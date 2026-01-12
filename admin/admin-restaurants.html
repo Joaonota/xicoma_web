@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurantes - Xicoma Admin</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="sidebar-logo-icon">🍔</div>
+            <div class="sidebar-logo-text">Xicoma</div>
+        </div>
+
+        <nav>
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item">
+                    <a href="admin-dashboard.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">📊</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-restaurants.html" class="sidebar-nav-link active">
+                        <span class="sidebar-nav-icon">🏪</span>
+                        <span>Restaurantes</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-orders.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">📦</span>
+                        <span>Pedidos</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-couriers.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">🚴</span>
+                        <span>Entregadores</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-payments.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">💰</span>
+                        <span>Pagamentos</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-notifications.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">🔔</span>
+                        <span>Notificações</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-settings.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">⚙️</span>
+                        <span>Configurações</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header flex justify-between items-center mb-xl">
+            <div>
+                <h1 class="page-title">Gestão de Restaurantes</h1>
+                <p class="page-subtitle">Gerir todos os restaurantes da plataforma</p>
+            </div>
+            <button class="btn btn-primary">
+                <span>➕</span>
+                Adicionar Restaurante
+            </button>
+        </div>
+
+        <!-- Filters and Search -->
+        <div class="card mb-xl">
+            <div class="flex gap-md items-center">
+                <div style="flex: 1;">
+                    <input type="text" class="form-input"
+                        placeholder="🔍 Pesquisar por nome, localização ou categoria...">
+                </div>
+                <select class="form-select" style="width: 200px;">
+                    <option>Todos os Status</option>
+                    <option>Ativo</option>
+                    <option>Inativo</option>
+                    <option>Pendente</option>
+                </select>
+                <select class="form-select" style="width: 200px;">
+                    <option>Todas Categorias</option>
+                    <option>Fast Food</option>
+                    <option>Restaurante</option>
+                    <option>Sobremesas</option>
+                    <option>Bebidas</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Restaurants Table -->
+        <div class="card">
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Restaurante</th>
+                            <th>Localização</th>
+                            <th>Categoria</th>
+                            <th>Pedidos</th>
+                            <th>Rating</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-md">
+                                    <div
+                                        style="width: 50px; height: 50px; background: var(--gradient-primary); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                        🍔</div>
+                                    <div>
+                                        <div style="font-weight: 600; color: var(--gray-900);">Burger King</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">ID: #RST-001</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div>Centro, Maputo</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Av. Julius Nyerere</div>
+                            </td>
+                            <td><span class="badge badge-primary">Fast Food</span></td>
+                            <td><strong>342</strong></td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                    <span>⭐</span>
+                                    <strong>4.8</strong>
+                                    <span style="color: var(--gray-500); font-size: 0.875rem;">(1.2K)</span>
+                                </div>
+                            </td>
+                            <td><span class="badge badge-success">Ativo</span></td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <button class="btn btn-sm btn-secondary" title="Ver detalhes">👁️</button>
+                                    <button class="btn btn-sm btn-secondary" title="Editar">✏️</button>
+                                    <button class="btn btn-sm btn-danger" title="Desativar">🗑️</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-md">
+                                    <div
+                                        style="width: 50px; height: 50px; background: var(--gradient-warm); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                        🍕</div>
+                                    <div>
+                                        <div style="font-weight: 600; color: var(--gray-900);">Pizza Hut</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">ID: #RST-002</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div>Polana, Maputo</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Av. Marginal</div>
+                            </td>
+                            <td><span class="badge badge-warning">Restaurante</span></td>
+                            <td><strong>298</strong></td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                    <span>⭐</span>
+                                    <strong>4.7</strong>
+                                    <span style="color: var(--gray-500); font-size: 0.875rem;">(980)</span>
+                                </div>
+                            </td>
+                            <td><span class="badge badge-success">Ativo</span></td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <button class="btn btn-sm btn-secondary" title="Ver detalhes">👁️</button>
+                                    <button class="btn btn-sm btn-secondary" title="Editar">✏️</button>
+                                    <button class="btn btn-sm btn-danger" title="Desativar">🗑️</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-md">
+                                    <div
+                                        style="width: 50px; height: 50px; background: var(--gradient-sunset); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                        🍟</div>
+                                    <div>
+                                        <div style="font-weight: 600; color: var(--gray-900);">McDonald's</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">ID: #RST-003</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div>Sommerschield, Maputo</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Av. Vladimir Lenine</div>
+                            </td>
+                            <td><span class="badge badge-primary">Fast Food</span></td>
+                            <td><strong>267</strong></td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                    <span>⭐</span>
+                                    <strong>4.6</strong>
+                                    <span style="color: var(--gray-500); font-size: 0.875rem;">(856)</span>
+                                </div>
+                            </td>
+                            <td><span class="badge badge-success">Ativo</span></td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <button class="btn btn-sm btn-secondary" title="Ver detalhes">👁️</button>
+                                    <button class="btn btn-sm btn-secondary" title="Editar">✏️</button>
+                                    <button class="btn btn-sm btn-danger" title="Desativar">🗑️</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-md">
+                                    <div
+                                        style="width: 50px; height: 50px; background: var(--gradient-primary); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                        🍗</div>
+                                    <div>
+                                        <div style="font-weight: 600; color: var(--gray-900);">KFC</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">ID: #RST-004</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div>Matola, Maputo</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Av. da Namaacha</div>
+                            </td>
+                            <td><span class="badge badge-primary">Fast Food</span></td>
+                            <td><strong>234</strong></td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                    <span>⭐</span>
+                                    <strong>4.5</strong>
+                                    <span style="color: var(--gray-500); font-size: 0.875rem;">(723)</span>
+                                </div>
+                            </td>
+                            <td><span class="badge badge-warning">Pendente</span></td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <button class="btn btn-sm btn-secondary" title="Ver detalhes">👁️</button>
+                                    <button class="btn btn-sm btn-secondary" title="Editar">✏️</button>
+                                    <button class="btn btn-sm btn-danger" title="Desativar">🗑️</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-md">
+                                    <div
+                                        style="width: 50px; height: 50px; background: var(--gradient-warm); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                        🥪</div>
+                                    <div>
+                                        <div style="font-weight: 600; color: var(--gray-900);">Subway</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">ID: #RST-005</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div>Costa do Sol, Maputo</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Av. Marginal</div>
+                            </td>
+                            <td><span class="badge badge-primary">Fast Food</span></td>
+                            <td><strong>189</strong></td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                    <span>⭐</span>
+                                    <strong>4.7</strong>
+                                    <span style="color: var(--gray-500); font-size: 0.875rem;">(645)</span>
+                                </div>
+                            </td>
+                            <td><span class="badge badge-success">Ativo</span></td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <button class="btn btn-sm btn-secondary" title="Ver detalhes">👁️</button>
+                                    <button class="btn btn-sm btn-secondary" title="Editar">✏️</button>
+                                    <button class="btn btn-sm btn-danger" title="Desativar">🗑️</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-md">
+                                    <div
+                                        style="width: 50px; height: 50px; background: var(--gradient-sunset); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                        🍰</div>
+                                    <div>
+                                        <div style="font-weight: 600; color: var(--gray-900);">Doce Tentação</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">ID: #RST-006</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div>Baixa, Maputo</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Av. 25 de Setembro</div>
+                            </td>
+                            <td><span class="badge badge-info">Sobremesas</span></td>
+                            <td><strong>156</strong></td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                    <span>⭐</span>
+                                    <strong>4.9</strong>
+                                    <span style="color: var(--gray-500); font-size: 0.875rem;">(534)</span>
+                                </div>
+                            </td>
+                            <td><span class="badge badge-danger">Inativo</span></td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <button class="btn btn-sm btn-secondary" title="Ver detalhes">👁️</button>
+                                    <button class="btn btn-sm btn-secondary" title="Editar">✏️</button>
+                                    <button class="btn btn-sm btn-success" title="Ativar">✅</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="card-footer flex justify-between items-center">
+                <div style="color: var(--gray-600); font-size: 0.875rem;">
+                    Mostrando <strong>1-6</strong> de <strong>156</strong> restaurantes
+                </div>
+                <div class="flex gap-sm">
+                    <button class="btn btn-sm btn-secondary" disabled>← Anterior</button>
+                    <button class="btn btn-sm btn-primary">1</button>
+                    <button class="btn btn-sm btn-secondary">2</button>
+                    <button class="btn btn-sm btn-secondary">3</button>
+                    <button class="btn btn-sm btn-secondary">...</button>
+                    <button class="btn btn-sm btn-secondary">26</button>
+                    <button class="btn btn-sm btn-secondary">Próximo →</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Xicoma Admin</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="sidebar-logo-icon"><i class="fas fa-utensils"></i></div>
+            <div class="sidebar-logo-text">Xicoma</div>
+        </div>
+
+        <nav>
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item">
+                    <a href="admin-dashboard.html" class="sidebar-nav-link active">
+                        <span class="sidebar-nav-icon"><i class="fas fa-chart-line"></i></span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-restaurants.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon"><i class="fas fa-store"></i></span>
+                        <span>Restaurantes</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-orders.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon"><i class="fas fa-shopping-bag"></i></span>
+                        <span>Pedidos</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-couriers.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon"><i class="fas fa-motorcycle"></i></span>
+                        <span>Entregadores</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-payments.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon"><i class="fas fa-wallet"></i></span>
+                        <span>Pagamentos</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-notifications.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon"><i class="fas fa-bell"></i></span>
+                        <span>Notificações</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-settings.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon"><i class="fas fa-cog"></i></span>
+                        <span>Configurações</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header flex justify-between items-center">
+            <div>
+                <h1 class="page-title">Dashboard</h1>
+                <p class="page-subtitle">Visão geral da plataforma Xicoma</p>
+            </div>
+            <button class="btn btn-primary">
+                <i class="fas fa-download"></i>
+                Exportar Relatório
+            </button>
+        </div>
+
+        <!-- Metrics Cards -->
+        <div class="grid grid-cols-4 gap-lg mb-xl">
+            <div class="metric-card" style="border-left-color: var(--primary-orange);">
+                <div class="metric-label">Total de Pedidos</div>
+                <div class="metric-value">2,847</div>
+                <div class="metric-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>12.5% vs. mês passado</span>
+                </div>
+            </div>
+
+            <div class="metric-card" style="border-left-color: var(--success);">
+                <div class="metric-label">Receita Total</div>
+                <div class="metric-value">R$ 84.2K</div>
+                <div class="metric-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>8.3% vs. mês passado</span>
+                </div>
+            </div>
+
+            <div class="metric-card" style="border-left-color: var(--info);">
+                <div class="metric-label">Restaurantes Ativos</div>
+                <div class="metric-value">156</div>
+                <div class="metric-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>5 novos esta semana</span>
+                </div>
+            </div>
+
+            <div class="metric-card" style="border-left-color: var(--warning);">
+                <div class="metric-label">Entregadores Online</div>
+                <div class="metric-value">89</div>
+                <div class="metric-change negative">
+                    <i class="fas fa-arrow-down"></i>
+                    <span>3 vs. ontem</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid grid-cols-2 gap-lg mb-xl">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Pedidos por Dia</h3>
+                    <p class="card-subtitle">Últimos 7 dias</p>
+                </div>
+                <div class="card-body"
+                    style="height: 300px; background: var(--gray-50); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--gray-500);">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem; color: var(--primary-orange);"><i
+                                class="fas fa-chart-area"></i></div>
+                        <div style="font-weight: 600; color: var(--gray-700);">Gráfico de Pedidos</div>
+                        <div style="font-size: 0.875rem; margin-top: 0.5rem;">Tendência crescente de 12.5%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Receita por Categoria</h3>
+                    <p class="card-subtitle">Distribuição mensal</p>
+                </div>
+                <div class="card-body"
+                    style="height: 300px; background: var(--gray-50); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--gray-500);">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem; color: var(--primary-orange);"><i
+                                class="fas fa-chart-pie"></i></div>
+                        <div style="font-weight: 600; color: var(--gray-700);">Gráfico de Pizza</div>
+                        <div style="font-size: 0.875rem; margin-top: 0.5rem;">Fast Food: 45% | Restaurantes: 35% |
+                            Sobremesas: 20%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="grid grid-cols-2 gap-lg">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Pedidos Recentes</h3>
+                    <p class="card-subtitle">Últimos 5 pedidos</p>
+                </div>
+                <div class="card-body">
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Cliente</th>
+                                    <th>Restaurante</th>
+                                    <th>Status</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>#8472</strong></td>
+                                    <td>João Silva</td>
+                                    <td>Burger King</td>
+                                    <td><span class="badge badge-success">Entregue</span></td>
+                                    <td><strong>R$ 45.90</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#8471</strong></td>
+                                    <td>Maria Santos</td>
+                                    <td>Pizza Hut</td>
+                                    <td><span class="badge badge-warning">A caminho</span></td>
+                                    <td><strong>R$ 78.50</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#8470</strong></td>
+                                    <td>Pedro Costa</td>
+                                    <td>McDonald's</td>
+                                    <td><span class="badge badge-info">Preparando</span></td>
+                                    <td><strong>R$ 32.00</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#8469</strong></td>
+                                    <td>Ana Oliveira</td>
+                                    <td>KFC</td>
+                                    <td><span class="badge badge-primary">Novo</span></td>
+                                    <td><strong>R$ 56.20</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#8468</strong></td>
+                                    <td>Carlos Mendes</td>
+                                    <td>Subway</td>
+                                    <td><span class="badge badge-success">Entregue</span></td>
+                                    <td><strong>R$ 28.90</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Top Restaurantes</h3>
+                    <p class="card-subtitle">Por volume de pedidos</p>
+                </div>
+                <div class="card-body">
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Restaurante</th>
+                                    <th>Pedidos</th>
+                                    <th>Receita</th>
+                                    <th>Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="flex items-center gap-md">
+                                            <div
+                                                style="width: 40px; height: 40px; background: var(--gradient-primary); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+                                                🍔</div>
+                                            <strong>Burger King</strong>
+                                        </div>
+                                    </td>
+                                    <td>342</td>
+                                    <td><strong>R$ 15.6K</strong></td>
+                                    <td>
+                                        <div class="flex items-center gap-md">
+                                            <div
+                                                style="width: 40px; height: 40px; background: var(--gradient-warm); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+                                                🥪</div>
+                                            <strong>Subway</strong>
+                                        </div>
+                                    </td>
+                                    <td>189</td>
+                                    <td><strong>R$ 8.2K</strong></td>
+                                    <td>⭐ 4.7</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

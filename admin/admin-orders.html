@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos - Xicoma Admin</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="sidebar-logo-icon">🍔</div>
+            <div class="sidebar-logo-text">Xicoma</div>
+        </div>
+
+        <nav>
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item">
+                    <a href="admin-dashboard.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">📊</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-restaurants.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">🏪</span>
+                        <span>Restaurantes</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-orders.html" class="sidebar-nav-link active">
+                        <span class="sidebar-nav-icon">📦</span>
+                        <span>Pedidos</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-couriers.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">🚴</span>
+                        <span>Entregadores</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-payments.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">💰</span>
+                        <span>Pagamentos</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-notifications.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">🔔</span>
+                        <span>Notificações</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-settings.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">⚙️</span>
+                        <span>Configurações</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header mb-xl">
+            <h1 class="page-title">Gestão de Pedidos</h1>
+            <p class="page-subtitle">Monitorizar e gerir todos os pedidos da plataforma</p>
+        </div>
+
+        <!-- Status Summary Cards -->
+        <div class="grid grid-cols-4 gap-lg mb-xl">
+            <div class="card" style="border-left: 4px solid var(--primary-orange);">
+                <div class="metric-label">Novos</div>
+                <div class="metric-value" style="font-size: 2rem;">47</div>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--info);">
+                <div class="metric-label">Preparando</div>
+                <div class="metric-value" style="font-size: 2rem;">89</div>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--warning);">
+                <div class="metric-label">A Caminho</div>
+                <div class="metric-value" style="font-size: 2rem;">34</div>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--success);">
+                <div class="metric-label">Entregues Hoje</div>
+                <div class="metric-value" style="font-size: 2rem;">342</div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="card mb-xl">
+            <div class="flex gap-md items-center">
+                <div style="flex: 1;">
+                    <input type="text" class="form-input" placeholder="🔍 Pesquisar por ID, cliente ou restaurante...">
+                </div>
+                <select class="form-select" style="width: 180px;">
+                    <option>Todos os Status</option>
+                    <option>Novo</option>
+                    <option>Preparando</option>
+                    <option>A Caminho</option>
+                    <option>Entregue</option>
+                    <option>Cancelado</option>
+                </select>
+                <input type="date" class="form-input" style="width: 180px;">
+            </div>
+        </div>
+
+        <!-- Orders Table -->
+        <div class="card">
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID Pedido</th>
+                            <th>Cliente</th>
+                            <th>Restaurante</th>
+                            <th>Entregador</th>
+                            <th>Itens</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Hora</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>#8472</strong></td>
+                            <td>
+                                <div>
+                                    <div style="font-weight: 600;">João Silva</div>
+                                    <div style="font-size: 0.875rem; color: var(--gray-600);">+258 84 123 4567</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex items-center gap-sm">
+                                    <span style="font-size: 1.25rem;">🍔</span>
+                                    <span>Burger King</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <div style="font-weight: 600;">Carlos Mendes</div>
+                                    <div style="font-size: 0.875rem; color: var(--gray-600);">Moto #234</div>
+                                </div>
+                            </td>
+                            <td>3 itens</td>
+                            <td><strong>R$ 45.90</strong></td>
+                            <td><span class="badge badge-success">Entregue</span></td>
+                            <td>
+                                <div style="font-size: 0.875rem;">
+                                    <div>13:45</div>
+                                    <div style="color: var(--gray-600);">Hoje</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <button class="btn btn-sm btn-secondary" title="Ver detalhes">👁️</button>
+                                    <button class="btn btn-sm btn-secondary" title="Rastrear">📍</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>#8471</strong></td>
+                            <td>
+                                <div>
+                                    <div style="font-weight: 600;">Maria Santos</div>
+                                    <div style="font-size: 0.875rem; color: var(--gray-600);">+258 84 234 5678</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex items-center gap-sm">
+                                    <span style="font-size: 1.25rem;">🍕</span>
+                                    <span>Pizza Hut</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <div style="font-weight: 600;">Ana Costa</div>
+                                    <div style="font-size: 0.875rem; color: var(--gray-600);">Moto #156</div>
+                                </div>
+                            </td>
+                            <td>5 itens</td>
+                            <td><strong>R$ 78.50</strong></td>
+                            <td><span class="badge badge-warning">A Caminho</span></td>
+                            <td>
+                                <div style="font-size: 0.875rem;">
+                                    <div>13:30</div>
+                                    <div style="color: var(--gray-600);">Hoje</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <button class="btn btn-sm btn-secondary" title="Ver detalhes">👁️</button>
+                                    <button class="btn btn-sm btn-primary" title="Rastrear">📍</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>#8470</strong></td>
+                            <td>
+                                <div>
+                                    <div style="font-weight: 600;">Pedro Costa</div>
+                                    <div style="font-size: 0.875rem; color: var(--gray-600);">+258 84 345 6789</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex items-center gap-sm">
+                                    <span style="font-size: 1.25rem;">🍟</span>
+                                    <span>McDonald's</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <div style="font-weight: 600;">Paulo Dias</div>
+                                    <div style="font-size: 0.875rem; color: var(--gray-600);">Moto #089</div>
+                                </div>
+                            </td>
+                            <td>2 itens</td>
+                            <td><strong>R$ 32.00</strong></td>
+                            <td><span class="badge badge-info">Preparando</span></td>
+                            <td>
+                                <div style="font-size: 0.875rem;">
+                                    <div>13:20</div>
+                                    <div style="color: var(--gray-600);">Hoje</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <button class="btn btn-sm btn-secondary" title="Ver detalhes">👁️</button>
+                                    <button class="btn btn-sm btn-secondary" title="Rastrear">📍</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>#8469</strong></td>
+                            <td>
+                                <div>
+                                    <div style="font-weight: 600;">Ana Oliveira</div>
+                                    <div style="font-size: 0.875rem; color: var(--gray-600);">+258 84 456 7890</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex items-center gap-sm">
+                                    <span style="font-size: 1.25rem;">🍗</span>
+                                    <span>KFC</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div style="color: var(--gray-500); font-style: italic;">
+                                    Aguardando...
+                                </div>
+                            </td>
+                            <td>4 itens</td>
+                            <td><strong>R$ 56.20</strong></td>
+                            <td><span class="badge badge-primary">Novo</span></td>
+                            <td>
+                                <div style="font-size: 0.875rem;">
+                                    <div>13:15</div>
+                                    <div style="color: var(--gray-600);">Hoje</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <button class="btn btn-sm btn-secondary" title="Ver detalhes">👁️</button>
+                                    <button class="btn btn-sm btn-success" title="Atribuir">👤</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>#8468</strong></td>
+                            <td>
+                                <div>
+                                    <div style="font-weight: 600;">Carlos Mendes</div>
+                                    <div style="font-size: 0.875rem; color: var(--gray-600);">+258 84 567 8901</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex items-center gap-sm">
+                                    <span style="font-size: 1.25rem;">🥪</span>
+                                    <span>Subway</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <div style="font-weight: 600;">Rita Sousa</div>
+                                    <div style="font-size: 0.875rem; color: var(--gray-600);">Moto #312</div>
+                                </div>
+                            </td>
+                            <td>1 item</td>
+                            <td><strong>R$ 28.90</strong></td>
+                            <td><span class="badge badge-success">Entregue</span></td>
+                            <td>
+                                <div style="font-size: 0.875rem;">
+                                    <div>12:50</div>
+                                    <div style="color: var(--gray-600);">Hoje</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <button class="btn btn-sm btn-secondary" title="Ver detalhes">👁️</button>
+                                    <button class="btn btn-sm btn-secondary" title="Rastrear">📍</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>#8467</strong></td>
+                            <td>
+                                <div>
+                                    <div style="font-weight: 600;">Luís Pereira</div>
+                                    <div style="font-size: 0.875rem; color: var(--gray-600);">+258 84 678 9012</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex items-center gap-sm">
+                                    <span style="font-size: 1.25rem;">🍰</span>
+                                    <span>Doce Tentação</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div style="color: var(--gray-500); font-style: italic;">
+                                    N/A
+                                </div>
+                            </td>
+                            <td>2 itens</td>
+                            <td><strong>R$ 42.00</strong></td>
+                            <td><span class="badge badge-danger">Cancelado</span></td>
+                            <td>
+                                <div style="font-size: 0.875rem;">
+                                    <div>12:30</div>
+                                    <div style="color: var(--gray-600);">Hoje</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <button class="btn btn-sm btn-secondary" title="Ver detalhes">👁️</button>
+                                    <button class="btn btn-sm btn-secondary" title="Reembolso">💵</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="card-footer flex justify-between items-center">
+                <div style="color: var(--gray-600); font-size: 0.875rem;">
+                    Mostrando <strong>1-6</strong> de <strong>2,847</strong> pedidos
+                </div>
+                <div class="flex gap-sm">
+                    <button class="btn btn-sm btn-secondary" disabled>← Anterior</button>
+                    <button class="btn btn-sm btn-primary">1</button>
+                    <button class="btn btn-sm btn-secondary">2</button>
+                    <button class="btn btn-sm btn-secondary">3</button>
+                    <button class="btn btn-sm btn-secondary">...</button>
+                    <button class="btn btn-sm btn-secondary">475</button>
+                    <button class="btn btn-sm btn-secondary">Próximo →</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

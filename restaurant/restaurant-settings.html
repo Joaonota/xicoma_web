@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Restaurante Xicoma</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="sidebar-logo-icon">🏪</div>
+            <div class="sidebar-logo-text">Burger King</div>
+        </div>
+
+        <nav>
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item">
+                    <a href="restaurant-dashboard.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">📊</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="restaurant-orders.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">📦</span>
+                        <span>Pedidos</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="restaurant-menu.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">🍔</span>
+                        <span>Menu</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="restaurant-settings.html" class="sidebar-nav-link active">
+                        <span class="sidebar-nav-icon">⚙️</span>
+                        <span>Configurações</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div style="margin-top: auto; padding-top: var(--spacing-xl); border-top: 2px solid var(--gray-100);">
+            <a href="restaurant-login.html" class="sidebar-nav-link" style="color: var(--danger);">
+                <span class="sidebar-nav-icon">🚪</span>
+                <span>Sair</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header mb-xl">
+            <h1 class="page-title">Configurações do Restaurante</h1>
+            <p class="page-subtitle">Gerir perfil e configurações do negócio</p>
+        </div>
+
+        <div class="grid gap-xl">
+            <!-- Business Profile -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Perfil do Negócio</h3>
+                    <p class="card-subtitle">Informações básicas do restaurante</p>
+                </div>
+                <div class="card-body">
+                    <div class="grid grid-cols-2 gap-lg">
+                        <div class="form-group">
+                            <label class="form-label">Nome do Restaurante</label>
+                            <input type="text" class="form-input" value="Burger King">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">ID do Restaurante</label>
+                            <input type="text" class="form-input" value="RST-001" disabled
+                                style="background: var(--gray-100);">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email de Contacto</label>
+                            <input type="email" class="form-input" value="burgerking@xicoma.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Telefone</label>
+                            <input type="tel" class="form-input" value="+258 84 123 4567">
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label class="form-label">Endereço Completo</label>
+                            <input type="text" class="form-input" value="Av. Julius Nyerere, 1234, Centro, Maputo">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Categoria</label>
+                            <select class="form-select">
+                                <option selected>Fast Food</option>
+                                <option>Restaurante</option>
+                                <option>Sobremesas</option>
+                                <option>Bebidas</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Zona de Entrega</label>
+                            <select class="form-select">
+                                <option selected>Centro</option>
+                                <option>Polana</option>
+                                <option>Matola</option>
+                                <option>Costa do Sol</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label class="form-label">Descrição</label>
+                            <textarea class="form-textarea"
+                                rows="3">Restaurante de fast food com os melhores hambúrgueres da cidade. Entrega rápida e qualidade garantida.</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary">Guardar Alterações</button>
+                </div>
+            </div>
+
+            <!-- Business Hours -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Horário de Funcionamento</h3>
+                    <p class="card-subtitle">Definir horários de abertura e fecho</p>
+                </div>
+                <div class="card-body">
+                    <div class="grid gap-md">
+                        <div class="flex items-center gap-lg"
+                            style="padding: 1rem; background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div style="width: 120px; font-weight: 700; color: var(--gray-900);">Segunda-feira</div>
+                            <input type="time" class="form-input" value="10:00" style="width: 150px;">
+                            <span style="color: var(--gray-600);">até</span>
+                            <input type="time" class="form-input" value="22:00" style="width: 150px;">
+                            <label style="margin-left: auto; display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" class="form-checkbox" checked>
+                                <span style="font-weight: 600; color: var(--gray-700);">Aberto</span>
+                            </label>
+                        </div>
+
+                        <div class="flex items-center gap-lg"
+                            style="padding: 1rem; background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div style="width: 120px; font-weight: 700; color: var(--gray-900);">Terça-feira</div>
+                            <input type="time" class="form-input" value="10:00" style="width: 150px;">
+                            <span style="color: var(--gray-600);">até</span>
+                            <input type="time" class="form-input" value="22:00" style="width: 150px;">
+                            <label style="margin-left: auto; display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" class="form-checkbox" checked>
+                                <span style="font-weight: 600; color: var(--gray-700);">Aberto</span>
+                            </label>
+                        </div>
+
+                        <div class="flex items-center gap-lg"
+                            style="padding: 1rem; background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div style="width: 120px; font-weight: 700; color: var(--gray-900);">Quarta-feira</div>
+                            <input type="time" class="form-input" value="10:00" style="width: 150px;">
+                            <span style="color: var(--gray-600);">até</span>
+                            <input type="time" class="form-input" value="22:00" style="width: 150px;">
+                            <label style="margin-left: auto; display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" class="form-checkbox" checked>
+                                <span style="font-weight: 600; color: var(--gray-700);">Aberto</span>
+                            </label>
+                        </div>
+
+                        <div class="flex items-center gap-lg"
+                            style="padding: 1rem; background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div style="width: 120px; font-weight: 700; color: var(--gray-900);">Quinta-feira</div>
+                            <input type="time" class="form-input" value="10:00" style="width: 150px;">
+                            <span style="color: var(--gray-600);">até</span>
+                            <input type="time" class="form-input" value="22:00" style="width: 150px;">
+                            <label style="margin-left: auto; display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" class="form-checkbox" checked>
+                                <span style="font-weight: 600; color: var(--gray-700);">Aberto</span>
+                            </label>
+                        </div>
+
+                        <div class="flex items-center gap-lg"
+                            style="padding: 1rem; background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div style="width: 120px; font-weight: 700; color: var(--gray-900);">Sexta-feira</div>
+                            <input type="time" class="form-input" value="10:00" style="width: 150px;">
+                            <span style="color: var(--gray-600);">até</span>
+                            <input type="time" class="form-input" value="23:00" style="width: 150px;">
+                            <label style="margin-left: auto; display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" class="form-checkbox" checked>
+                                <span style="font-weight: 600; color: var(--gray-700);">Aberto</span>
+                            </label>
+                        </div>
+
+                        <div class="flex items-center gap-lg"
+                            style="padding: 1rem; background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div style="width: 120px; font-weight: 700; color: var(--gray-900);">Sábado</div>
+                            <input type="time" class="form-input" value="10:00" style="width: 150px;">
+                            <span style="color: var(--gray-600);">até</span>
+                            <input type="time" class="form-input" value="23:00" style="width: 150px;">
+                            <label style="margin-left: auto; display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" class="form-checkbox" checked>
+                                <span style="font-weight: 600; color: var(--gray-700);">Aberto</span>
+                            </label>
+                        </div>
+
+                        <div class="flex items-center gap-lg"
+                            style="padding: 1rem; background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div style="width: 120px; font-weight: 700; color: var(--gray-900);">Domingo</div>
+                            <input type="time" class="form-input" value="11:00" style="width: 150px;">
+                            <span style="color: var(--gray-600);">até</span>
+                            <input type="time" class="form-input" value="21:00" style="width: 150px;">
+                            <label style="margin-left: auto; display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" class="form-checkbox" checked>
+                                <span style="font-weight: 600; color: var(--gray-700);">Aberto</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary">Guardar Horários</button>
+                </div>
+            </div>
+
+            <!-- Delivery Settings -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Configurações de Entrega</h3>
+                    <p class="card-subtitle">Gerir opções de entrega</p>
+                </div>
+                <div class="card-body">
+                    <div class="grid grid-cols-2 gap-lg">
+                        <div class="form-group">
+                            <label class="form-label">Tempo Médio de Preparação (min)</label>
+                            <input type="number" class="form-input" value="30" min="5" step="5">
+                            <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 0.5rem;">
+                                Tempo estimado para preparar pedidos
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Raio de Entrega (km)</label>
+                            <input type="number" class="form-input" value="5" min="1" step="0.5">
+                            <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 0.5rem;">
+                                Distância máxima para entregas
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Valor Mínimo Pedido (MZN)</label>
+                            <input type="number" class="form-input" value="100" min="0" step="10">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Taxa de Entrega (MZN)</label>
+                            <input type="number" class="form-input" value="50" min="0" step="5">
+                        </div>
+                    </div>
+
+                    <div class="grid gap-md mt-lg">
+                        <label class="flex items-center gap-md" style="cursor: pointer;">
+                            <input type="checkbox" class="form-checkbox" checked>
+                            <div>
+                                <div style="font-weight: 600;">Aceitar Novos Pedidos</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Permitir que clientes façam
+                                    novos pedidos</div>
+                            </div>
+                        </label>
+
+                        <label class="flex items-center gap-md" style="cursor: pointer;">
+                            <input type="checkbox" class="form-checkbox" checked>
+                            <div>
+                                <div style="font-weight: 600;">Entrega Própria</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Usar entregadores próprios do
+                                    restaurante</div>
+                            </div>
+                        </label>
+
+                        <label class="flex items-center gap-md" style="cursor: pointer;">
+                            <input type="checkbox" class="form-checkbox">
+                            <div>
+                                <div style="font-weight: 600;">Levantamento no Local</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Permitir que clientes levantem
+                                    pedidos no restaurante</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary">Guardar Configurações</button>
+                </div>
+            </div>
+
+            <!-- Bank Details -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Dados Bancários</h3>
+                    <p class="card-subtitle">Informações para recebimento de pagamentos</p>
+                </div>
+                <div class="card-body">
+                    <div class="grid grid-cols-2 gap-lg">
+                        <div class="form-group">
+                            <label class="form-label">Banco</label>
+                            <select class="form-select">
+                                <option selected>BCI</option>
+                                <option>Millennium BIM</option>
+                                <option>Standard Bank</option>
+                                <option>Absa</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Número da Conta</label>
+                            <input type="text" class="form-input" value="1234567890">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">NIB</label>
+                            <input type="text" class="form-input" value="000123456789012345678">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Titular da Conta</label>
+                            <input type="text" class="form-input" value="Burger King Moçambique Lda">
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label class="form-label">Número M-Pesa (Opcional)</label>
+                            <input type="tel" class="form-input" value="+258 84 123 4567">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary">Guardar Dados Bancários</button>
+                </div>
+            </div>
+
+            <!-- Notification Preferences -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Preferências de Notificações</h3>
+                    <p class="card-subtitle">Gerir como recebe notificações</p>
+                </div>
+                <div class="card-body">
+                    <div class="grid gap-md">
+                        <label class="flex items-center gap-md" style="cursor: pointer;">
+                            <input type="checkbox" class="form-checkbox" checked>
+                            <div>
+                                <div style="font-weight: 600;">Notificações de Novos Pedidos</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Receber alerta quando um novo
+                                    pedido chega</div>
+                            </div>
+                        </label>
+
+                        <label class="flex items-center gap-md" style="cursor: pointer;">
+                            <input type="checkbox" class="form-checkbox" checked>
+                            <div>
+                                <div style="font-weight: 600;">Notificações de Pagamentos</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Receber alerta quando um
+                                    pagamento é confirmado</div>
+                            </div>
+                        </label>
+
+                        <label class="flex items-center gap-md" style="cursor: pointer;">
+                            <input type="checkbox" class="form-checkbox">
+                            <div>
+                                <div style="font-weight: 600;">Notificações de Avaliações</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Receber alerta quando recebe
+                                    uma nova avaliação</div>
+                            </div>
+                        </label>
+
+                        <label class="flex items-center gap-md" style="cursor: pointer;">
+                            <input type="checkbox" class="form-checkbox" checked>
+                            <div>
+                                <div style="font-weight: 600;">Relatórios Semanais</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Receber resumo semanal de
+                                    vendas e desempenho</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary">Guardar Preferências</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

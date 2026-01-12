@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entregadores - Xicoma Admin</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="sidebar-logo-icon">🍔</div>
+            <div class="sidebar-logo-text">Xicoma</div>
+        </div>
+
+        <nav>
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item">
+                    <a href="admin-dashboard.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">📊</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-restaurants.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">🏪</span>
+                        <span>Restaurantes</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-orders.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">📦</span>
+                        <span>Pedidos</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-couriers.html" class="sidebar-nav-link active">
+                        <span class="sidebar-nav-icon">🚴</span>
+                        <span>Entregadores</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-payments.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">💰</span>
+                        <span>Pagamentos</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-notifications.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">🔔</span>
+                        <span>Notificações</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="admin-settings.html" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">⚙️</span>
+                        <span>Configurações</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header flex justify-between items-center mb-xl">
+            <div>
+                <h1 class="page-title">Gestão de Entregadores</h1>
+                <p class="page-subtitle">Monitorizar e gerir todos os entregadores</p>
+            </div>
+            <button class="btn btn-primary">
+                <span>➕</span>
+                Adicionar Entregador
+            </button>
+        </div>
+
+        <!-- Status Summary -->
+        <div class="grid grid-cols-4 gap-lg mb-xl">
+            <div class="card" style="border-left: 4px solid var(--success);">
+                <div class="metric-label">Online</div>
+                <div class="metric-value" style="font-size: 2rem;">89</div>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--gray-500);">
+                <div class="metric-label">Offline</div>
+                <div class="metric-value" style="font-size: 2rem;">34</div>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--warning);">
+                <div class="metric-label">Em Entrega</div>
+                <div class="metric-value" style="font-size: 2rem;">56</div>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--info);">
+                <div class="metric-label">Disponíveis</div>
+                <div class="metric-value" style="font-size: 2rem;">33</div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="card mb-xl">
+            <div class="flex gap-md items-center">
+                <div style="flex: 1;">
+                    <input type="text" class="form-input" placeholder="🔍 Pesquisar por nome ou ID...">
+                </div>
+                <select class="form-select" style="width: 180px;">
+                    <option>Todos os Status</option>
+                    <option>Online</option>
+                    <option>Offline</option>
+                    <option>Em Entrega</option>
+                    <option>Disponível</option>
+                </select>
+                <select class="form-select" style="width: 180px;">
+                    <option>Todas Zonas</option>
+                    <option>Centro</option>
+                    <option>Polana</option>
+                    <option>Matola</option>
+                    <option>Costa do Sol</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Couriers Table -->
+        <div class="card">
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Entregador</th>
+                            <th>Veículo</th>
+                            <th>Zona</th>
+                            <th>Status</th>
+                            <th>Pedidos Ativos</th>
+                            <th>Total Entregas</th>
+                            <th>Rating</th>
+                            <th>Ganhos Hoje</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-md">
+                                    <div
+                                        style="width: 50px; height: 50px; background: var(--gradient-primary); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--white); font-weight: 700;">
+                                        CM</div>
+                                    <div>
+                                        <div style="font-weight: 600; color: var(--gray-900);">Carlos Mendes</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">ID: #COU-234</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <div>🏍️ Moto</div>
+                                    <div style="font-size: 0.875rem; color: var(--gray-600);">Honda CG 125</div>
+                                </div>
+                            </td>
+                            <td>Centro</td>
+                            <td><span class="badge badge-warning">Em Entrega</span></td>
+                            <td><strong>2</strong></td>
+                            <td>1,247</td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                    <span>⭐</span>
+                                    <strong>4.9</strong>
+                                    <span style="color: var(--gray-500); font-size: 0.875rem;">(856)</span>
+                                </div>
+                            </td>
+                            <td><strong>R$ 145.80</strong></td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <button class="btn btn-sm btn-secondary" title="Ver perfil">👁️</button>
+                                    <button class="btn btn-sm btn-primary" title="Rastrear">📍</button>
+                                    <button class="btn btn-sm btn-secondary" title="Mensagem">💬</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-md">
+                                    <div
+                                        style="width: 50px; height: 50px; background: var(--gradient-warm); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--white); font-weight: 700;">
+                                        AC</div>
+                                    <div>
+                                        <div style="font-weight: 600; color: var(--gray-900);">Ana Costa</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">ID: #COU-156</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <div>🏍️ Moto</div>
+                                    <div style="font-size: 0.875rem; color: var(--gray-600);">Yamaha YBR 125</div>
+                                </div>
+                            </td>
+                            <td>Polana</td>
+                            <td><span class="badge badge-warning">Em Entrega</span></td>
+                            <td><strong>1</strong></td>
+                            <td>1,089</td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                    <span>⭐</span>
+                                    <strong>4.8</strong>
+                                    <span style="color: var(--gray-500); font-size: 0.875rem;">(723)</span>
+                                </div>
+                            </td>
+                            <td><strong>R$ 98.50</strong></td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <button class="btn btn-sm btn-secondary" title="Ver perfil">👁️</button>
+                                    <button class="btn btn-sm btn-primary" title="Rastrear">📍</button>
+                                    <button class="btn btn-sm btn-secondary" title="Mensagem">💬</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-md">
+                                    <div
+                                        style="width: 50px; height: 50px; background: var(--gradient-sunset); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--white); font-weight: 700;">
+                                        PD</div>
+                                    <div>
+                                        <div style="font-weight: 600; color: var(--gray-900);">Paulo Dias</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">ID: #COU-089</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <div>🚲 Bicicleta</div>
+                                    <div style="font-size: 0.875rem; color: var(--gray-600);">Mountain Bike</div>
+                                </div>
+                            </td>
+                            <td>Centro</td>
+                            <td><span class="badge badge-success">Disponível</span></td>
+                            <td><strong>0</strong></td>
+                            <td>892</td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                    <span>⭐</span>
+                                    <strong>4.7</strong>
+                                    <span style="color: var(--gray-500); font-size: 0.875rem;">(645)</span>
+                                </div>
+                            </td>
+                            <td><strong>R$ 67.20</strong></td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <button class="btn btn-sm btn-secondary" title="Ver perfil">👁️</button>
+                                    <button class="btn btn-sm btn-success" title="Atribuir pedido">📦</button>
+                                    <button class="btn btn-sm btn-secondary" title="Mensagem">💬</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-md">
+                                    <div
+                                        style="width: 50px; height: 50px; background: var(--gradient-primary); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--white); font-weight: 700;">
+                                        RS</div>
+                                    <div>
+                                        <div style="font-weight: 600; color: var(--gray-900);">Rita Sousa</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">ID: #COU-312</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <div>🏍️ Moto</div>
+                                    <div style="font-size: 0.875rem; color: var(--gray-600);">Suzuki EN 125</div>
+                                </div>
+                            </td>
+                            <td>Matola</td>
+                            <td><span class="badge badge-success">Disponível</span></td>
+                            <td><strong>0</strong></td>
+                            <td>1,456</td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                    <span>⭐</span>
+                                    <strong>4.9</strong>
+                                    <span style="color: var(--gray-500); font-size: 0.875rem;">(1.1K)</span>
+                                </div>
+                            </td>
+                            <td><strong>R$ 123.40</strong></td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <button class="btn btn-sm btn-secondary" title="Ver perfil">👁️</button>
+                                    <button class="btn btn-sm btn-success" title="Atribuir pedido">📦</button>
+                                    <button class="btn btn-sm btn-secondary" title="Mensagem">💬</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-md">
+                                    <div
+                                        style="width: 50px; height: 50px; background: var(--gray-400); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--white); font-weight: 700;">
+                                        JF</div>
+                                    <div>
+                                        <div style="font-weight: 600; color: var(--gray-900);">João Fernandes</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">ID: #COU-445</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <div>🏍️ Moto</div>
+                                    <div style="font-size: 0.875rem; color: var(--gray-600);">Honda CG 150</div>
+                                </div>
+                            </td>
+                            <td>Costa do Sol</td>
+                            <td><span class="badge badge-gray">Offline</span></td>
+                            <td><strong>0</strong></td>
+                            <td>734</td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                    <span>⭐</span>
+                                    <strong>4.6</strong>
+                                    <span style="color: var(--gray-500); font-size: 0.875rem;">(534)</span>
+                                </div>
+                            </td>
+                            <td><strong>R$ 0.00</strong></td>
+                            <td>
+                                <div class="flex gap-sm">
+                                    <button class="btn btn-sm btn-secondary" title="Ver perfil">👁️</button>
+                                    <button class="btn btn-sm btn-secondary" title="Mensagem">💬</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="card-footer flex justify-between items-center">
+                <div style="color: var(--gray-600); font-size: 0.875rem;">
+                    Mostrando <strong>1-5</strong> de <strong>123</strong> entregadores
+                </div>
+                <div class="flex gap-sm">
+                    <button class="btn btn-sm btn-secondary" disabled>← Anterior</button>
+                    <button class="btn btn-sm btn-primary">1</button>
+                    <button class="btn btn-sm btn-secondary">2</button>
+                    <button class="btn btn-sm btn-secondary">3</button>
+                    <button class="btn btn-sm btn-secondary">...</button>
+                    <button class="btn btn-sm btn-secondary">25</button>
+                    <button class="btn btn-sm btn-secondary">Próximo →</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
