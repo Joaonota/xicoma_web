@@ -4,16 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagamentos - Xicoma Admin</title>
+    <title>Pagamentos & Finanças - Xicoma Admin</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
-    <!-- Sidebar -->
+    <!-- Sidebar Navigation -->
     <aside class="sidebar">
-        <div class="sidebar-logo">
-            <div class="sidebar-logo-icon">🍔</div>
-            <div class="sidebar-logo-text">Xicoma</div>
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon">X</div>
+                <div class="sidebar-logo-text">Xicoma</div>
+            </div>
         </div>
 
         <nav>
@@ -32,19 +34,19 @@
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-orders.html" class="sidebar-nav-link">
-                        <span class="sidebar-nav-icon">📦</span>
+                        <span class="sidebar-nav-icon">🛍️</span>
                         <span>Pedidos</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-couriers.html" class="sidebar-nav-link">
-                        <span class="sidebar-nav-icon">🚴</span>
+                        <span class="sidebar-nav-icon">🛵</span>
                         <span>Entregadores</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-payments.html" class="sidebar-nav-link active">
-                        <span class="sidebar-nav-icon">💰</span>
+                        <span class="sidebar-nav-icon">💳</span>
                         <span>Pagamentos</span>
                     </a>
                 </li>
@@ -62,296 +64,312 @@
                 </li>
             </ul>
         </nav>
+
+        <div class="sidebar-footer">
+            <div class="flex items-center gap-md">
+                <div
+                    style="width: 40px; height: 40px; border-radius: var(--radius-full); background: var(--gray-200); display: flex; align-items: center; justify-content: center; font-weight: 700;">
+                    AD</div>
+                <div>
+                    <div style="font-size: 0.875rem; font-weight: 700;">Admin Xicoma</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500);">Nível Master</div>
+                </div>
+            </div>
+            <a href="admin-login.html" class="btn btn-secondary w-full mt-lg btn-sm">Sair do Painel</a>
+        </div>
     </aside>
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="page-header flex justify-between items-center mb-xl">
+        <header class="page-header flex justify-between items-center">
             <div>
                 <h1 class="page-title">Pagamentos & Receita</h1>
-                <p class="page-subtitle">Gerir transações e receitas da plataforma</p>
+                <p class="page-subtitle">Monitore o fluxo de caixa, comissões e repasses aos lojistas.</p>
             </div>
-            <button class="btn btn-primary">
-                <span>📥</span>
-                Exportar Relatório
-            </button>
-        </div>
+            <div class="flex gap-md">
+                <button class="btn btn-secondary">
+                    <span>📑</span>
+                    Extrato PDF
+                </button>
+                <button class="btn btn-primary">
+                    <span>📥</span>
+                    Exportar CSV
+                </button>
+            </div>
+        </header>
 
-        <!-- Revenue Summary -->
-        <div class="grid grid-cols-4 gap-lg mb-xl">
-            <div class="metric-card" style="border-left-color: var(--success);">
-                <div class="metric-label">Receita Hoje</div>
-                <div class="metric-value">R$ 12.4K</div>
-                <div class="metric-change positive">
-                    <span>↑</span>
-                    <span>15.3% vs. ontem</span>
+        <div class="page-content">
+            <!-- Financial KPIs -->
+            <div class="grid grid-cols-4 gap-lg mb-xl">
+                <div class="stat-card">
+                    <div class="stat-card-content">
+                        <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">💰
+                        </div>
+                        <div class="stat-details">
+                            <div class="stat-label">Receita Líquida (Hoje)</div>
+                            <div class="stat-value">R$ 12.450</div>
+                            <div class="stat-trend up"><span>↑</span> 15.3%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-content">
+                        <div class="stat-icon" style="background: rgba(59, 130, 246, 0.1); color: var(--info);">🏦</div>
+                        <div class="stat-details">
+                            <div class="stat-label">Comissão Acumulada</div>
+                            <div class="stat-value">R$ 42.600</div>
+                            <div class="stat-trend up"><span>↑</span> 12.1%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-content">
+                        <div class="stat-icon" style="background: rgba(234, 88, 12, 0.1); color: var(--primary);">💸
+                        </div>
+                        <div class="stat-details">
+                            <div class="stat-label">Repasses Pendentes</div>
+                            <div class="stat-value">R$ 15.200</div>
+                            <div class="text-xs text-gray-500">12 restaurantes</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-content">
+                        <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning);">⏳
+                        </div>
+                        <div class="stat-details">
+                            <div class="stat-label">Em Processamento</div>
+                            <div class="stat-value">R$ 4.890</div>
+                            <div class="text-xs text-gray-500">Transações em curso</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="metric-card" style="border-left-color: var(--info);">
-                <div class="metric-label">Receita Semana</div>
-                <div class="metric-value">R$ 67.8K</div>
-                <div class="metric-change positive">
-                    <span>↑</span>
-                    <span>8.7% vs. semana passada</span>
-                </div>
-            </div>
-
-            <div class="metric-card" style="border-left-color: var(--primary-orange);">
-                <div class="metric-label">Receita Mês</div>
-                <div class="metric-value">R$ 284.2K</div>
-                <div class="metric-change positive">
-                    <span>↑</span>
-                    <span>12.1% vs. mês passado</span>
-                </div>
-            </div>
-
-            <div class="metric-card" style="border-left-color: var(--warning);">
-                <div class="metric-label">Comissão Plataforma</div>
-                <div class="metric-value">R$ 42.6K</div>
-                <div class="metric-change positive">
-                    <span>↑</span>
-                    <span>15% de R$ 284.2K</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Charts -->
-        <div class="grid grid-cols-2 gap-lg mb-xl">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Métodos de Pagamento</h3>
-                    <p class="card-subtitle">Distribuição por método</p>
-                </div>
-                <div class="card-body">
-                    <div
-                        style="height: 300px; background: var(--gray-50); border-radius: var(--radius-md); padding: var(--spacing-xl);">
-                        <div style="display: flex; flex-direction: column; gap: 1rem;">
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-md">
+            <!-- Analysis Section -->
+            <div class="grid grid-cols-3 gap-lg mb-xl">
+                <div class="card grid-cols-2" style="grid-column: span 2;">
+                    <div class="card-header">
+                        <h3 class="card-title">Tendência de Faturamento</h3>
+                        <p class="card-subtitle">Comparativo de vendas brutas nos últimos 7 dias</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="flex items-end justify-between gap-md"
+                            style="height: 200px; padding-top: var(--spacing-md);">
+                            <div class="flex flex-col items-center gap-sm flex-1">
+                                <div
+                                    style="width: 100%; height: 40%; background: var(--gray-100); border-radius: 4px; position: relative;">
                                     <div
-                                        style="width: 40px; height: 40px; background: var(--gradient-primary); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
-                                        💳</div>
-                                    <div>
-                                        <div style="font-weight: 600;">Cartão de Crédito</div>
-                                        <div style="font-size: 0.875rem; color: var(--gray-600);">45% do total</div>
+                                        style="position: absolute; bottom: 0; width: 100%; height: 70%; background: var(--primary); border-radius: 4px; opacity: 0.8;">
                                     </div>
                                 </div>
-                                <strong style="font-size: 1.25rem;">R$ 127.9K</strong>
+                                <span class="text-xs text-gray-500">Seg</span>
                             </div>
-
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-md">
+                            <div class="flex flex-col items-center gap-sm flex-1">
+                                <div
+                                    style="width: 100%; height: 60%; background: var(--gray-100); border-radius: 4px; position: relative;">
                                     <div
-                                        style="width: 40px; height: 40px; background: var(--gradient-warm); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
-                                        📱</div>
-                                    <div>
-                                        <div style="font-weight: 600;">M-Pesa</div>
-                                        <div style="font-size: 0.875rem; color: var(--gray-600);">35% do total</div>
+                                        style="position: absolute; bottom: 0; width: 100%; height: 80%; background: var(--primary); border-radius: 4px; opacity: 0.8;">
                                     </div>
                                 </div>
-                                <strong style="font-size: 1.25rem;">R$ 99.5K</strong>
+                                <span class="text-xs text-gray-500">Ter</span>
                             </div>
-
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-md">
+                            <div class="flex flex-col items-center gap-sm flex-1">
+                                <div
+                                    style="width: 100%; height: 50%; background: var(--gray-100); border-radius: 4px; position: relative;">
                                     <div
-                                        style="width: 40px; height: 40px; background: var(--gradient-sunset); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
-                                        💵</div>
-                                    <div>
-                                        <div style="font-weight: 600;">Dinheiro</div>
-                                        <div style="font-size: 0.875rem; color: var(--gray-600);">20% do total</div>
+                                        style="position: absolute; bottom: 0; width: 100%; height: 75%; background: var(--primary); border-radius: 4px; opacity: 0.8;">
                                     </div>
                                 </div>
-                                <strong style="font-size: 1.25rem;">R$ 56.8K</strong>
+                                <span class="text-xs text-gray-500">Qua</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-sm flex-1">
+                                <div
+                                    style="width: 100%; height: 80%; background: var(--gray-100); border-radius: 4px; position: relative;">
+                                    <div
+                                        style="position: absolute; bottom: 0; width: 100%; height: 90%; background: var(--primary); border-radius: 4px; opacity: 0.8;">
+                                    </div>
+                                </div>
+                                <span class="text-xs text-gray-500">Qui</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-sm flex-1">
+                                <div
+                                    style="width: 100%; height: 70%; background: var(--gray-100); border-radius: 4px; position: relative;">
+                                    <div
+                                        style="position: absolute; bottom: 0; width: 100%; height: 85%; background: var(--primary); border-radius: 4px; opacity: 0.8;">
+                                    </div>
+                                </div>
+                                <span class="text-xs text-gray-500">Sex</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-sm flex-1">
+                                <div
+                                    style="width: 100%; height: 90%; background: var(--gray-100); border-radius: 4px; position: relative;">
+                                    <div
+                                        style="position: absolute; bottom: 0; width: 100%; height: 95%; background: var(--primary); border-radius: 4px; opacity: 0.8;">
+                                    </div>
+                                </div>
+                                <span class="text-xs text-gray-500">Sáb</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-sm flex-1">
+                                <div
+                                    style="width: 100%; height: 100%; background: var(--gray-100); border-radius: 4px; position: relative;">
+                                    <div
+                                        style="position: absolute; bottom: 0; width: 100%; height: 98%; background: var(--primary); border-radius: 4px; opacity: 0.8;">
+                                    </div>
+                                </div>
+                                <span class="text-xs text-gray-500">Dom</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Métodos Utilizados</h3>
+                        <p class="card-subtitle">Volume por forma de pagamento</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="flex flex-col gap-lg mt-md">
+                            <div class="flex items-center gap-md">
+                                <div
+                                    style="width: 40px; height: 40px; border-radius: 8px; background: #F3F4F6; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+                                    📱</div>
+                                <div style="flex: 1;">
+                                    <div class="flex justify-between mb-xs">
+                                        <span class="text-sm font-semibold">M-Pesa / Mobile</span>
+                                        <span class="text-sm">55%</span>
+                                    </div>
+                                    <div style="height: 6px; background: var(--gray-100); border-radius: 3px;">
+                                        <div
+                                            style="width: 55%; height: 100%; background: var(--primary); border-radius: 3px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-md">
+                                <div
+                                    style="width: 40px; height: 40px; border-radius: 8px; background: #F3F4F6; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+                                    💳</div>
+                                <div style="flex: 1;">
+                                    <div class="flex justify-between mb-xs">
+                                        <span class="text-sm font-semibold">Cartão Crédito</span>
+                                        <span class="text-sm">30%</span>
+                                    </div>
+                                    <div style="height: 6px; background: var(--gray-100); border-radius: 3px;">
+                                        <div
+                                            style="width: 30%; height: 100%; background: var(--info); border-radius: 3px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-md">
+                                <div
+                                    style="width: 40px; height: 40px; border-radius: 8px; background: #F3F4F6; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+                                    💵</div>
+                                <div style="flex: 1;">
+                                    <div class="flex justify-between mb-xs">
+                                        <span class="text-sm font-semibold">Dinheiro</span>
+                                        <span class="text-sm">15%</span>
+                                    </div>
+                                    <div style="height: 6px; background: var(--gray-100); border-radius: 3px;">
+                                        <div
+                                            style="width: 15%; height: 100%; background: var(--success); border-radius: 3px;">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Transactions Table -->
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Receita por Dia</h3>
-                    <p class="card-subtitle">Últimos 7 dias</p>
-                </div>
-                <div class="card-body"
-                    style="height: 300px; background: var(--gray-50); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--gray-500);">
-                    <div style="text-align: center;">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
-                        <div>Gráfico de Barras</div>
-                        <div style="font-size: 0.875rem; margin-top: 0.5rem;">Tendência crescente de 12.1%</div>
+                <div class="card-header flex justify-between items-center">
+                    <div>
+                        <h3 class="card-title">Transações de Hoje</h3>
+                        <p class="card-subtitle">Fluxo em tempo real de entradas e saídas</p>
+                    </div>
+                    <div class="flex gap-sm">
+                        <input type="text" class="form-input" placeholder="🔍 Buscar ID..." style="width: 150px;">
+                        <button class="btn btn-secondary btn-sm">Filtrar</button>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Recent Transactions -->
-        <div class="card">
-            <div class="card-header flex justify-between items-center">
-                <div>
-                    <h3 class="card-title">Transações Recentes</h3>
-                    <p class="card-subtitle">Últimas 10 transações</p>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Transação ID</th>
+                                <th>Origem / Loja</th>
+                                <th>Tipo de Fluxo</th>
+                                <th>Método</th>
+                                <th>Valor Bruto</th>
+                                <th>Sua Taxa (15%)</th>
+                                <th>Status</th>
+                                <th class="text-right">Horário</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="text-sm font-mono text-gray-500">#TX-948271</span></td>
+                                <td>
+                                    <div class="font-bold text-gray-900">Burger King - Centro</div>
+                                    <div class="text-xs text-gray-500">Ref. Pedido #8472</div>
+                                </td>
+                                <td><span class="badge badge-success">Venda Recebida</span></td>
+                                <td><span class="text-sm">💳 Cartão</span></td>
+                                <td class="font-bold">R$ 45.90</td>
+                                <td class="text-success font-bold">R$ 6.88</td>
+                                <td><span class="badge badge-success badge-dot">Liquidado</span></td>
+                                <td class="text-right text-gray-500 text-sm">14:22</td>
+                            </tr>
+                            <tr>
+                                <td><span class="text-sm font-mono text-gray-500">#TX-948270</span></td>
+                                <td>
+                                    <div class="font-bold text-gray-900">Pizza Hut - Polana</div>
+                                    <div class="text-xs text-gray-500">Ref. Pedido #8471</div>
+                                </td>
+                                <td><span class="badge badge-success">Venda Recebida</span></td>
+                                <td><span class="text-sm">📱 M-Pesa</span></td>
+                                <td class="font-bold">R$ 89.20</td>
+                                <td class="text-success font-bold">R$ 13.38</td>
+                                <td><span class="badge badge-warning badge-dot">Pendente</span></td>
+                                <td class="text-right text-gray-500 text-sm">14:15</td>
+                            </tr>
+                            <tr>
+                                <td><span class="text-sm font-mono text-gray-500">#TX-948269</span></td>
+                                <td>
+                                    <div class="font-bold text-gray-900">Doce Tentação</div>
+                                    <div class="text-xs text-gray-500">Ref. Pedido #8467</div>
+                                </td>
+                                <td><span class="badge badge-danger">Reembolso</span></td>
+                                <td><span class="text-sm">💳 Cartão</span></td>
+                                <td class="font-bold text-danger">- R$ 42.00</td>
+                                <td class="text-danger">R$ 0.00</td>
+                                <td><span class="badge badge-success badge-dot">Concluído</span></td>
+                                <td class="text-right text-gray-500 text-sm">13:58</td>
+                            </tr>
+                            <tr>
+                                <td><span class="text-sm font-mono text-gray-500">#TX-948268</span></td>
+                                <td>
+                                    <div class="font-bold text-gray-900">McDonald's</div>
+                                    <div class="text-xs text-gray-500">Ref. Pedido #8470</div>
+                                </td>
+                                <td><span class="badge badge-success">Venda Recebida</span></td>
+                                <td><span class="text-sm">💵 Dinheiro</span></td>
+                                <td class="font-bold">R$ 32.00</td>
+                                <td class="text-success font-bold">R$ 4.80</td>
+                                <td><span class="badge badge-success badge-dot">Liquidado</span></td>
+                                <td class="text-right text-gray-500 text-sm">13:45</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="flex gap-md">
-                    <select class="form-select" style="width: 180px;">
-                        <option>Todos os Tipos</option>
-                        <option>Pedidos</option>
-                        <option>Reembolsos</option>
-                        <option>Comissões</option>
-                    </select>
-                    <input type="date" class="form-input" style="width: 180px;">
+                <div class="card-footer flex justify-between items-center">
+                    <div class="text-sm text-gray-600">Total processado hoje: <strong class="text-gray-900">R$
+                            21.432,00</strong></div>
+                    <button class="btn btn-secondary btn-sm">Ver Histórico Completo</button>
                 </div>
-            </div>
-            <div class="table-container">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID Transação</th>
-                            <th>Tipo</th>
-                            <th>Pedido</th>
-                            <th>Restaurante</th>
-                            <th>Método</th>
-                            <th>Valor</th>
-                            <th>Comissão</th>
-                            <th>Status</th>
-                            <th>Data</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>#TXN-8472</strong></td>
-                            <td><span class="badge badge-success">Pedido</span></td>
-                            <td>#8472</td>
-                            <td>Burger King</td>
-                            <td>
-                                <div class="flex items-center gap-sm">
-                                    <span>💳</span>
-                                    <span>Cartão</span>
-                                </div>
-                            </td>
-                            <td><strong>R$ 45.90</strong></td>
-                            <td>R$ 6.89</td>
-                            <td><span class="badge badge-success">Concluído</span></td>
-                            <td>
-                                <div style="font-size: 0.875rem;">
-                                    <div>13:45</div>
-                                    <div style="color: var(--gray-600);">Hoje</div>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><strong>#TXN-8471</strong></td>
-                            <td><span class="badge badge-success">Pedido</span></td>
-                            <td>#8471</td>
-                            <td>Pizza Hut</td>
-                            <td>
-                                <div class="flex items-center gap-sm">
-                                    <span>📱</span>
-                                    <span>M-Pesa</span>
-                                </div>
-                            </td>
-                            <td><strong>R$ 78.50</strong></td>
-                            <td>R$ 11.78</td>
-                            <td><span class="badge badge-warning">Pendente</span></td>
-                            <td>
-                                <div style="font-size: 0.875rem;">
-                                    <div>13:30</div>
-                                    <div style="color: var(--gray-600);">Hoje</div>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><strong>#TXN-8470</strong></td>
-                            <td><span class="badge badge-success">Pedido</span></td>
-                            <td>#8470</td>
-                            <td>McDonald's</td>
-                            <td>
-                                <div class="flex items-center gap-sm">
-                                    <span>💵</span>
-                                    <span>Dinheiro</span>
-                                </div>
-                            </td>
-                            <td><strong>R$ 32.00</strong></td>
-                            <td>R$ 4.80</td>
-                            <td><span class="badge badge-success">Concluído</span></td>
-                            <td>
-                                <div style="font-size: 0.875rem;">
-                                    <div>13:20</div>
-                                    <div style="color: var(--gray-600);">Hoje</div>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><strong>#TXN-8469</strong></td>
-                            <td><span class="badge badge-success">Pedido</span></td>
-                            <td>#8469</td>
-                            <td>KFC</td>
-                            <td>
-                                <div class="flex items-center gap-sm">
-                                    <span>💳</span>
-                                    <span>Cartão</span>
-                                </div>
-                            </td>
-                            <td><strong>R$ 56.20</strong></td>
-                            <td>R$ 8.43</td>
-                            <td><span class="badge badge-warning">Pendente</span></td>
-                            <td>
-                                <div style="font-size: 0.875rem;">
-                                    <div>13:15</div>
-                                    <div style="color: var(--gray-600);">Hoje</div>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><strong>#TXN-8468</strong></td>
-                            <td><span class="badge badge-success">Pedido</span></td>
-                            <td>#8468</td>
-                            <td>Subway</td>
-                            <td>
-                                <div class="flex items-center gap-sm">
-                                    <span>📱</span>
-                                    <span>M-Pesa</span>
-                                </div>
-                            </td>
-                            <td><strong>R$ 28.90</strong></td>
-                            <td>R$ 4.34</td>
-                            <td><span class="badge badge-success">Concluído</span></td>
-                            <td>
-                                <div style="font-size: 0.875rem;">
-                                    <div>12:50</div>
-                                    <div style="color: var(--gray-600);">Hoje</div>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><strong>#TXN-8467</strong></td>
-                            <td><span class="badge badge-danger">Reembolso</span></td>
-                            <td>#8467</td>
-                            <td>Doce Tentação</td>
-                            <td>
-                                <div class="flex items-center gap-sm">
-                                    <span>💳</span>
-                                    <span>Cartão</span>
-                                </div>
-                            </td>
-                            <td><strong>-R$ 42.00</strong></td>
-                            <td>-R$ 6.30</td>
-                            <td><span class="badge badge-success">Concluído</span></td>
-                            <td>
-                                <div style="font-size: 0.875rem;">
-                                    <div>12:30</div>
-                                    <div style="color: var(--gray-600);">Hoje</div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </main>

@@ -4,111 +4,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurante Login - Xicoma</title>
+    <title>Login de Parceiro - Xicoma Restaurantes</title>
     <link rel="stylesheet" href="../styles.css">
     <style>
-        .login-container {
-            min-height: 100vh;
+        body {
+            background-color: #F9FAFB;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #FFB627 0%, #FF6B35 50%, #E63946 100%);
-            padding: var(--spacing-lg);
-            position: relative;
+            min-height: 100vh;
+            margin: 0;
             overflow: hidden;
         }
 
-        .login-container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
+        .login-wrapper {
             width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            animation: float 20s infinite ease-in-out;
+            max-width: 440px;
+            padding: var(--spacing-xl);
+            position: relative;
         }
 
-        @keyframes float {
+        /* Decorative background blob for "Warm/Food" feel */
+        .bg-blob {
+            position: fixed;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(234, 88, 12, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
 
-            0%,
-            100% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-
-            50% {
-                transform: translate(30px, -30px) rotate(180deg);
-            }
+        .bg-blob-2 {
+            position: fixed;
+            bottom: -150px;
+            left: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
         }
 
         .login-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: var(--radius-2xl);
+            background: var(--white);
             padding: var(--spacing-3xl);
+            border-radius: var(--radius-2xl);
             box-shadow: var(--shadow-2xl);
-            width: 100%;
-            max-width: 450px;
-            position: relative;
-            z-index: 1;
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
-        .login-logo {
+        .login-header {
             text-align: center;
             margin-bottom: var(--spacing-2xl);
         }
 
-        .login-logo-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient-warm);
+        .login-logo {
+            width: 64px;
+            height: 64px;
+            background: var(--primary);
+            color: white;
             border-radius: var(--radius-xl);
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            color: var(--white);
+            font-size: 2rem;
             font-weight: 800;
-            margin-bottom: var(--spacing-md);
-            box-shadow: var(--shadow-yellow);
+            margin: 0 auto var(--spacing-lg);
+            box-shadow: 0 10px 15px -3px rgba(234, 88, 12, 0.3);
         }
 
         .login-title {
-            font-size: 2rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.75rem;
             font-weight: 800;
             color: var(--gray-900);
-            margin-bottom: 0.5rem;
+            margin-bottom: var(--spacing-xs);
         }
 
         .login-subtitle {
-            color: var(--gray-600);
-            font-size: 1rem;
+            color: var(--gray-500);
+            font-size: 0.875rem;
+            line-height: 1.5;
         }
 
-        .login-form {
-            margin-top: var(--spacing-2xl);
-        }
-
-        .remember-forgot {
+        .form-options {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            color: var(--gray-700);
+            margin-top: var(--spacing-lg);
         }
 
         .forgot-password {
             font-size: 0.875rem;
-            color: var(--primary-orange);
+            color: var(--primary);
+            text-decoration: none;
             font-weight: 600;
         }
 
@@ -117,61 +108,59 @@
         }
 
         .login-footer {
-            margin-top: var(--spacing-xl);
+            margin-top: var(--spacing-2xl);
             text-align: center;
             font-size: 0.875rem;
-            color: var(--gray-600);
+            color: var(--gray-500);
         }
 
-        .register-link {
-            margin-top: var(--spacing-md);
-            text-align: center;
-            font-size: 0.875rem;
+        .login-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
         }
     </style>
 </head>
 
 <body>
-    <div class="login-container">
-        <div class="login-card">
-            <div class="login-logo">
-                <div class="login-logo-icon">🏪</div>
-                <h1 class="login-title">Xicoma Restaurante</h1>
-                <p class="login-subtitle">Acesso para restaurantes</p>
-            </div>
+    <div class="bg-blob"></div>
+    <div class="bg-blob-2"></div>
 
-            <form class="login-form" action="restaurant-dashboard.html">
+    <div class="login-wrapper">
+        <div class="login-card">
+            <header class="login-header">
+                <div class="login-logo">X</div>
+                <h1 class="login-title">Painel do Parceiro</h1>
+                <p class="login-subtitle">Bem-vindo de volta! Faça login para gerenciar seus pedidos e cardápio.</p>
+            </header>
+
+            <form action="restaurant-dashboard.html">
                 <div class="form-group">
-                    <label class="form-label" for="restaurant-id">ID do Restaurante ou Email</label>
-                    <input type="text" id="restaurant-id" class="form-input"
-                        placeholder="RST-001 ou email@restaurante.com" required>
+                    <label class="form-label" for="email">E-mail do Restaurante</label>
+                    <input type="email" id="email" class="form-input" placeholder="exemplo@restaurante.com" required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="password">Senha</label>
+                    <label class="form-label" for="password">Senha de Acesso</label>
                     <input type="password" id="password" class="form-input" placeholder="••••••••" required>
                 </div>
 
-                <div class="remember-forgot">
-                    <label class="remember-me">
+                <div class="form-options">
+                    <label class="flex items-center gap-sm" style="cursor: pointer;">
                         <input type="checkbox" class="form-checkbox">
-                        <span>Lembrar-me</span>
+                        <span class="text-sm text-gray-600">Lembrar-me</span>
                     </label>
                     <a href="#" class="forgot-password">Esqueceu a senha?</a>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-full btn-lg">
-                    Entrar
+                <button type="submit" class="btn btn-primary w-full btn-lg mt-xl">
+                    Entrar no Painel
                 </button>
             </form>
 
-            <div class="register-link">
-                <p>Ainda não tem conta? <a href="#" style="color: var(--primary-orange); font-weight: 600;">Registar
-                        Restaurante</a></p>
-            </div>
-
             <div class="login-footer">
-                <p>&copy; 2026 Xicoma. Todos os direitos reservados.</p>
+                <p>Ainda não é um parceiro? <a href="#">Cadastre-se aqui</a></p>
+                <p class="mt-xl text-xs">© 2026 Xicoma Tecnologia. Todos os direitos reservados.</p>
             </div>
         </div>
     </div>

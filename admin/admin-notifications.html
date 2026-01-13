@@ -4,16 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notificações - Xicoma Admin</title>
+    <title>Notificações & Broadcast - Xicoma Admin</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
-    <!-- Sidebar -->
+    <!-- Sidebar Navigation -->
     <aside class="sidebar">
-        <div class="sidebar-logo">
-            <div class="sidebar-logo-icon">🍔</div>
-            <div class="sidebar-logo-text">Xicoma</div>
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon">X</div>
+                <div class="sidebar-logo-text">Xicoma</div>
+            </div>
         </div>
 
         <nav>
@@ -32,19 +34,19 @@
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-orders.html" class="sidebar-nav-link">
-                        <span class="sidebar-nav-icon">📦</span>
+                        <span class="sidebar-nav-icon">🛍️</span>
                         <span>Pedidos</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-couriers.html" class="sidebar-nav-link">
-                        <span class="sidebar-nav-icon">🚴</span>
+                        <span class="sidebar-nav-icon">🛵</span>
                         <span>Entregadores</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-payments.html" class="sidebar-nav-link">
-                        <span class="sidebar-nav-icon">💰</span>
+                        <span class="sidebar-nav-icon">💳</span>
                         <span>Pagamentos</span>
                     </a>
                 </li>
@@ -62,228 +64,169 @@
                 </li>
             </ul>
         </nav>
+
+        <div class="sidebar-footer">
+            <div class="flex items-center gap-md">
+                <div
+                    style="width: 40px; height: 40px; border-radius: var(--radius-full); background: var(--gray-200); display: flex; align-items: center; justify-content: center; font-weight: 700;">
+                    AD</div>
+                <div>
+                    <div style="font-size: 0.875rem; font-weight: 700;">Admin Xicoma</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500);">Nível Master</div>
+                </div>
+            </div>
+            <a href="admin-login.html" class="btn btn-secondary w-full mt-lg btn-sm">Sair do Painel</a>
+        </div>
     </aside>
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="page-header flex justify-between items-center mb-xl">
+        <header class="page-header flex justify-between items-center">
             <div>
-                <h1 class="page-title">Central de Notificações</h1>
-                <p class="page-subtitle">Gerir notificações e alertas do sistema</p>
+                <h1 class="page-title">Notificações & Broadcast</h1>
+                <p class="page-subtitle">Envie mensagens globais e monitore alertas automáticos do sistema.</p>
             </div>
             <div class="flex gap-md">
                 <button class="btn btn-secondary">
-                    <span>✓</span>
-                    Marcar Todas Lidas
-                </button>
-                <button class="btn btn-primary">
-                    <span>➕</span>
-                    Nova Notificação
+                    <span>📑</span>
+                    Ver Histórico Push
                 </button>
             </div>
-        </div>
+        </header>
 
-        <!-- Filters -->
-        <div class="card mb-xl">
-            <div class="flex gap-md items-center">
-                <select class="form-select" style="width: 200px;">
-                    <option>Todas Notificações</option>
-                    <option>Não Lidas</option>
-                    <option>Lidas</option>
-                </select>
-                <select class="form-select" style="width: 200px;">
-                    <option>Todos os Tipos</option>
-                    <option>Pedidos</option>
-                    <option>Pagamentos</option>
-                    <option>Sistema</option>
-                    <option>Alertas</option>
-                </select>
-                <input type="date" class="form-input" style="width: 200px;">
-            </div>
-        </div>
-
-        <!-- Notifications List -->
-        <div class="grid gap-lg">
-            <!-- Unread Notification -->
-            <div class="card"
-                style="border-left: 4px solid var(--primary-orange); background: rgba(255, 107, 53, 0.05);">
-                <div class="flex gap-lg">
-                    <div
-                        style="width: 60px; height: 60px; background: var(--gradient-primary); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0;">
-                        🚨</div>
-                    <div style="flex: 1;">
-                        <div class="flex justify-between items-start mb-sm">
-                            <div>
-                                <h4
-                                    style="font-size: 1.125rem; font-weight: 700; color: var(--gray-900); margin-bottom: 0.25rem;">
-                                    Alerta: Múltiplos Pedidos Cancelados</h4>
-                                <div style="font-size: 0.875rem; color: var(--gray-600);">Sistema • Há 5 minutos</div>
-                            </div>
-                            <span class="badge badge-danger">Não Lida</span>
-                        </div>
-                        <p style="color: var(--gray-700); margin-bottom: 1rem;">
-                            O restaurante "Burger King" teve 5 pedidos cancelados na última hora. Isso pode indicar um
-                            problema operacional que requer atenção imediata.
-                        </p>
-                        <div class="flex gap-sm">
-                            <button class="btn btn-sm btn-primary">Ver Detalhes</button>
-                            <button class="btn btn-sm btn-secondary">Marcar como Lida</button>
-                            <button class="btn btn-sm btn-secondary">Arquivar</button>
-                        </div>
+        <div class="page-content">
+            <div class="grid grid-cols-3 gap-xl">
+                <!-- Send Notification Form -->
+                <div class="card grid-cols-2" style="grid-column: span 2;">
+                    <div class="card-header">
+                        <h3 class="card-title">Nova Notificação Push</h3>
+                        <p class="card-subtitle">Envie um alerta para um grupo específico de usuários.</p>
                     </div>
-                </div>
-            </div>
-
-            <!-- Unread Notification -->
-            <div class="card" style="border-left: 4px solid var(--success); background: rgba(16, 185, 129, 0.05);">
-                <div class="flex gap-lg">
-                    <div
-                        style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--success) 0%, var(--success-dark) 100%); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0;">
-                        💰</div>
-                    <div style="flex: 1;">
-                        <div class="flex justify-between items-start mb-sm">
-                            <div>
-                                <h4
-                                    style="font-size: 1.125rem; font-weight: 700; color: var(--gray-900); margin-bottom: 0.25rem;">
-                                    Pagamento Recebido</h4>
-                                <div style="font-size: 0.875rem; color: var(--gray-600);">Pagamentos • Há 15 minutos
+                    <div class="card-body">
+                        <form class="flex flex-col gap-lg">
+                            <div class="grid grid-cols-2 gap-lg">
+                                <div class="form-group">
+                                    <label class="form-label">Título da Mensagem</label>
+                                    <input type="text" class="form-input" placeholder="Ex: Cupom de 20% OFF 🍕">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Público Alvo</label>
+                                    <select class="form-select">
+                                        <option>Todos os Clientes</option>
+                                        <option>Apenas Restaurantes</option>
+                                        <option>Apenas Entregadores</option>
+                                        <option>Usuários em Maputo</option>
+                                    </select>
                                 </div>
                             </div>
-                            <span class="badge badge-danger">Não Lida</span>
-                        </div>
-                        <p style="color: var(--gray-700); margin-bottom: 1rem;">
-                            Pagamento de R$ 78.50 recebido via M-Pesa para o pedido #8471. Comissão da plataforma: R$
-                            11.78.
-                        </p>
-                        <div class="flex gap-sm">
-                            <button class="btn btn-sm btn-primary">Ver Transação</button>
-                            <button class="btn btn-sm btn-secondary">Marcar como Lida</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unread Notification -->
-            <div class="card" style="border-left: 4px solid var(--info); background: rgba(59, 130, 246, 0.05);">
-                <div class="flex gap-lg">
-                    <div
-                        style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--info) 0%, var(--info-dark) 100%); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0;">
-                        🏪</div>
-                    <div style="flex: 1;">
-                        <div class="flex justify-between items-start mb-sm">
-                            <div>
-                                <h4
-                                    style="font-size: 1.125rem; font-weight: 700; color: var(--gray-900); margin-bottom: 0.25rem;">
-                                    Novo Restaurante Registado</h4>
-                                <div style="font-size: 0.875rem; color: var(--gray-600);">Sistema • Há 1 hora</div>
+                            <div class="form-group">
+                                <label class="form-label">Conteúdo da Notificação</label>
+                                <textarea class="form-input" rows="4"
+                                    placeholder="Escreva aqui o texto que aparecerá no celular do usuário..."></textarea>
+                                <p class="text-xs text-gray-500 mt-xs">Máximo de 150 caracteres para garantir
+                                    legibilidade.</p>
                             </div>
-                            <span class="badge badge-danger">Não Lida</span>
-                        </div>
-                        <p style="color: var(--gray-700); margin-bottom: 1rem;">
-                            "Restaurante Sabor Tropical" completou o registo e aguarda aprovação. Localização: Polana,
-                            Maputo.
-                        </p>
-                        <div class="flex gap-sm">
-                            <button class="btn btn-sm btn-success">Aprovar</button>
-                            <button class="btn btn-sm btn-danger">Rejeitar</button>
-                            <button class="btn btn-sm btn-secondary">Ver Perfil</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Read Notification -->
-            <div class="card" style="border-left: 4px solid var(--gray-300);">
-                <div class="flex gap-lg">
-                    <div
-                        style="width: 60px; height: 60px; background: var(--gray-300); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0;">
-                        📦</div>
-                    <div style="flex: 1;">
-                        <div class="flex justify-between items-start mb-sm">
-                            <div>
-                                <h4
-                                    style="font-size: 1.125rem; font-weight: 700; color: var(--gray-700); margin-bottom: 0.25rem;">
-                                    Pedido Entregue com Sucesso</h4>
-                                <div style="font-size: 0.875rem; color: var(--gray-600);">Pedidos • Há 2 horas</div>
+                            <div class="grid grid-cols-2 gap-lg">
+                                <div class="form-group">
+                                    <label class="form-label">Ação ao Clicar (Link)</label>
+                                    <input type="text" class="form-input" placeholder="Ex: /promotions/weekend">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Ícone / Imagem (Opcional)</label>
+                                    <input type="file" class="form-input">
+                                </div>
                             </div>
-                            <span class="badge badge-gray">Lida</span>
-                        </div>
-                        <p style="color: var(--gray-600); margin-bottom: 1rem;">
-                            Pedido #8472 foi entregue com sucesso por Carlos Mendes. Cliente avaliou com 5 estrelas.
-                        </p>
-                        <div class="flex gap-sm">
-                            <button class="btn btn-sm btn-secondary">Ver Pedido</button>
-                            <button class="btn btn-sm btn-secondary">Arquivar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Read Notification -->
-            <div class="card" style="border-left: 4px solid var(--gray-300);">
-                <div class="flex gap-lg">
-                    <div
-                        style="width: 60px; height: 60px; background: var(--gray-300); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0;">
-                        🚴</div>
-                    <div style="flex: 1;">
-                        <div class="flex justify-between items-start mb-sm">
-                            <div>
-                                <h4
-                                    style="font-size: 1.125rem; font-weight: 700; color: var(--gray-700); margin-bottom: 0.25rem;">
-                                    Novo Entregador Registado</h4>
-                                <div style="font-size: 0.875rem; color: var(--gray-600);">Sistema • Há 3 horas</div>
+                            <div class="flex justify-end gap-md">
+                                <button type="reset" class="btn btn-secondary">Limpar</button>
+                                <button type="submit" class="btn btn-primary btn-lg">Enviar Agora 🚀</button>
                             </div>
-                            <span class="badge badge-gray">Lida</span>
-                        </div>
-                        <p style="color: var(--gray-600); margin-bottom: 1rem;">
-                            "Miguel Santos" completou o registo como entregador. Veículo: Moto Honda CG 125. Zona:
-                            Centro.
-                        </p>
-                        <div class="flex gap-sm">
-                            <button class="btn btn-sm btn-secondary">Ver Perfil</button>
-                            <button class="btn btn-sm btn-secondary">Arquivar</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
-            </div>
 
-            <!-- Read Notification -->
-            <div class="card" style="border-left: 4px solid var(--gray-300);">
-                <div class="flex gap-lg">
-                    <div
-                        style="width: 60px; height: 60px; background: var(--gray-300); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0;">
-                        ⚙️</div>
-                    <div style="flex: 1;">
-                        <div class="flex justify-between items-start mb-sm">
+                <!-- Active System Alerts -->
+                <div class="flex flex-col gap-lg">
+                    <h3 class="text-lg font-bold text-gray-900 mb-sm">Alertas Críticos</h3>
+
+                    <div class="card" style="border-left: 4px solid var(--danger);">
+                        <div class="flex gap-md">
+                            <div class="text-xl">⚠️</div>
                             <div>
-                                <h4
-                                    style="font-size: 1.125rem; font-weight: 700; color: var(--gray-700); margin-bottom: 0.25rem;">
-                                    Atualização do Sistema</h4>
-                                <div style="font-size: 0.875rem; color: var(--gray-600);">Sistema • Ontem</div>
+                                <div class="font-bold text-danger text-sm">Problemas na Região Norte</div>
+                                <p class="text-xs text-gray-600 mt-xs">5 restaurantes off-line no bairro Triunfo há mais
+                                    de 20min.</p>
+                                <button class="btn btn-secondary btn-sm mt-md">Atender</button>
                             </div>
-                            <span class="badge badge-gray">Lida</span>
                         </div>
-                        <p style="color: var(--gray-600); margin-bottom: 1rem;">
-                            Sistema atualizado para versão 2.5.0. Novas funcionalidades incluem rastreamento em tempo
-                            real melhorado e notificações push.
-                        </p>
-                        <div class="flex gap-sm">
-                            <button class="btn btn-sm btn-secondary">Ver Changelog</button>
-                            <button class="btn btn-sm btn-secondary">Arquivar</button>
+                    </div>
+
+                    <div class="card" style="border-left: 4px solid var(--warning);">
+                        <div class="flex gap-md">
+                            <div class="text-xl">🛵</div>
+                            <div>
+                                <div class="font-bold text-warning text-sm">Baixa Frota em Zimpeto</div>
+                                <p class="text-xs text-gray-600 mt-xs">Demanda alta de pedidos e poucos entregadores
+                                    disponíveis.</p>
+                                <button class="btn btn-secondary btn-sm mt-md">Ver Mapa</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="border-left: 4px solid var(--info);">
+                        <div class="flex gap-md">
+                            <div class="text-xl">✅</div>
+                            <div>
+                                <div class="font-bold text-info text-sm">Backup Concluído</div>
+                                <p class="text-xs text-gray-600 mt-xs">A base de dados de transações foi espelhada com
+                                    sucesso.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Pagination -->
-        <div class="flex justify-center mt-xl">
-            <div class="flex gap-sm">
-                <button class="btn btn-sm btn-secondary" disabled>← Anterior</button>
-                <button class="btn btn-sm btn-primary">1</button>
-                <button class="btn btn-sm btn-secondary">2</button>
-                <button class="btn btn-sm btn-secondary">3</button>
-                <button class="btn btn-sm btn-secondary">Próximo →</button>
+            <!-- Recent Notifications Logs -->
+            <div class="card mt-xl">
+                <div class="card-header">
+                    <h3 class="card-title">Registros Enviados Recentemente</h3>
+                </div>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Data/Hora</th>
+                                <th>Público</th>
+                                <th>Título</th>
+                                <th>Alcance</th>
+                                <th>Cliques</th>
+                                <th>Status</th>
+                                <th class="text-right">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-sm">Hoje, 10:30</td>
+                                <td><span class="badge badge-gray">Clientes</span></td>
+                                <td class="font-semibold">🍕 Sextou com Pizza!</td>
+                                <td>1.450</td>
+                                <td class="font-bold">240 (16%)</td>
+                                <td><span class="badge badge-success badge-dot">Entregue</span></td>
+                                <td class="text-right"><button class="btn btn-icon btn-sm btn-secondary">👁️</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-sm">Ontem, 18:00</td>
+                                <td><span class="badge badge-gray">Lojistas</span></td>
+                                <td class="font-semibold">Nova Política de Taxas</td>
+                                <td>156</td>
+                                <td class="font-bold">142 (91%)</td>
+                                <td><span class="badge badge-success badge-dot">Entregue</span></td>
+                                <td class="text-right"><button class="btn btn-icon btn-sm btn-secondary">👁️</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </main>

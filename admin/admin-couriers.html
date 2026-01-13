@@ -4,16 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entregadores - Xicoma Admin</title>
+    <title>Gestão de Entregadores - Xicoma Admin</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
-    <!-- Sidebar -->
+    <!-- Sidebar Navigation -->
     <aside class="sidebar">
-        <div class="sidebar-logo">
-            <div class="sidebar-logo-icon">🍔</div>
-            <div class="sidebar-logo-text">Xicoma</div>
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon">X</div>
+                <div class="sidebar-logo-text">Xicoma</div>
+            </div>
         </div>
 
         <nav>
@@ -32,19 +34,19 @@
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-orders.html" class="sidebar-nav-link">
-                        <span class="sidebar-nav-icon">📦</span>
+                        <span class="sidebar-nav-icon">🛍️</span>
                         <span>Pedidos</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-couriers.html" class="sidebar-nav-link active">
-                        <span class="sidebar-nav-icon">🚴</span>
+                        <span class="sidebar-nav-icon">🛵</span>
                         <span>Entregadores</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-payments.html" class="sidebar-nav-link">
-                        <span class="sidebar-nav-icon">💰</span>
+                        <span class="sidebar-nav-icon">💳</span>
                         <span>Pagamentos</span>
                     </a>
                 </li>
@@ -62,292 +64,266 @@
                 </li>
             </ul>
         </nav>
+
+        <div class="sidebar-footer">
+            <div class="flex items-center gap-md">
+                <div
+                    style="width: 40px; height: 40px; border-radius: var(--radius-full); background: var(--gray-200); display: flex; align-items: center; justify-content: center; font-weight: 700;">
+                    AD</div>
+                <div>
+                    <div style="font-size: 0.875rem; font-weight: 700;">Admin Xicoma</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500);">Nível Master</div>
+                </div>
+            </div>
+            <a href="admin-login.html" class="btn btn-secondary w-full mt-lg btn-sm">Sair do Painel</a>
+        </div>
     </aside>
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="page-header flex justify-between items-center mb-xl">
+        <header class="page-header flex justify-between items-center">
             <div>
-                <h1 class="page-title">Gestão de Entregadores</h1>
-                <p class="page-subtitle">Monitorizar e gerir todos os entregadores</p>
+                <h1 class="page-title">Frota de Entregadores</h1>
+                <p class="page-subtitle">Gerencie e monitore a logística de entrega em toda a rede.</p>
             </div>
-            <button class="btn btn-primary">
-                <span>➕</span>
-                Adicionar Entregador
-            </button>
-        </div>
+            <div class="flex gap-md">
+                <button class="btn btn-secondary">
+                    <span>🗺️</span>
+                    Mapa em Tempo Real
+                </button>
+                <button class="btn btn-primary">
+                    <span>➕</span>
+                    Cadastrar Entregador
+                </button>
+            </div>
+        </header>
 
-        <!-- Status Summary -->
-        <div class="grid grid-cols-4 gap-lg mb-xl">
-            <div class="card" style="border-left: 4px solid var(--success);">
-                <div class="metric-label">Online</div>
-                <div class="metric-value" style="font-size: 2rem;">89</div>
-            </div>
-            <div class="card" style="border-left: 4px solid var(--gray-500);">
-                <div class="metric-label">Offline</div>
-                <div class="metric-value" style="font-size: 2rem;">34</div>
-            </div>
-            <div class="card" style="border-left: 4px solid var(--warning);">
-                <div class="metric-label">Em Entrega</div>
-                <div class="metric-value" style="font-size: 2rem;">56</div>
-            </div>
-            <div class="card" style="border-left: 4px solid var(--info);">
-                <div class="metric-label">Disponíveis</div>
-                <div class="metric-value" style="font-size: 2rem;">33</div>
-            </div>
-        </div>
-
-        <!-- Filters -->
-        <div class="card mb-xl">
-            <div class="flex gap-md items-center">
-                <div style="flex: 1;">
-                    <input type="text" class="form-input" placeholder="🔍 Pesquisar por nome ou ID...">
+        <div class="page-content">
+            <!-- Fleet Status Summary -->
+            <div class="grid grid-cols-4 gap-lg mb-xl">
+                <div class="stat-card">
+                    <div class="stat-card-content">
+                        <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">🔋
+                        </div>
+                        <div class="stat-details">
+                            <div class="stat-label">Disponíveis</div>
+                            <div class="stat-value">33</div>
+                            <div class="text-xs text-gray-500">Prontos para coletar</div>
+                        </div>
+                    </div>
                 </div>
-                <select class="form-select" style="width: 180px;">
-                    <option>Todos os Status</option>
-                    <option>Online</option>
-                    <option>Offline</option>
-                    <option>Em Entrega</option>
-                    <option>Disponível</option>
-                </select>
-                <select class="form-select" style="width: 180px;">
-                    <option>Todas Zonas</option>
-                    <option>Centro</option>
-                    <option>Polana</option>
-                    <option>Matola</option>
-                    <option>Costa do Sol</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Couriers Table -->
-        <div class="card">
-            <div class="table-container">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Entregador</th>
-                            <th>Veículo</th>
-                            <th>Zona</th>
-                            <th>Status</th>
-                            <th>Pedidos Ativos</th>
-                            <th>Total Entregas</th>
-                            <th>Rating</th>
-                            <th>Ganhos Hoje</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="flex items-center gap-md">
-                                    <div
-                                        style="width: 50px; height: 50px; background: var(--gradient-primary); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--white); font-weight: 700;">
-                                        CM</div>
-                                    <div>
-                                        <div style="font-weight: 600; color: var(--gray-900);">Carlos Mendes</div>
-                                        <div style="font-size: 0.875rem; color: var(--gray-600);">ID: #COU-234</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div>
-                                    <div>🏍️ Moto</div>
-                                    <div style="font-size: 0.875rem; color: var(--gray-600);">Honda CG 125</div>
-                                </div>
-                            </td>
-                            <td>Centro</td>
-                            <td><span class="badge badge-warning">Em Entrega</span></td>
-                            <td><strong>2</strong></td>
-                            <td>1,247</td>
-                            <td>
-                                <div style="display: flex; align-items: center; gap: 0.25rem;">
-                                    <span>⭐</span>
-                                    <strong>4.9</strong>
-                                    <span style="color: var(--gray-500); font-size: 0.875rem;">(856)</span>
-                                </div>
-                            </td>
-                            <td><strong>R$ 145.80</strong></td>
-                            <td>
-                                <div class="flex gap-sm">
-                                    <button class="btn btn-sm btn-secondary" title="Ver perfil">👁️</button>
-                                    <button class="btn btn-sm btn-primary" title="Rastrear">📍</button>
-                                    <button class="btn btn-sm btn-secondary" title="Mensagem">💬</button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="flex items-center gap-md">
-                                    <div
-                                        style="width: 50px; height: 50px; background: var(--gradient-warm); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--white); font-weight: 700;">
-                                        AC</div>
-                                    <div>
-                                        <div style="font-weight: 600; color: var(--gray-900);">Ana Costa</div>
-                                        <div style="font-size: 0.875rem; color: var(--gray-600);">ID: #COU-156</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div>
-                                    <div>🏍️ Moto</div>
-                                    <div style="font-size: 0.875rem; color: var(--gray-600);">Yamaha YBR 125</div>
-                                </div>
-                            </td>
-                            <td>Polana</td>
-                            <td><span class="badge badge-warning">Em Entrega</span></td>
-                            <td><strong>1</strong></td>
-                            <td>1,089</td>
-                            <td>
-                                <div style="display: flex; align-items: center; gap: 0.25rem;">
-                                    <span>⭐</span>
-                                    <strong>4.8</strong>
-                                    <span style="color: var(--gray-500); font-size: 0.875rem;">(723)</span>
-                                </div>
-                            </td>
-                            <td><strong>R$ 98.50</strong></td>
-                            <td>
-                                <div class="flex gap-sm">
-                                    <button class="btn btn-sm btn-secondary" title="Ver perfil">👁️</button>
-                                    <button class="btn btn-sm btn-primary" title="Rastrear">📍</button>
-                                    <button class="btn btn-sm btn-secondary" title="Mensagem">💬</button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="flex items-center gap-md">
-                                    <div
-                                        style="width: 50px; height: 50px; background: var(--gradient-sunset); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--white); font-weight: 700;">
-                                        PD</div>
-                                    <div>
-                                        <div style="font-weight: 600; color: var(--gray-900);">Paulo Dias</div>
-                                        <div style="font-size: 0.875rem; color: var(--gray-600);">ID: #COU-089</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div>
-                                    <div>🚲 Bicicleta</div>
-                                    <div style="font-size: 0.875rem; color: var(--gray-600);">Mountain Bike</div>
-                                </div>
-                            </td>
-                            <td>Centro</td>
-                            <td><span class="badge badge-success">Disponível</span></td>
-                            <td><strong>0</strong></td>
-                            <td>892</td>
-                            <td>
-                                <div style="display: flex; align-items: center; gap: 0.25rem;">
-                                    <span>⭐</span>
-                                    <strong>4.7</strong>
-                                    <span style="color: var(--gray-500); font-size: 0.875rem;">(645)</span>
-                                </div>
-                            </td>
-                            <td><strong>R$ 67.20</strong></td>
-                            <td>
-                                <div class="flex gap-sm">
-                                    <button class="btn btn-sm btn-secondary" title="Ver perfil">👁️</button>
-                                    <button class="btn btn-sm btn-success" title="Atribuir pedido">📦</button>
-                                    <button class="btn btn-sm btn-secondary" title="Mensagem">💬</button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="flex items-center gap-md">
-                                    <div
-                                        style="width: 50px; height: 50px; background: var(--gradient-primary); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--white); font-weight: 700;">
-                                        RS</div>
-                                    <div>
-                                        <div style="font-weight: 600; color: var(--gray-900);">Rita Sousa</div>
-                                        <div style="font-size: 0.875rem; color: var(--gray-600);">ID: #COU-312</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div>
-                                    <div>🏍️ Moto</div>
-                                    <div style="font-size: 0.875rem; color: var(--gray-600);">Suzuki EN 125</div>
-                                </div>
-                            </td>
-                            <td>Matola</td>
-                            <td><span class="badge badge-success">Disponível</span></td>
-                            <td><strong>0</strong></td>
-                            <td>1,456</td>
-                            <td>
-                                <div style="display: flex; align-items: center; gap: 0.25rem;">
-                                    <span>⭐</span>
-                                    <strong>4.9</strong>
-                                    <span style="color: var(--gray-500); font-size: 0.875rem;">(1.1K)</span>
-                                </div>
-                            </td>
-                            <td><strong>R$ 123.40</strong></td>
-                            <td>
-                                <div class="flex gap-sm">
-                                    <button class="btn btn-sm btn-secondary" title="Ver perfil">👁️</button>
-                                    <button class="btn btn-sm btn-success" title="Atribuir pedido">📦</button>
-                                    <button class="btn btn-sm btn-secondary" title="Mensagem">💬</button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="flex items-center gap-md">
-                                    <div
-                                        style="width: 50px; height: 50px; background: var(--gray-400); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--white); font-weight: 700;">
-                                        JF</div>
-                                    <div>
-                                        <div style="font-weight: 600; color: var(--gray-900);">João Fernandes</div>
-                                        <div style="font-size: 0.875rem; color: var(--gray-600);">ID: #COU-445</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div>
-                                    <div>🏍️ Moto</div>
-                                    <div style="font-size: 0.875rem; color: var(--gray-600);">Honda CG 150</div>
-                                </div>
-                            </td>
-                            <td>Costa do Sol</td>
-                            <td><span class="badge badge-gray">Offline</span></td>
-                            <td><strong>0</strong></td>
-                            <td>734</td>
-                            <td>
-                                <div style="display: flex; align-items: center; gap: 0.25rem;">
-                                    <span>⭐</span>
-                                    <strong>4.6</strong>
-                                    <span style="color: var(--gray-500); font-size: 0.875rem;">(534)</span>
-                                </div>
-                            </td>
-                            <td><strong>R$ 0.00</strong></td>
-                            <td>
-                                <div class="flex gap-sm">
-                                    <button class="btn btn-sm btn-secondary" title="Ver perfil">👁️</button>
-                                    <button class="btn btn-sm btn-secondary" title="Mensagem">💬</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Pagination -->
-            <div class="card-footer flex justify-between items-center">
-                <div style="color: var(--gray-600); font-size: 0.875rem;">
-                    Mostrando <strong>1-5</strong> de <strong>123</strong> entregadores
+                <div class="stat-card">
+                    <div class="stat-card-content">
+                        <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning);">⚡
+                        </div>
+                        <div class="stat-details">
+                            <div class="stat-label">Em Rota</div>
+                            <div class="stat-value">56</div>
+                            <div class="text-xs text-gray-500">Entregas ativas</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="flex gap-sm">
-                    <button class="btn btn-sm btn-secondary" disabled>← Anterior</button>
-                    <button class="btn btn-sm btn-primary">1</button>
-                    <button class="btn btn-sm btn-secondary">2</button>
-                    <button class="btn btn-sm btn-secondary">3</button>
-                    <button class="btn btn-sm btn-secondary">...</button>
-                    <button class="btn btn-sm btn-secondary">25</button>
-                    <button class="btn btn-sm btn-secondary">Próximo →</button>
+                <div class="stat-card">
+                    <div class="stat-card-content">
+                        <div class="stat-icon" style="background: rgba(59, 130, 246, 0.1); color: var(--info);">📡</div>
+                        <div class="stat-details">
+                            <div class="stat-label">Total Online</div>
+                            <div class="stat-value">89</div>
+                            <div class="text-xs text-gray-500">Logados no app</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-content">
+                        <div class="stat-icon" style="background: rgba(107, 114, 128, 0.1); color: var(--gray-500);">🌙
+                        </div>
+                        <div class="stat-details">
+                            <div class="stat-label">Desconectados</div>
+                            <div class="stat-value">34</div>
+                            <div class="text-xs text-gray-500">Offline no momento</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters Bar -->
+            <div class="card mb-xl">
+                <div class="card-body p-md">
+                    <div class="flex gap-lg items-end">
+                        <div style="flex: 2;">
+                            <label class="form-label">Buscar por Nome ou Placa</label>
+                            <input type="text" class="form-input" placeholder="🔍 Ex: Carlos Mendes, Moto #234...">
+                        </div>
+                        <div style="flex: 1;">
+                            <label class="form-label">Filtrar por Status</label>
+                            <select class="form-select">
+                                <option>Todos os status</option>
+                                <option>Disponível</option>
+                                <option>Em Entrega</option>
+                                <option>Indisponível</option>
+                                <option>Aguardando Documento</option>
+                            </select>
+                        </div>
+                        <div style="flex: 1;">
+                            <label class="form-label">Região Operacional</label>
+                            <select class="form-select">
+                                <option>Todas as zonas</option>
+                                <option>Centro, Maputo</option>
+                                <option>Polana</option>
+                                <option>Matola</option>
+                                <option>Costa do Sol</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-secondary" style="height: 48px; border-radius: var(--radius-md);">
+                            <span>🔍</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Couriers Table -->
+            <div class="card">
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Entregador (Avatar)</th>
+                                <th>Veículo & Identificação</th>
+                                <th>Zona Principal</th>
+                                <th>Status Atual</th>
+                                <th>Pedidos Hoje</th>
+                                <th>Avaliação Geral</th>
+                                <th>Ganhos Acum.</th>
+                                <th class="text-right">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-md">
+                                        <div
+                                            style="width: 44px; height: 44px; border-radius: var(--radius-full); background: var(--primary-100); color: var(--primary-dark); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.875rem;">
+                                            CM</div>
+                                        <div>
+                                            <div class="font-bold text-gray-900">Carlos Mendes</div>
+                                            <div class="text-xs text-gray-500">Membro desde Out 2025</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <div class="text-sm font-semibold">🏍️ Moto Honda CG</div>
+                                        <div class="text-xs text-gray-500">Placa: MC-92-34</div>
+                                    </div>
+                                </td>
+                                <td><span class="text-sm">Bairro Central</span></td>
+                                <td><span class="badge badge-warning badge-dot">Em Rota (2)</span></td>
+                                <td class="font-bold">14</td>
+                                <td>
+                                    <div class="flex items-center gap-xs">
+                                        <span class="text-primary">⭐</span>
+                                        <span class="font-bold">4.9</span>
+                                        <span class="text-xs text-gray-400">(856)</span>
+                                    </div>
+                                </td>
+                                <td class="font-bold text-success">R$ 145.80</td>
+                                <td class="text-right">
+                                    <div class="flex justify-end gap-sm">
+                                        <button class="btn btn-icon btn-sm btn-secondary"
+                                            title="Ver Perfil">👁️</button>
+                                        <button class="btn btn-icon btn-sm btn-primary" title="Ver Mapa">📍</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-md">
+                                        <div
+                                            style="width: 44px; height: 44px; border-radius: var(--radius-full); background: #DBEAFE; color: #1E40AF; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.875rem;">
+                                            AC</div>
+                                        <div>
+                                            <div class="font-bold text-gray-900">Ana Costa</div>
+                                            <div class="text-xs text-gray-500">Membro desde Jan 2026</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <div class="text-sm font-semibold">🚲 Bicicleta Aro 29</div>
+                                        <div class="text-xs text-gray-500">ID Frota: #FC-156</div>
+                                    </div>
+                                </td>
+                                <td><span class="text-sm">Polana C.</span></td>
+                                <td><span class="badge badge-success badge-dot">Disponível</span></td>
+                                <td class="font-bold">08</td>
+                                <td>
+                                    <div class="flex items-center gap-xs">
+                                        <span class="text-primary">⭐</span>
+                                        <span class="font-bold">4.8</span>
+                                        <span class="text-xs text-gray-400">(212)</span>
+                                    </div>
+                                </td>
+                                <td class="font-bold text-success">R$ 62.40</td>
+                                <td class="text-right">
+                                    <div class="flex justify-end gap-sm">
+                                        <button class="btn btn-icon btn-sm btn-secondary"
+                                            title="Ver Perfil">👁️</button>
+                                        <button class="btn btn-icon btn-sm btn-success"
+                                            title="Enviar Pedido">📦</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-md">
+                                        <div
+                                            style="width: 44px; height: 44px; border-radius: var(--radius-full); background: #FFE4E6; color: #9F1239; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.875rem;">
+                                            PD</div>
+                                        <div>
+                                            <div class="font-bold text-gray-900">Paulo Dias</div>
+                                            <div class="text-xs text-gray-500">Membro desde Ago 2024</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <div class="text-sm font-semibold">🏍️ Suzuki EN 125</div>
+                                        <div class="text-xs text-gray-500">Placa: MC-08-90</div>
+                                    </div>
+                                </td>
+                                <td><span class="text-sm">Matola Rio</span></td>
+                                <td><span class="badge badge-gray badge-dot">Offline</span></td>
+                                <td class="font-bold">00</td>
+                                <td>
+                                    <div class="flex items-center gap-xs">
+                                        <span class="text-primary">⭐</span>
+                                        <span class="font-bold">4.7</span>
+                                        <span class="text-xs text-gray-400">(1.1k)</span>
+                                    </div>
+                                </td>
+                                <td class="font-bold text-gray-400">R$ 0.00</td>
+                                <td class="text-right">
+                                    <div class="flex justify-end gap-sm">
+                                        <button class="btn btn-icon btn-sm btn-secondary"
+                                            title="Ver Perfil">👁️</button>
+                                        <button class="btn btn-icon btn-sm btn-secondary" title="Ligar">📞</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer flex justify-between items-center">
+                    <div class="text-sm text-gray-600">
+                        Mostrando <strong class="text-gray-900">1-3</strong> de <strong
+                            class="text-gray-900">123</strong> entregadores
+                    </div>
+                    <div class="flex gap-sm">
+                        <button class="btn btn-secondary btn-sm" disabled>Anterior</button>
+                        <button class="btn btn-primary btn-sm">1</button>
+                        <button class="btn btn-secondary btn-sm">2</button>
+                        <button class="btn btn-secondary btn-sm">Próximo</button>
+                    </div>
                 </div>
             </div>
         </div>

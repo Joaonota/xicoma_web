@@ -4,257 +4,420 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Xicoma Admin</title>
+    <title>Dashboard Geral - Xicoma Admin</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
-    <!-- Sidebar -->
+    <!-- Sidebar Navigation -->
     <aside class="sidebar">
-        <div class="sidebar-logo">
-            <div class="sidebar-logo-icon"><i class="fas fa-utensils"></i></div>
-            <div class="sidebar-logo-text">Xicoma</div>
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon">X</div>
+                <div class="sidebar-logo-text">Xicoma</div>
+            </div>
         </div>
 
         <nav>
             <ul class="sidebar-nav">
                 <li class="sidebar-nav-item">
                     <a href="admin-dashboard.html" class="sidebar-nav-link active">
-                        <span class="sidebar-nav-icon"><i class="fas fa-chart-line"></i></span>
+                        <span class="sidebar-nav-icon">📊</span>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-restaurants.html" class="sidebar-nav-link">
-                        <span class="sidebar-nav-icon"><i class="fas fa-store"></i></span>
+                        <span class="sidebar-nav-icon">🏪</span>
                         <span>Restaurantes</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-orders.html" class="sidebar-nav-link">
-                        <span class="sidebar-nav-icon"><i class="fas fa-shopping-bag"></i></span>
+                        <span class="sidebar-nav-icon">🛍️</span>
                         <span>Pedidos</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-couriers.html" class="sidebar-nav-link">
-                        <span class="sidebar-nav-icon"><i class="fas fa-motorcycle"></i></span>
+                        <span class="sidebar-nav-icon">🛵</span>
                         <span>Entregadores</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-payments.html" class="sidebar-nav-link">
-                        <span class="sidebar-nav-icon"><i class="fas fa-wallet"></i></span>
+                        <span class="sidebar-nav-icon">💳</span>
                         <span>Pagamentos</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-notifications.html" class="sidebar-nav-link">
-                        <span class="sidebar-nav-icon"><i class="fas fa-bell"></i></span>
+                        <span class="sidebar-nav-icon">🔔</span>
                         <span>Notificações</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-settings.html" class="sidebar-nav-link">
-                        <span class="sidebar-nav-icon"><i class="fas fa-cog"></i></span>
+                        <span class="sidebar-nav-icon">⚙️</span>
                         <span>Configurações</span>
                     </a>
                 </li>
             </ul>
         </nav>
+
+        <div class="sidebar-footer">
+            <div class="flex items-center gap-md">
+                <div
+                    style="width: 40px; height: 40px; border-radius: var(--radius-full); background: var(--gray-200); display: flex; align-items: center; justify-content: center; font-weight: 700;">
+                    AD</div>
+                <div>
+                    <div style="font-size: 0.875rem; font-weight: 700;">Admin Xicoma</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500);">Nível Master</div>
+                </div>
+            </div>
+            <a href="admin-login.html" class="btn btn-secondary w-full mt-lg btn-sm">Sair do Painel</a>
+        </div>
     </aside>
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="page-header flex justify-between items-center">
+        <header class="page-header flex justify-between items-center">
             <div>
-                <h1 class="page-title">Dashboard</h1>
-                <p class="page-subtitle">Visão geral da plataforma Xicoma</p>
+                <h1 class="page-title">Dashboard Overview</h1>
+                <p class="page-subtitle">Bem-vindo de volta! Aqui está o resumo da plataforma hoje.</p>
             </div>
-            <button class="btn btn-primary">
-                <i class="fas fa-download"></i>
-                Exportar Relatório
-            </button>
-        </div>
-
-        <!-- Metrics Cards -->
-        <div class="grid grid-cols-4 gap-lg mb-xl">
-            <div class="metric-card" style="border-left-color: var(--primary-orange);">
-                <div class="metric-label">Total de Pedidos</div>
-                <div class="metric-value">2,847</div>
-                <div class="metric-change positive">
-                    <i class="fas fa-arrow-up"></i>
-                    <span>12.5% vs. mês passado</span>
-                </div>
+            <div class="flex gap-md">
+                <button class="btn btn-secondary">
+                    <span>📅</span>
+                    Últimos 30 dias
+                </button>
+                <button class="btn btn-primary">
+                    <span>📥</span>
+                    Relatórios
+                </button>
             </div>
+        </header>
 
-            <div class="metric-card" style="border-left-color: var(--success);">
-                <div class="metric-label">Receita Total</div>
-                <div class="metric-value">R$ 84.2K</div>
-                <div class="metric-change positive">
-                    <i class="fas fa-arrow-up"></i>
-                    <span>8.3% vs. mês passado</span>
+        <div class="page-content">
+            <!-- Metric Cards (KPIs) -->
+            <div class="grid grid-cols-4 gap-lg mb-xl">
+                <div class="stat-card">
+                    <div class="stat-card-content">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);">📦
+                        </div>
+                        <div class="stat-details">
+                            <div class="stat-label">Total de Pedidos</div>
+                            <div class="stat-value">2,847</div>
+                            <div class="stat-trend up">
+                                <span>↑</span> 12.5% incr.
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="metric-card" style="border-left-color: var(--info);">
-                <div class="metric-label">Restaurantes Ativos</div>
-                <div class="metric-value">156</div>
-                <div class="metric-change positive">
-                    <i class="fas fa-arrow-up"></i>
-                    <span>5 novos esta semana</span>
+                <div class="stat-card">
+                    <div class="stat-card-content">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #10B981 0%, #047857 100%);">💰
+                        </div>
+                        <div class="stat-details">
+                            <div class="stat-label">Receita Gerada</div>
+                            <div class="stat-value">R$ 84.2k</div>
+                            <div class="stat-trend up">
+                                <span>↑</span> 8.3% incr.
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="metric-card" style="border-left-color: var(--warning);">
-                <div class="metric-label">Entregadores Online</div>
-                <div class="metric-value">89</div>
-                <div class="metric-change negative">
-                    <i class="fas fa-arrow-down"></i>
-                    <span>3 vs. ontem</span>
+                <div class="stat-card">
+                    <div class="stat-card-content">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #EA580C 0%, #C2410C 100%);">🏪
+                        </div>
+                        <div class="stat-details">
+                            <div class="stat-label">Restaurantes</div>
+                            <div class="stat-value">156</div>
+                            <div class="stat-trend up">
+                                <span>+5</span> novos
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Charts Section -->
-        <div class="grid grid-cols-2 gap-lg mb-xl">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Pedidos por Dia</h3>
-                    <p class="card-subtitle">Últimos 7 dias</p>
-                </div>
-                <div class="card-body"
-                    style="height: 300px; background: var(--gray-50); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--gray-500);">
-                    <div style="text-align: center;">
-                        <div style="font-size: 3rem; margin-bottom: 1rem; color: var(--primary-orange);"><i
-                                class="fas fa-chart-area"></i></div>
-                        <div style="font-weight: 600; color: var(--gray-700);">Gráfico de Pedidos</div>
-                        <div style="font-size: 0.875rem; margin-top: 0.5rem;">Tendência crescente de 12.5%</div>
+                <div class="stat-card">
+                    <div class="stat-card-content">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);">🛵
+                        </div>
+                        <div class="stat-details">
+                            <div class="stat-label">Entregadores</div>
+                            <div class="stat-value">89</div>
+                            <div class="stat-trend down">
+                                <span>↓</span> 3% descr.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Receita por Categoria</h3>
-                    <p class="card-subtitle">Distribuição mensal</p>
+            <!-- Analytics Section -->
+            <div class="grid grid-cols-3 gap-lg mb-xl">
+                <div class="card grid-cols-2" style="grid-column: span 2;">
+                    <div class="card-header flex justify-between items-center">
+                        <div>
+                            <h3 class="card-title">Fluxo de Pedidos e Receita</h3>
+                            <p class="card-subtitle">Análise comparativa dos últimos 30 dias</p>
+                        </div>
+                        <div class="flex gap-sm">
+                            <span class="badge badge-primary">Vendas</span>
+                            <span class="badge badge-gray">Metas</span>
+                        </div>
+                    </div>
+                    <div class="card-body" style="height: 350px;">
+                        <!-- Placeholder for real chart -->
+                        <div style="width: 100%; height: 100%; position: relative; padding-top: var(--spacing-md);">
+                            <div
+                                style="position: absolute; bottom: 0; left: 0; width: 100%; height: 80%; display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; padding: 0 10px;">
+                                <div
+                                    style="flex: 1; background: var(--gray-100); height: 40%; border-radius: 4px; position: relative;">
+                                    <div
+                                        style="position: absolute; bottom: 0; width: 100%; height: 60%; background: var(--primary); border-radius: 4px; opacity: 0.8;">
+                                    </div>
+                                </div>
+                                <div
+                                    style="flex: 1; background: var(--gray-100); height: 60%; border-radius: 4px; position: relative;">
+                                    <div
+                                        style="position: absolute; bottom: 0; width: 100%; height: 80%; background: var(--primary); border-radius: 4px; opacity: 0.8;">
+                                    </div>
+                                </div>
+                                <div
+                                    style="flex: 1; background: var(--gray-100); height: 50%; border-radius: 4px; position: relative;">
+                                    <div
+                                        style="position: absolute; bottom: 0; width: 100%; height: 70%; background: var(--primary); border-radius: 4px; opacity: 0.8;">
+                                    </div>
+                                </div>
+                                <div
+                                    style="flex: 1; background: var(--gray-100); height: 70%; border-radius: 4px; position: relative;">
+                                    <div
+                                        style="position: absolute; bottom: 0; width: 100%; height: 90%; background: var(--primary); border-radius: 4px; opacity: 0.8;">
+                                    </div>
+                                </div>
+                                <div
+                                    style="flex: 1; background: var(--gray-100); height: 45%; border-radius: 4px; position: relative;">
+                                    <div
+                                        style="position: absolute; bottom: 0; width: 100%; height: 65%; background: var(--primary); border-radius: 4px; opacity: 0.8;">
+                                    </div>
+                                </div>
+                                <div
+                                    style="flex: 1; background: var(--gray-100); height: 80%; border-radius: 4px; position: relative;">
+                                    <div
+                                        style="position: absolute; bottom: 0; width: 100%; height: 95%; background: var(--primary); border-radius: 4px; opacity: 0.8;">
+                                    </div>
+                                </div>
+                                <div
+                                    style="flex: 1; background: var(--gray-100); height: 65%; border-radius: 4px; position: relative;">
+                                    <div
+                                        style="position: absolute; bottom: 0; width: 100%; height: 85%; background: var(--primary); border-radius: 4px; opacity: 0.8;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="flex justify-between items-center">
+                            <div class="text-sm text-gray-600">Projeção estimada para este mês: <strong
+                                    class="text-primary">R$ 95.400</strong></div>
+                            <button class="btn btn-secondary btn-sm">Ver análise detalhada</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body"
-                    style="height: 300px; background: var(--gray-50); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--gray-500);">
-                    <div style="text-align: center;">
-                        <div style="font-size: 3rem; margin-bottom: 1rem; color: var(--primary-orange);"><i
-                                class="fas fa-chart-pie"></i></div>
-                        <div style="font-weight: 600; color: var(--gray-700);">Gráfico de Pizza</div>
-                        <div style="font-size: 0.875rem; margin-top: 0.5rem;">Fast Food: 45% | Restaurantes: 35% |
-                            Sobremesas: 20%</div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Distribuição por Categoria</h3>
+                        <p class="card-subtitle">Volume de vendas por tipo</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="flex flex-col gap-lg mt-md">
+                            <div class="w-full">
+                                <div class="flex justify-between mb-sm">
+                                    <span class="text-sm font-semibold">Fast Food</span>
+                                    <span class="text-sm">45%</span>
+                                </div>
+                                <div style="height: 8px; background: var(--gray-100); border-radius: 4px;">
+                                    <div
+                                        style="width: 45%; height: 100%; background: var(--primary); border-radius: 4px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full">
+                                <div class="flex justify-between mb-sm">
+                                    <span class="text-sm font-semibold">Restaurantes</span>
+                                    <span class="text-sm">35%</span>
+                                </div>
+                                <div style="height: 8px; background: var(--gray-100); border-radius: 4px;">
+                                    <div style="width: 35%; height: 100%; background: var(--info); border-radius: 4px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full">
+                                <div class="flex justify-between mb-sm">
+                                    <span class="text-sm font-semibold">Sobremesas</span>
+                                    <span class="text-sm">15%</span>
+                                </div>
+                                <div style="height: 8px; background: var(--gray-100); border-radius: 4px;">
+                                    <div
+                                        style="width: 15%; height: 100%; background: var(--warning); border-radius: 4px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full">
+                                <div class="flex justify-between mb-sm">
+                                    <span class="text-sm font-semibold">Bebidas</span>
+                                    <span class="text-sm">5%</span>
+                                </div>
+                                <div style="height: 8px; background: var(--gray-100); border-radius: 4px;">
+                                    <div
+                                        style="width: 5%; height: 100%; background: var(--success); border-radius: 4px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="#" class="text-sm font-semibold text-primary">Análise de Categorias →</a>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Recent Activity -->
-        <div class="grid grid-cols-2 gap-lg">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Pedidos Recentes</h3>
-                    <p class="card-subtitle">Últimos 5 pedidos</p>
-                </div>
-                <div class="card-body">
+            <!-- Recent Orders & Activity -->
+            <div class="grid grid-cols-3 gap-lg">
+                <div class="card grid-cols-2" style="grid-column: span 2;">
+                    <div class="card-header flex justify-between items-center">
+                        <div>
+                            <h3 class="card-title">Pedidos de Alta Prioridade</h3>
+                            <p class="card-subtitle">Necessitam monitoramento imediato</p>
+                        </div>
+                        <a href="admin-orders.html" class="btn btn-secondary btn-sm">Ver todos</a>
+                    </div>
                     <div class="table-container">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Cliente</th>
-                                    <th>Restaurante</th>
+                                    <th>Ref ID</th>
+                                    <th>Logista / Restaurante</th>
+                                    <th>Valor</th>
                                     <th>Status</th>
-                                    <th>Total</th>
+                                    <th>Tempo</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td><strong>#8472</strong></td>
-                                    <td>João Silva</td>
-                                    <td>Burger King</td>
-                                    <td><span class="badge badge-success">Entregue</span></td>
-                                    <td><strong>R$ 45.90</strong></td>
+                                    <td>
+                                        <div class="flex items-center gap-md">
+                                            <div
+                                                style="width: 32px; height: 32px; border-radius: 8px; background: #FFEDD5; display: flex; align-items: center; justify-content: center; font-size: 0.875rem;">
+                                                🍔</div>
+                                            <span>Burger King - Centro</span>
+                                        </div>
+                                    </td>
+                                    <td class="font-bold">R$ 45.90</td>
+                                    <td><span class="badge badge-warning">Preparando</span></td>
+                                    <td class="text-danger font-semibold">12 min</td>
                                 </tr>
                                 <tr>
                                     <td><strong>#8471</strong></td>
-                                    <td>Maria Santos</td>
-                                    <td>Pizza Hut</td>
-                                    <td><span class="badge badge-warning">A caminho</span></td>
-                                    <td><strong>R$ 78.50</strong></td>
+                                    <td>
+                                        <div class="flex items-center gap-md">
+                                            <div
+                                                style="width: 32px; height: 32px; border-radius: 8px; background: #DBEAFE; display: flex; align-items: center; justify-content: center; font-size: 0.875rem;">
+                                                🍕</div>
+                                            <span>Pizza Hut - Norte</span>
+                                        </div>
+                                    </td>
+                                    <td class="font-bold">R$ 89.20</td>
+                                    <td><span class="badge badge-info">A caminho</span></td>
+                                    <td class="text-gray-600">18 min</td>
                                 </tr>
                                 <tr>
                                     <td><strong>#8470</strong></td>
-                                    <td>Pedro Costa</td>
-                                    <td>McDonald's</td>
-                                    <td><span class="badge badge-info">Preparando</span></td>
-                                    <td><strong>R$ 32.00</strong></td>
+                                    <td>
+                                        <div class="flex items-center gap-md">
+                                            <div
+                                                style="width: 32px; height: 32px; border-radius: 8px; background: #D1FAE5; display: flex; align-items: center; justify-content: center; font-size: 0.875rem;">
+                                                🥗</div>
+                                            <span>Salad Day</span>
+                                        </div>
+                                    </td>
+                                    <td class="font-bold">R$ 32.15</td>
+                                    <td><span class="badge badge-primary">Pendente</span></td>
+                                    <td class="text-danger font-semibold">05 min</td>
                                 </tr>
                                 <tr>
                                     <td><strong>#8469</strong></td>
-                                    <td>Ana Oliveira</td>
-                                    <td>KFC</td>
-                                    <td><span class="badge badge-primary">Novo</span></td>
-                                    <td><strong>R$ 56.20</strong></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>#8468</strong></td>
-                                    <td>Carlos Mendes</td>
-                                    <td>Subway</td>
-                                    <td><span class="badge badge-success">Entregue</span></td>
-                                    <td><strong>R$ 28.90</strong></td>
+                                    <td>
+                                        <div class="flex items-center gap-md">
+                                            <div
+                                                style="width: 32px; height: 32px; border-radius: 8px; background: #FFEDD5; display: flex; align-items: center; justify-content: center; font-size: 0.875rem;">
+                                                🥪</div>
+                                            <span>Subway Premium</span>
+                                        </div>
+                                    </td>
+                                    <td class="font-bold">R$ 28.50</td>
+                                    <td><span class="badge badge-warning">Preparando</span></td>
+                                    <td class="text-gray-600">22 min</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-            </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Top Restaurantes</h3>
-                    <p class="card-subtitle">Por volume de pedidos</p>
-                </div>
-                <div class="card-body">
-                    <div class="table-container">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Restaurante</th>
-                                    <th>Pedidos</th>
-                                    <th>Receita</th>
-                                    <th>Rating</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="flex items-center gap-md">
-                                            <div
-                                                style="width: 40px; height: 40px; background: var(--gradient-primary); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
-                                                🍔</div>
-                                            <strong>Burger King</strong>
-                                        </div>
-                                    </td>
-                                    <td>342</td>
-                                    <td><strong>R$ 15.6K</strong></td>
-                                    <td>
-                                        <div class="flex items-center gap-md">
-                                            <div
-                                                style="width: 40px; height: 40px; background: var(--gradient-warm); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
-                                                🥪</div>
-                                            <strong>Subway</strong>
-                                        </div>
-                                    </td>
-                                    <td>189</td>
-                                    <td><strong>R$ 8.2K</strong></td>
-                                    <td>⭐ 4.7</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Atividade Recente</h3>
+                        <p class="card-subtitle">Log de eventos do sistema</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="flex flex-col gap-lg">
+                            <div class="flex gap-md">
+                                <div
+                                    style="width: 12px; height: 12px; border-radius: 50%; background: var(--success); margin-top: 4px; flex-shrink: 0;">
+                                </div>
+                                <div>
+                                    <div class="text-sm font-semibold">Novo Restaurante Aprovado</div>
+                                    <div class="text-xs text-gray-500">Há 5 minutos • "The Burger Lab"</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-md">
+                                <div
+                                    style="width: 12px; height: 12px; border-radius: 50%; background: var(--info); margin-top: 4px; flex-shrink: 0;">
+                                </div>
+                                <div>
+                                    <div class="text-sm font-semibold">Pagamento de Lojista Processado</div>
+                                    <div class="text-xs text-gray-500">Há 25 minutos • ID #PAY-3921</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-md">
+                                <div
+                                    style="width: 12px; height: 12px; border-radius: 50%; background: var(--danger); margin-top: 4px; flex-shrink: 0;">
+                                </div>
+                                <div>
+                                    <div class="text-sm font-semibold">Pedido Cancelado pelo Cliente</div>
+                                    <div class="text-xs text-gray-500">Há 1 hora • Pedido #8455</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-md">
+                                <div
+                                    style="width: 12px; height: 12px; border-radius: 50%; background: var(--warning); margin-top: 4px; flex-shrink: 0;">
+                                </div>
+                                <div>
+                                    <div class="text-sm font-semibold">Alerta de Poucos Entregadores</div>
+                                    <div class="text-xs text-gray-500">Há 2 horas • Zona: Sul, Maputo</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button class="btn btn-secondary btn-sm w-full">Ver todos os registros</button>
                     </div>
                 </div>
             </div>

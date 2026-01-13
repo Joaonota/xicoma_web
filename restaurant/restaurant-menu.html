@@ -4,86 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu - Restaurante Xicoma</title>
+    <title>Gestão de Cardápio - Restaurante Xicoma</title>
     <link rel="stylesheet" href="../styles.css">
-    <style>
-        .menu-item-card {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: all var(--transition-base);
-            border: 2px solid var(--gray-200);
-        }
-
-        .menu-item-card:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-4px);
-        }
-
-        .menu-item-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, var(--gray-200) 0%, var(--gray-300) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-        }
-
-        .availability-toggle {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 30px;
-        }
-
-        .availability-toggle input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: var(--gray-400);
-            transition: var(--transition-base);
-            border-radius: var(--radius-full);
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 22px;
-            width: 22px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: var(--transition-base);
-            border-radius: 50%;
-        }
-
-        input:checked+.slider {
-            background-color: var(--success);
-        }
-
-        input:checked+.slider:before {
-            transform: translateX(30px);
-        }
-    </style>
 </head>
 
 <body>
-    <!-- Sidebar -->
+    <!-- Sidebar Navigation -->
     <aside class="sidebar">
-        <div class="sidebar-logo">
-            <div class="sidebar-logo-icon">🏪</div>
-            <div class="sidebar-logo-text">Burger King</div>
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon">BK</div>
+                <div class="sidebar-logo-text">Burger King</div>
+            </div>
         </div>
 
         <nav>
@@ -96,14 +28,14 @@
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="restaurant-orders.html" class="sidebar-nav-link">
-                        <span class="sidebar-nav-icon">📦</span>
+                        <span class="sidebar-nav-icon">🛍️</span>
                         <span>Pedidos</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="restaurant-menu.html" class="sidebar-nav-link active">
                         <span class="sidebar-nav-icon">🍔</span>
-                        <span>Menu</span>
+                        <span>Cardápio</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
@@ -115,426 +47,177 @@
             </ul>
         </nav>
 
-        <div style="margin-top: auto; padding-top: var(--spacing-xl); border-top: 2px solid var(--gray-100);">
-            <a href="restaurant-login.html" class="sidebar-nav-link" style="color: var(--danger);">
-                <span class="sidebar-nav-icon">🚪</span>
-                <span>Sair</span>
-            </a>
+        <div class="sidebar-footer">
+            <div class="flex items-center gap-md">
+                <div
+                    style="width: 40px; height: 40px; border-radius: var(--radius-full); background: var(--primary-100); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--primary-dark);">
+                    BK</div>
+                <div>
+                    <div style="font-size: 0.875rem; font-weight: 700;">Gerente BK</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500);">Unidade Centro</div>
+                </div>
+            </div>
+            <a href="restaurant-login.html" class="btn btn-secondary w-full mt-lg btn-sm">Sair do Painel</a>
         </div>
     </aside>
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="page-header flex justify-between items-center mb-xl">
+        <header class="page-header flex justify-between items-center">
             <div>
-                <h1 class="page-title">Gestão de Menu</h1>
-                <p class="page-subtitle">Gerir itens do menu e disponibilidade</p>
+                <h1 class="page-title">Gestão de Cardápio</h1>
+                <p class="page-subtitle">Organize seus produtos, preços e disponibilidade.</p>
             </div>
-            <button class="btn btn-primary">
-                <span>➕</span>
-                Adicionar Item
-            </button>
-        </div>
-
-        <!-- Filters -->
-        <div class="card mb-xl">
-            <div class="flex gap-md items-center">
-                <div style="flex: 1;">
-                    <input type="text" class="form-input" placeholder="🔍 Pesquisar itens do menu...">
-                </div>
-                <select class="form-select" style="width: 200px;">
-                    <option>Todas Categorias</option>
-                    <option>Burgers</option>
-                    <option>Acompanhamentos</option>
-                    <option>Bebidas</option>
-                    <option>Sobremesas</option>
-                </select>
-                <select class="form-select" style="width: 200px;">
-                    <option>Todos os Status</option>
-                    <option>Disponível</option>
-                    <option>Indisponível</option>
-                </select>
+            <div class="flex gap-md">
+                <button class="btn btn-secondary">Categorias</button>
+                <button class="btn btn-primary">
+                    <span>➕</span>
+                    Novo Produto
+                </button>
             </div>
-        </div>
+        </header>
 
-        <!-- Menu Items Grid -->
-        <div class="grid grid-cols-3 gap-lg">
-            <!-- Menu Item 1 -->
-            <div class="menu-item-card">
-                <div class="menu-item-image">🍔</div>
-                <div style="padding: var(--spacing-lg);">
-                    <div class="flex justify-between items-start mb-md">
-                        <div>
-                            <h3
-                                style="font-size: 1.125rem; font-weight: 700; color: var(--gray-900); margin-bottom: 0.25rem;">
-                                Whopper</h3>
-                            <span class="badge badge-primary">Burger</span>
+        <div class="page-content">
+            <!-- Search and Filter Bar -->
+            <div class="card mb-xl">
+                <div class="card-body p-md">
+                    <div class="flex gap-md">
+                        <div class="flex-1">
+                            <input type="text" class="form-input" placeholder="🔍 Pesquisar por nome ou código...">
                         </div>
-                        <div style="text-align: right;">
-                            <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary-orange);">R$ 17.90
+                        <select class="form-select" style="width: 200px;">
+                            <option>Todas as Categorias</option>
+                            <option>Burgers</option>
+                            <option>Combos</option>
+                            <option>Bebidas</option>
+                            <option>Sobremesas</option>
+                        </select>
+                        <select class="form-select" style="width: 180px;">
+                            <option>Status: Todos</option>
+                            <option>Ativos</option>
+                            <option>Pausados</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="grid grid-cols-3 gap-xl">
+
+                <!-- Product Card #01 -->
+                <div class="card p-0 overflow-hidden">
+                    <div
+                        style="height: 180px; width: 100%; background: #F3F4F6; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #D1D5DB; position: relative;">
+                        🍔
+                        <div style="position: absolute; top: 12px; right: 12px;">
+                            <span class="badge badge-success">ATALHO #01</span>
+                        </div>
+                    </div>
+                    <div class="p-lg">
+                        <div class="flex justify-between items-start mb-sm">
+                            <div>
+                                <h3 class="font-bold text-gray-900">Whopper Clássico</h3>
+                                <span class="text-xs font-bold text-primary">BURGER</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-extrabold text-gray-900">R$ 32,90</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mb-lg line-clamp-2">Pão com gergelim, hambúrguer de carne
+                            bovina, queijo derretido, picles, cebola e molho.</p>
+
+                        <div class="flex items-center justify-between pt-md border-t border-gray-50">
+                            <div class="flex items-center gap-sm">
+                                <div
+                                    style="width: 32px; height: 16px; border-radius: 10px; background: var(--success); position: relative; cursor: pointer;">
+                                    <div
+                                        style="width: 12px; height: 12px; background: white; border-radius: 50%; position: absolute; right: 2px; top: 2px;">
+                                    </div>
+                                </div>
+                                <span class="text-xs font-bold text-gray-900">Ativo</span>
+                            </div>
+                            <div class="flex gap-sm">
+                                <button class="btn btn-icon btn-sm btn-secondary">✏️</button>
+                                <button class="btn btn-icon btn-sm btn-secondary">🗑️</button>
                             </div>
                         </div>
                     </div>
-
-                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 1rem;">
-                        Hambúrguer grelhado com tomate, alface, maionese, ketchup, picles e cebola.
-                    </p>
-
-                    <div class="flex justify-between items-center mb-md"
-                        style="padding: 0.75rem; background: var(--gray-50); border-radius: var(--radius-md);">
-                        <span style="font-weight: 600; color: var(--gray-700);">Disponibilidade</span>
-                        <label class="availability-toggle">
-                            <input type="checkbox" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="flex gap-sm">
-                        <button class="btn btn-sm btn-secondary" style="flex: 1;">
-                            <span>✏️</span>
-                            Editar
-                        </button>
-                        <button class="btn btn-sm btn-danger">
-                            <span>🗑️</span>
-                        </button>
-                    </div>
                 </div>
-            </div>
 
-            <!-- Menu Item 2 -->
-            <div class="menu-item-card">
-                <div class="menu-item-image">🍔</div>
-                <div style="padding: var(--spacing-lg);">
-                    <div class="flex justify-between items-start mb-md">
-                        <div>
-                            <h3
-                                style="font-size: 1.125rem; font-weight: 700; color: var(--gray-900); margin-bottom: 0.25rem;">
-                                Big King XXL</h3>
-                            <span class="badge badge-primary">Burger</span>
+                <!-- Product Card #02 -->
+                <div class="card p-0 overflow-hidden">
+                    <div
+                        style="height: 180px; width: 100%; background: #F3F4F6; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #D1D5DB; position: relative;">
+                        🥤
+                    </div>
+                    <div class="p-lg">
+                        <div class="flex justify-between items-start mb-sm">
+                            <div>
+                                <h3 class="font-bold text-gray-900">Coca-Cola 500ml</h3>
+                                <span class="text-xs font-bold text-info">BEBIDAS</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-extrabold text-gray-900">R$ 8,50</span>
+                            </div>
                         </div>
-                        <div style="text-align: right;">
-                            <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary-orange);">R$ 24.90
+                        <p class="text-xs text-gray-500 mb-lg line-clamp-2">Garrafa pet 500ml, gelada para acompanhar
+                            seu pedido.</p>
+
+                        <div class="flex items-center justify-between pt-md border-t border-gray-50">
+                            <div class="flex items-center gap-sm">
+                                <div
+                                    style="width: 32px; height: 16px; border-radius: 10px; background: var(--success); position: relative; cursor: pointer;">
+                                    <div
+                                        style="width: 12px; height: 12px; background: white; border-radius: 50%; position: absolute; right: 2px; top: 2px;">
+                                    </div>
+                                </div>
+                                <span class="text-xs font-bold text-gray-900">Ativo</span>
+                            </div>
+                            <div class="flex gap-sm">
+                                <button class="btn btn-icon btn-sm btn-secondary">✏️</button>
+                                <button class="btn btn-icon btn-sm btn-secondary">🗑️</button>
                             </div>
                         </div>
                     </div>
-
-                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 1rem;">
-                        Dois hambúrgueres, queijo, alface, cebola e molho especial em pão com gergelim.
-                    </p>
-
-                    <div class="flex justify-between items-center mb-md"
-                        style="padding: 0.75rem; background: var(--gray-50); border-radius: var(--radius-md);">
-                        <span style="font-weight: 600; color: var(--gray-700);">Disponibilidade</span>
-                        <label class="availability-toggle">
-                            <input type="checkbox" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="flex gap-sm">
-                        <button class="btn btn-sm btn-secondary" style="flex: 1;">
-                            <span>✏️</span>
-                            Editar
-                        </button>
-                        <button class="btn btn-sm btn-danger">
-                            <span>🗑️</span>
-                        </button>
-                    </div>
                 </div>
-            </div>
 
-            <!-- Menu Item 3 -->
-            <div class="menu-item-card">
-                <div class="menu-item-image">🍗</div>
-                <div style="padding: var(--spacing-lg);">
-                    <div class="flex justify-between items-start mb-md">
-                        <div>
-                            <h3
-                                style="font-size: 1.125rem; font-weight: 700; color: var(--gray-900); margin-bottom: 0.25rem;">
-                                Chicken Royale</h3>
-                            <span class="badge badge-primary">Burger</span>
+                <!-- Product Card #03 -->
+                <div class="card p-0 overflow-hidden">
+                    <div
+                        style="height: 180px; width: 100%; background: #F3F4F6; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #D1D5DB; position: relative;">
+                        🍟
+                    </div>
+                    <div class="p-lg">
+                        <div class="flex justify-between items-start mb-sm">
+                            <div>
+                                <h3 class="font-bold text-gray-900">Batata Frita G</h3>
+                                <span class="text-xs font-bold text-warning">ACOMPANHAMENTOS</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-extrabold text-gray-900">R$ 14,00</span>
+                            </div>
                         </div>
-                        <div style="text-align: right;">
-                            <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary-orange);">R$ 12.90
+                        <p class="text-xs text-gray-500 mb-lg line-clamp-2">Porção grande de batatas fritas crocantes
+                            com sal.</p>
+
+                        <div class="flex items-center justify-between pt-md border-t border-gray-50">
+                            <div class="flex items-center gap-sm">
+                                <div
+                                    style="width: 32px; height: 16px; border-radius: 10px; background: var(--gray-300); position: relative; cursor: pointer;">
+                                    <div
+                                        style="width: 12px; height: 12px; background: white; border-radius: 50%; position: absolute; left: 2px; top: 2px;">
+                                    </div>
+                                </div>
+                                <span class="text-xs font-bold text-gray-400">Pausado</span>
+                            </div>
+                            <div class="flex gap-sm">
+                                <button class="btn btn-icon btn-sm btn-secondary">✏️</button>
+                                <button class="btn btn-icon btn-sm btn-secondary">🗑️</button>
                             </div>
                         </div>
                     </div>
-
-                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 1rem;">
-                        Frango empanado crocante com alface e maionese em pão macio.
-                    </p>
-
-                    <div class="flex justify-between items-center mb-md"
-                        style="padding: 0.75rem; background: var(--gray-50); border-radius: var(--radius-md);">
-                        <span style="font-weight: 600; color: var(--gray-700);">Disponibilidade</span>
-                        <label class="availability-toggle">
-                            <input type="checkbox" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="flex gap-sm">
-                        <button class="btn btn-sm btn-secondary" style="flex: 1;">
-                            <span>✏️</span>
-                            Editar
-                        </button>
-                        <button class="btn btn-sm btn-danger">
-                            <span>🗑️</span>
-                        </button>
-                    </div>
                 </div>
-            </div>
 
-            <!-- Menu Item 4 -->
-            <div class="menu-item-card">
-                <div class="menu-item-image">🍟</div>
-                <div style="padding: var(--spacing-lg);">
-                    <div class="flex justify-between items-start mb-md">
-                        <div>
-                            <h3
-                                style="font-size: 1.125rem; font-weight: 700; color: var(--gray-900); margin-bottom: 0.25rem;">
-                                Batata Frita Grande</h3>
-                            <span class="badge badge-warning">Acompanhamento</span>
-                        </div>
-                        <div style="text-align: right;">
-                            <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary-orange);">R$ 8.90
-                            </div>
-                        </div>
-                    </div>
-
-                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 1rem;">
-                        Batatas fritas crocantes e douradas, porção grande.
-                    </p>
-
-                    <div class="flex justify-between items-center mb-md"
-                        style="padding: 0.75rem; background: var(--gray-50); border-radius: var(--radius-md);">
-                        <span style="font-weight: 600; color: var(--gray-700);">Disponibilidade</span>
-                        <label class="availability-toggle">
-                            <input type="checkbox" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="flex gap-sm">
-                        <button class="btn btn-sm btn-secondary" style="flex: 1;">
-                            <span>✏️</span>
-                            Editar
-                        </button>
-                        <button class="btn btn-sm btn-danger">
-                            <span>🗑️</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Menu Item 5 -->
-            <div class="menu-item-card">
-                <div class="menu-item-image">🧅</div>
-                <div style="padding: var(--spacing-lg);">
-                    <div class="flex justify-between items-start mb-md">
-                        <div>
-                            <h3
-                                style="font-size: 1.125rem; font-weight: 700; color: var(--gray-900); margin-bottom: 0.25rem;">
-                                Onion Rings</h3>
-                            <span class="badge badge-warning">Acompanhamento</span>
-                        </div>
-                        <div style="text-align: right;">
-                            <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary-orange);">R$ 7.50
-                            </div>
-                        </div>
-                    </div>
-
-                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 1rem;">
-                        Anéis de cebola empanados e fritos até ficarem crocantes.
-                    </p>
-
-                    <div class="flex justify-between items-center mb-md"
-                        style="padding: 0.75rem; background: var(--gray-50); border-radius: var(--radius-md);">
-                        <span style="font-weight: 600; color: var(--gray-700);">Disponibilidade</span>
-                        <label class="availability-toggle">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="flex gap-sm">
-                        <button class="btn btn-sm btn-secondary" style="flex: 1;">
-                            <span>✏️</span>
-                            Editar
-                        </button>
-                        <button class="btn btn-sm btn-danger">
-                            <span>🗑️</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Menu Item 6 -->
-            <div class="menu-item-card">
-                <div class="menu-item-image">🥤</div>
-                <div style="padding: var(--spacing-lg);">
-                    <div class="flex justify-between items-start mb-md">
-                        <div>
-                            <h3
-                                style="font-size: 1.125rem; font-weight: 700; color: var(--gray-900); margin-bottom: 0.25rem;">
-                                Refrigerante 500ml</h3>
-                            <span class="badge badge-info">Bebida</span>
-                        </div>
-                        <div style="text-align: right;">
-                            <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary-orange);">R$ 5.90
-                            </div>
-                        </div>
-                    </div>
-
-                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 1rem;">
-                        Coca-Cola, Fanta, Sprite ou Guaraná. Escolha o seu sabor favorito.
-                    </p>
-
-                    <div class="flex justify-between items-center mb-md"
-                        style="padding: 0.75rem; background: var(--gray-50); border-radius: var(--radius-md);">
-                        <span style="font-weight: 600; color: var(--gray-700);">Disponibilidade</span>
-                        <label class="availability-toggle">
-                            <input type="checkbox" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="flex gap-sm">
-                        <button class="btn btn-sm btn-secondary" style="flex: 1;">
-                            <span>✏️</span>
-                            Editar
-                        </button>
-                        <button class="btn btn-sm btn-danger">
-                            <span>🗑️</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Menu Item 7 -->
-            <div class="menu-item-card">
-                <div class="menu-item-image">🍦</div>
-                <div style="padding: var(--spacing-lg);">
-                    <div class="flex justify-between items-start mb-md">
-                        <div>
-                            <h3
-                                style="font-size: 1.125rem; font-weight: 700; color: var(--gray-900); margin-bottom: 0.25rem;">
-                                Sundae Chocolate</h3>
-                            <span class="badge badge-success">Sobremesa</span>
-                        </div>
-                        <div style="text-align: right;">
-                            <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary-orange);">R$ 6.70
-                            </div>
-                        </div>
-                    </div>
-
-                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 1rem;">
-                        Gelado cremoso coberto com calda de chocolate.
-                    </p>
-
-                    <div class="flex justify-between items-center mb-md"
-                        style="padding: 0.75rem; background: var(--gray-50); border-radius: var(--radius-md);">
-                        <span style="font-weight: 600; color: var(--gray-700);">Disponibilidade</span>
-                        <label class="availability-toggle">
-                            <input type="checkbox" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="flex gap-sm">
-                        <button class="btn btn-sm btn-secondary" style="flex: 1;">
-                            <span>✏️</span>
-                            Editar
-                        </button>
-                        <button class="btn btn-sm btn-danger">
-                            <span>🗑️</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Menu Item 8 -->
-            <div class="menu-item-card">
-                <div class="menu-item-image">🍗</div>
-                <div style="padding: var(--spacing-lg);">
-                    <div class="flex justify-between items-start mb-md">
-                        <div>
-                            <h3
-                                style="font-size: 1.125rem; font-weight: 700; color: var(--gray-900); margin-bottom: 0.25rem;">
-                                Chicken Nuggets (10un)</h3>
-                            <span class="badge badge-warning">Acompanhamento</span>
-                        </div>
-                        <div style="text-align: right;">
-                            <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary-orange);">R$ 9.00
-                            </div>
-                        </div>
-                    </div>
-
-                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 1rem;">
-                        10 pedaços de frango empanado crocante com molho à escolha.
-                    </p>
-
-                    <div class="flex justify-between items-center mb-md"
-                        style="padding: 0.75rem; background: var(--gray-50); border-radius: var(--radius-md);">
-                        <span style="font-weight: 600; color: var(--gray-700);">Disponibilidade</span>
-                        <label class="availability-toggle">
-                            <input type="checkbox" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="flex gap-sm">
-                        <button class="btn btn-sm btn-secondary" style="flex: 1;">
-                            <span>✏️</span>
-                            Editar
-                        </button>
-                        <button class="btn btn-sm btn-danger">
-                            <span>🗑️</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Menu Item 9 -->
-            <div class="menu-item-card">
-                <div class="menu-item-image">🍔</div>
-                <div style="padding: var(--spacing-lg);">
-                    <div class="flex justify-between items-start mb-md">
-                        <div>
-                            <h3
-                                style="font-size: 1.125rem; font-weight: 700; color: var(--gray-900); margin-bottom: 0.25rem;">
-                                Whopper Jr</h3>
-                            <span class="badge badge-primary">Burger</span>
-                        </div>
-                        <div style="text-align: right;">
-                            <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary-orange);">R$ 14.90
-                            </div>
-                        </div>
-                    </div>
-
-                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 1rem;">
-                        Versão menor do clássico Whopper com todos os ingredientes.
-                    </p>
-
-                    <div class="flex justify-between items-center mb-md"
-                        style="padding: 0.75rem; background: var(--gray-50); border-radius: var(--radius-md);">
-                        <span style="font-weight: 600; color: var(--gray-700);">Disponibilidade</span>
-                        <label class="availability-toggle">
-                            <input type="checkbox" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="flex gap-sm">
-                        <button class="btn btn-sm btn-secondary" style="flex: 1;">
-                            <span>✏️</span>
-                            Editar
-                        </button>
-                        <button class="btn btn-sm btn-danger">
-                            <span>🗑️</span>
-                        </button>
-                    </div>
-                </div>
             </div>
         </div>
     </main>

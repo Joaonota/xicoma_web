@@ -4,16 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configurações - Xicoma Admin</title>
+    <title>Configurações do Sistema - Xicoma Admin</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
-    <!-- Sidebar -->
+    <!-- Sidebar Navigation -->
     <aside class="sidebar">
-        <div class="sidebar-logo">
-            <div class="sidebar-logo-icon">🍔</div>
-            <div class="sidebar-logo-text">Xicoma</div>
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon">X</div>
+                <div class="sidebar-logo-text">Xicoma</div>
+            </div>
         </div>
 
         <nav>
@@ -32,19 +34,19 @@
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-orders.html" class="sidebar-nav-link">
-                        <span class="sidebar-nav-icon">📦</span>
+                        <span class="sidebar-nav-icon">🛍️</span>
                         <span>Pedidos</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-couriers.html" class="sidebar-nav-link">
-                        <span class="sidebar-nav-icon">🚴</span>
+                        <span class="sidebar-nav-icon">🛵</span>
                         <span>Entregadores</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="admin-payments.html" class="sidebar-nav-link">
-                        <span class="sidebar-nav-icon">💰</span>
+                        <span class="sidebar-nav-icon">💳</span>
                         <span>Pagamentos</span>
                     </a>
                 </li>
@@ -62,300 +64,169 @@
                 </li>
             </ul>
         </nav>
+
+        <div class="sidebar-footer">
+            <div class="flex items-center gap-md">
+                <div
+                    style="width: 40px; height: 40px; border-radius: var(--radius-full); background: var(--gray-200); display: flex; align-items: center; justify-content: center; font-weight: 700;">
+                    AD</div>
+                <div>
+                    <div style="font-size: 0.875rem; font-weight: 700;">Admin Xicoma</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500);">Nível Master</div>
+                </div>
+            </div>
+            <a href="admin-login.html" class="btn btn-secondary w-full mt-lg btn-sm">Sair do Painel</a>
+        </div>
     </aside>
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="page-header mb-xl">
-            <h1 class="page-title">Configurações da Plataforma</h1>
-            <p class="page-subtitle">Gerir configurações gerais e parâmetros do sistema</p>
-        </div>
-
-        <div class="grid gap-xl">
-            <!-- Platform Settings -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Configurações Gerais</h3>
-                    <p class="card-subtitle">Configurações básicas da plataforma</p>
-                </div>
-                <div class="card-body">
-                    <div class="grid grid-cols-2 gap-lg">
-                        <div class="form-group">
-                            <label class="form-label">Nome da Plataforma</label>
-                            <input type="text" class="form-input" value="Xicoma">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Email de Contacto</label>
-                            <input type="email" class="form-input" value="suporte@xicoma.com">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Telefone de Suporte</label>
-                            <input type="tel" class="form-input" value="+258 84 000 0000">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Moeda</label>
-                            <select class="form-select">
-                                <option>MZN (Metical)</option>
-                                <option>USD (Dólar)</option>
-                                <option>EUR (Euro)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary">Guardar Alterações</button>
-                </div>
+        <header class="page-header flex justify-between items-center">
+            <div>
+                <h1 class="page-title">Configurações Gerais</h1>
+                <p class="page-subtitle">Ajuste os parâmetros globais, taxas e regras da plataforma Xicoma.</p>
             </div>
-
-            <!-- Commission Settings -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Configurações de Comissão</h3>
-                    <p class="card-subtitle">Definir taxas de comissão da plataforma</p>
-                </div>
-                <div class="card-body">
-                    <div class="grid grid-cols-2 gap-lg">
-                        <div class="form-group">
-                            <label class="form-label">Comissão Restaurantes (%)</label>
-                            <input type="number" class="form-input" value="15" min="0" max="100" step="0.5">
-                            <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 0.5rem;">
-                                Percentagem cobrada sobre cada pedido
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Taxa de Entrega Base (MZN)</label>
-                            <input type="number" class="form-input" value="50" min="0" step="5">
-                            <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 0.5rem;">
-                                Taxa mínima de entrega
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Taxa por Km Adicional (MZN)</label>
-                            <input type="number" class="form-input" value="10" min="0" step="1">
-                            <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 0.5rem;">
-                                Custo por quilómetro extra
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Valor Mínimo Pedido (MZN)</label>
-                            <input type="number" class="form-input" value="100" min="0" step="10">
-                            <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 0.5rem;">
-                                Valor mínimo para fazer pedido
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary">Guardar Alterações</button>
-                </div>
+            <div class="flex gap-md">
+                <button class="btn btn-primary">
+                    <span>💾</span>
+                    Salvar Todas as Alterações
+                </button>
             </div>
+        </header>
 
-            <!-- Delivery Zones -->
-            <div class="card">
-                <div class="card-header flex justify-between items-center">
-                    <div>
-                        <h3 class="card-title">Zonas de Entrega</h3>
-                        <p class="card-subtitle">Gerir áreas de cobertura</p>
-                    </div>
-                    <button class="btn btn-primary btn-sm">
-                        <span>➕</span>
-                        Adicionar Zona
+        <div class="page-content">
+            <div class="grid grid-cols-3 gap-xl">
+                <!-- Navigation Tabs (Visual only) -->
+                <div class="flex flex-col gap-sm">
+                    <button class="btn btn-secondary justify-start active"
+                        style="background: var(--primary-100); color: var(--primary-dark); border-color: var(--primary-200);">
+                        <span>🌐</span> Geral & Identidade
+                    </button>
+                    <button class="btn btn-secondary justify-start">
+                        <span>💰</span> Financeiro & Taxas
+                    </button>
+                    <button class="btn btn-secondary justify-start">
+                        <span>🛵</span> Logística & Zonas
+                    </button>
+                    <button class="btn btn-secondary justify-start">
+                        <span>🔒</span> Segurança & Acesso
+                    </button>
+                    <button class="btn btn-secondary justify-start">
+                        <span>🤖</span> Integrações API
                     </button>
                 </div>
-                <div class="table-container">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Zona</th>
-                                <th>Raio (km)</th>
-                                <th>Taxa Extra</th>
-                                <th>Restaurantes</th>
-                                <th>Status</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Centro</strong></td>
-                                <td>5 km</td>
-                                <td>R$ 0</td>
-                                <td>45</td>
-                                <td><span class="badge badge-success">Ativa</span></td>
-                                <td>
-                                    <div class="flex gap-sm">
-                                        <button class="btn btn-sm btn-secondary">✏️</button>
-                                        <button class="btn btn-sm btn-danger">🗑️</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Polana</strong></td>
-                                <td>7 km</td>
-                                <td>R$ 20</td>
-                                <td>38</td>
-                                <td><span class="badge badge-success">Ativa</span></td>
-                                <td>
-                                    <div class="flex gap-sm">
-                                        <button class="btn btn-sm btn-secondary">✏️</button>
-                                        <button class="btn btn-sm btn-danger">🗑️</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Matola</strong></td>
-                                <td>10 km</td>
-                                <td>R$ 30</td>
-                                <td>28</td>
-                                <td><span class="badge badge-success">Ativa</span></td>
-                                <td>
-                                    <div class="flex gap-sm">
-                                        <button class="btn btn-sm btn-secondary">✏️</button>
-                                        <button class="btn btn-sm btn-danger">🗑️</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Costa do Sol</strong></td>
-                                <td>8 km</td>
-                                <td>R$ 25</td>
-                                <td>19</td>
-                                <td><span class="badge badge-warning">Pendente</span></td>
-                                <td>
-                                    <div class="flex gap-sm">
-                                        <button class="btn btn-sm btn-secondary">✏️</button>
-                                        <button class="btn btn-sm btn-danger">🗑️</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
 
-            <!-- Notification Settings -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Configurações de Notificações</h3>
-                    <p class="card-subtitle">Gerir notificações automáticas</p>
-                </div>
-                <div class="card-body">
-                    <div class="grid gap-md">
-                        <label class="flex items-center gap-md" style="cursor: pointer;">
-                            <input type="checkbox" class="form-checkbox" checked>
-                            <div>
-                                <div style="font-weight: 600;">Notificar Novos Pedidos</div>
-                                <div style="font-size: 0.875rem; color: var(--gray-600);">Enviar notificação quando um
-                                    novo pedido é criado</div>
+                <!-- Settings Content -->
+                <div class="flex flex-col gap-xl" style="grid-column: span 2;">
+
+                    <!-- Identity Section -->
+                    <section class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Identidade da Plataforma</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="grid grid-cols-2 gap-lg">
+                                <div class="form-group">
+                                    <label class="form-label">Nome de Exibição</label>
+                                    <input type="text" class="form-input" value="Xicoma Food Delivery">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email de Suporte</label>
+                                    <input type="email" class="form-input" value="suporte@xicoma.com">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">WhatsApp Corporativo</label>
+                                    <input type="text" class="form-input" value="+258 84 123 4567">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Moeda Padrão</label>
+                                    <select class="form-select">
+                                        <option>Metical (MZN)</option>
+                                        <option>Rand (ZAR)</option>
+                                        <option>Dólar (USD)</option>
+                                    </select>
+                                </div>
                             </div>
-                        </label>
+                        </div>
+                    </section>
 
-                        <label class="flex items-center gap-md" style="cursor: pointer;">
-                            <input type="checkbox" class="form-checkbox" checked>
-                            <div>
-                                <div style="font-weight: 600;">Notificar Pagamentos Recebidos</div>
-                                <div style="font-size: 0.875rem; color: var(--gray-600);">Enviar notificação quando um
-                                    pagamento é confirmado</div>
-                            </div>
-                        </label>
-
-                        <label class="flex items-center gap-md" style="cursor: pointer;">
-                            <input type="checkbox" class="form-checkbox" checked>
-                            <div>
-                                <div style="font-weight: 600;">Notificar Novos Registos</div>
-                                <div style="font-size: 0.875rem; color: var(--gray-600);">Enviar notificação quando um
-                                    restaurante ou entregador se regista</div>
-                            </div>
-                        </label>
-
-                        <label class="flex items-center gap-md" style="cursor: pointer;">
-                            <input type="checkbox" class="form-checkbox">
-                            <div>
-                                <div style="font-weight: 600;">Notificar Pedidos Cancelados</div>
-                                <div style="font-size: 0.875rem; color: var(--gray-600);">Enviar notificação quando um
-                                    pedido é cancelado</div>
-                            </div>
-                        </label>
-
-                        <label class="flex items-center gap-md" style="cursor: pointer;">
-                            <input type="checkbox" class="form-checkbox" checked>
-                            <div>
-                                <div style="font-weight: 600;">Alertas de Sistema</div>
-                                <div style="font-size: 0.875rem; color: var(--gray-600);">Enviar alertas sobre problemas
-                                    técnicos ou manutenção</div>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary">Guardar Alterações</button>
-                </div>
-            </div>
-
-            <!-- User Management -->
-            <div class="card">
-                <div class="card-header flex justify-between items-center">
-                    <div>
-                        <h3 class="card-title">Gestão de Utilizadores Admin</h3>
-                        <p class="card-subtitle">Gerir acessos administrativos</p>
-                    </div>
-                    <button class="btn btn-primary btn-sm">
-                        <span>➕</span>
-                        Adicionar Admin
-                    </button>
-                </div>
-                <div class="table-container">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Email</th>
-                                <th>Função</th>
-                                <th>Último Acesso</th>
-                                <th>Status</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Admin Principal</strong></td>
-                                <td>admin@xicoma.com</td>
-                                <td><span class="badge badge-danger">Super Admin</span></td>
-                                <td>Há 5 minutos</td>
-                                <td><span class="badge badge-success">Ativo</span></td>
-                                <td>
-                                    <div class="flex gap-sm">
-                                        <button class="btn btn-sm btn-secondary">✏️</button>
+                    <!-- Financial Rules -->
+                    <section class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Regras de Negócio & Taxas</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="grid grid-cols-2 gap-lg">
+                                <div class="form-group">
+                                    <label class="form-label">Comissão da Plataforma (%)</label>
+                                    <div class="flex items-center gap-md">
+                                        <input type="number" class="form-input" value="15">
+                                        <span class="font-bold text-gray-500">%</span>
                                     </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>João Silva</strong></td>
-                                <td>joao@xicoma.com</td>
-                                <td><span class="badge badge-info">Moderador</span></td>
-                                <td>Há 2 horas</td>
-                                <td><span class="badge badge-success">Ativo</span></td>
-                                <td>
-                                    <div class="flex gap-sm">
-                                        <button class="btn btn-sm btn-secondary">✏️</button>
-                                        <button class="btn btn-sm btn-danger">🗑️</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Maria Santos</strong></td>
-                                <td>maria@xicoma.com</td>
-                                <td><span class="badge badge-info">Suporte</span></td>
-                                <td>Ontem</td>
-                                <td><span class="badge badge-success">Ativo</span></td>
-                                <td>
-                                    <div class="flex gap-sm">
-                                        <button class="btn btn-sm btn-secondary">✏️</button>
-                                        <button class="btn btn-sm btn-danger">🗑️</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    <p class="text-xs text-gray-500 mt-xs">Incidente sobre o valor bruto do pedido.</p>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Taxa Mínima de Entrega</label>
+                                    <input type="text" class="form-input" value="R$ 5,00">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Repasse aos Lojistas</label>
+                                    <select class="form-select">
+                                        <option>Semanal (Toda Segunda)</option>
+                                        <option>Quinzenal</option>
+                                        <option>Mensal</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Valor Mínimo para Pedido</label>
+                                    <input type="text" class="form-input" value="R$ 20,00">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- User Management -->
+                    <section class="card">
+                        <div class="card-header flex justify-between items-center">
+                            <h3 class="card-title">Usuários com Acesso Administrativo</h3>
+                            <button class="btn btn-secondary btn-sm">Convidar Novo</button>
+                        </div>
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Função</th>
+                                        <th>Status</th>
+                                        <th class="text-right">Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="font-bold">Admin Xicoma</div>
+                                            <div class="text-xs text-gray-500">master@xicoma.com</div>
+                                        </td>
+                                        <td><span class="badge badge-primary">Proprietário</span></td>
+                                        <td><span class="badge badge-success badge-dot">Ativo</span></td>
+                                        <td class="text-right"><button
+                                                class="btn btn-icon btn-sm btn-secondary">⚙️</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="font-bold">Suporte Operacional</div>
+                                            <div class="text-xs text-gray-500">ajuda@xicoma.com</div>
+                                        </td>
+                                        <td><span class="badge badge-info">Moderador</span></td>
+                                        <td><span class="badge badge-success badge-dot">Ativo</span></td>
+                                        <td class="text-right"><button
+                                                class="btn btn-icon btn-sm btn-secondary">⚙️</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
                 </div>
             </div>
         </div>
