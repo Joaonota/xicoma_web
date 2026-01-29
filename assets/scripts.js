@@ -180,3 +180,8 @@ const actions = {
 document.addEventListener('DOMContentLoaded', () => {
     // Attach to specific static buttons if needed, but onClick attributes are used for simplicity in mockups
 });
+
+// Expose to window for inline calls
+window.nav = nav;
+window.actions = actions;
+window.showToast = showToast;
