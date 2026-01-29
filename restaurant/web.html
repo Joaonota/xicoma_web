@@ -358,6 +358,97 @@
 
     </div>
 
+    <!-- MODALS -->
+
+    <!-- 1. Product Modal -->
+    <div class="modal fade" id="modal-product" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold" id="modalProductTitle">Novo Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-product" onsubmit="actions.submitProduct(event)">
+                        <input type="hidden" id="prod-id">
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">Nome do Item</label>
+                            <input type="text" id="prod-name" class="form-control" required placeholder="Ex: X-Bacon">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">Categoria</label>
+                            <select id="prod-cat" class="form-select">
+                                <option>Lanches</option>
+                                <option>Pizza</option>
+                                <option>Bebidas</option>
+                                <option>Sobremesa</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">Preço (MT)</label>
+                            <input type="number" id="prod-price" class="form-control" required placeholder="0.00">
+                        </div>
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="prod-active" checked>
+                            <label class="form-check-label" for="prod-active">Disponível para venda</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary-xicoma w-100">Salvar Item</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Reject Modal -->
+    <div class="modal fade" id="modal-reject" tabindex="-1">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-body text-center p-4">
+                    <i class="bi bi-x-circle display-4 text-danger mb-3"></i>
+                    <h5 class="fw-bold mb-3">Rejeitar Pedido?</h5>
+                    <form onsubmit="actions.confirmReject(event)">
+                        <input type="hidden" id="reject-id">
+                        <select class="form-select mb-3" required id="reject-reason">
+                            <option value="">Selecione o motivo...</option>
+                            <option>Item esgotado</option>
+                            <option>Restaurante fechando</option>
+                            <option>Sobrecarga de pedidos</option>
+                            <option>Outro</option>
+                        </select>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger">Confirmar Rejeição</button>
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Pause Modal -->
+    <div class="modal fade" id="modal-pause" tabindex="-1">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-body text-center p-4">
+                    <i class="bi bi-pause-circle display-4 text-warning mb-3"></i>
+                    <h5 class="fw-bold mb-3">Pausar Loja</h5>
+                    <p class="small text-muted mb-3">Seus itens ficarão indisponíveis temporariamente.</p>
+                    <form onsubmit="actions.confirmPause(event)">
+                        <div class="mb-3">
+                            <label class="form-label small">Retornar em:</label>
+                            <select class="form-select" id="pause-duration">
+                                <option value="30m">30 Minutos</option>
+                                <option value="1h">1 Hora</option>
+                                <option value="Indefinido">Indefinido</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-warning w-100">Pausar Agora</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/scripts.js"></script>
     <script>

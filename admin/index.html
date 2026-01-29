@@ -708,6 +708,124 @@
         </div>
     </div>
 
+    <!-- MODALS -->
+
+    <!-- 1. User Modal -->
+    <div class="modal fade" id="modal-user" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold">Gerir Usuário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form onsubmit="actions.saveUser(event)">
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">Nome Completo</label>
+                            <input type="text" class="form-control" required placeholder="Ex: João Silva">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">Email</label>
+                            <input type="email" class="form-control" required placeholder="email@xicoma.com">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">Telefone</label>
+                            <input type="tel" class="form-control" required placeholder="+258 ...">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">Permissão</label>
+                            <select class="form-select">
+                                <option>Cliente</option>
+                                <option>Admin</option>
+                                <option>Suporte</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary-xicoma w-100">Salvar Dados</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Restaurant Modal -->
+    <div class="modal fade" id="modal-restaurant" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold">Novo Parceiro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form onsubmit="actions.saveRestaurant(event)">
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">Nome do Estabelecimento</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <label class="form-label small text-muted">Categoria</label>
+                                <select class="form-select">
+                                    <option>Fast Food</option>
+                                    <option>Tradicional</option>
+                                    <option>Padaria</option>
+                                </select>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label class="form-label small text-muted">Comissão (%)</label>
+                                <input type="number" class="form-control" value="15">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">Localização</label>
+                            <input type="text" class="form-control" required placeholder="Bairro, Rua...">
+                        </div>
+                        <button type="submit" class="btn btn-primary-xicoma w-100">Cadastrar Parceiro</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Courier Modal -->
+    <div class="modal fade" id="modal-courier" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold">Aprovar Entregador</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-light rounded-circle p-3 me-3"><i class="bi bi-person display-6"></i></div>
+                        <div>
+                            <h5 class="fw-bold m-0">Novo Candidato</h5>
+                            <p class="text-muted small m-0">Cadastrado há 2 horas</p>
+                        </div>
+                    </div>
+                    <form onsubmit="actions.approveCourier(event)">
+                        <div class="alert alert-warning small"><i class="bi bi-info-circle"></i> Verifique se a licença
+                            e documentos estão válidos antes de aprovar.</div>
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">Veículo</label>
+                            <select class="form-select">
+                                <option>Moto</option>
+                                <option>Bicicleta</option>
+                                <option>Carro</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">Placa / Matrícula</label>
+                            <input type="text" class="form-control" placeholder="ABC-123-MC">
+                        </div>
+                        <button type="submit" class="btn btn-success text-white w-100 fw-bold">Aprovar Cadastro</button>
+                        <button type="button" class="btn btn-link text-danger w-100 mt-2 text-decoration-none">Rejeitar
+                            e Bloquear</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function switchPage(pageId, navElement) {
