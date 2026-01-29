@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>XICOMA Partner</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="../assets/style.css">
+    <style>
+        body {
+            background-color: #f0f2f5;
+        }
+
+        .order-card {
+            border-left: 4px solid var(--xicoma-primary);
+        }
+
+        .status-new {
+            border-color: #0d6efd;
+        }
+
+        .status-prep {
+            border-color: #fd7e14;
+        }
+
+        .status-ready {
+            border-color: #198754;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- LOGIN SCREEN -->
+        <section id="login-screen" class="vh-100 bg-white p-4 d-flex flex-column justify-content-center">
+            <div class="text-center mb-5">
+                <i class="bi bi-shop display-1 text-dark mb-3"></i>
+                <h2 class="fw-bold">XICOMA <span class="text-primary-xicoma">Parceiro</span></h2>
+                <p class="text-muted">Gerencie seu restaurante</p>
+            </div>
+
+            <form id="login-form">
+                <div class="mb-3">
+                    <label class="form-label text-muted small">Email</label>
+                    <input type="text" class="form-control form-control-lg bg-light border-0"
+                        value="gourmet@xicoma.co.mz">
+                </div>
+                <div class="mb-4">
+                    <label class="form-label text-muted small">Senha</label>
+                    <input type="password" class="form-control form-control-lg bg-light border-0" value="******">
+                </div>
+                <button type="submit" class="btn btn-dark btn-lg w-100 shadow-sm mb-3"
+                    style="border-radius: 8px;">Acessar Portal</button>
+            </form>
+        </section>
+
+        <!-- DASHBOARD SCREEN -->
+        <section id="home-screen" class="d-none pb-5">
+            <!-- Header -->
+            <div class="bg-white p-3 shadow-sm d-flex justify-content-between align-items-center sticky-top">
+                <h5 class="m-0 fw-bold">Pedidos</h5>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="shopOpen" checked>
+                    <label class="form-check-label small" for="shopOpen">Aberto</label>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="row g-2 p-3">
+                <div class="col-6">
+                    <div class="card border-0 shadow-sm p-3">
+                        <small class="text-muted">Ganhos Hoje</small>
+                        <h4 class="fw-bold m-0">4,500 MT</h4>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card border-0 shadow-sm p-3">
+                        <small class="text-muted">Pedidos</small>
+                        <h4 class="fw-bold m-0">12</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders Tab -->
+            <ul class="nav nav-pills nav-fill px-3 mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active rounded-pill small" id="pills-new-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-new" type="button">Novos (2)</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill small" id="pills-prep-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-prep" type="button">Preparo (1)</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill small" id="pills-ready-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-ready" type="button">Prontos</button>
+                </li>
+            </ul>
+
+            <div class="tab-content px-3" id="pills-tabContent">
+                <!-- NEW ORDERS -->
+                <div class="tab-pane fade show active" id="pills-new">
+                    <div class="card shadow-sm border-0 mb-3 order-card status-new">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-light text-dark">#4582</span>
+                                <small class="text-muted">12:30</small>
+                            </div>
+                            <h6 class="fw-bold">Maria João</h6>
+                            <p class="small text-muted mb-3">2 Itens • 750 MT</p>
+                            <div class="d-grid gap-2 d-md-flex">
+                                <button onclick="nav.to('order-detail')"
+                                    class="btn btn-outline-dark btn-sm flex-fill">Detalhes</button>
+                                <button class="btn btn-primary-xicoma btn-sm flex-fill">Aceitar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm border-0 mb-3 order-card status-new">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-light text-dark">#4583</span>
+                                <small class="text-muted">12:32</small>
+                            </div>
+                            <h6 class="fw-bold">Pedro M.</h6>
+                            <p class="small text-muted mb-3">1 Item • 350 MT</p>
+                            <div class="d-grid gap-2 d-md-flex">
+                                <button class="btn btn-outline-dark btn-sm flex-fill">Detalhes</button>
+                                <button class="btn btn-primary-xicoma btn-sm flex-fill">Aceitar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PREP ORDERS -->
+                <div class="tab-pane fade" id="pills-prep">
+                    <div class="card shadow-sm border-0 mb-3 order-card status-prep"
+                        style="border-left-color: #fd7e14;">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-light text-dark">#4580</span>
+                                <span class="badge bg-warning text-dark">Preparando</span>
+                            </div>
+                            <h6 class="fw-bold">Ana Costa</h6>
+                            <ul class="list-unstyled small bg-light p-2 rounded mb-3">
+                                <li>1x Pizza Pepperoni</li>
+                                <li>2x Coca-Cola</li>
+                            </ul>
+                            <button class="btn btn-success btn-sm w-100 text-white fw-bold">Marcar como Pronto</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="height: 80px;"></div>
+        </section>
+
+        <!-- ORDER DETAIL -->
+        <section id="order-detail-screen" class="d-none bg-white h-100 position-fixed top-0 w-100"
+            style="max-width: 480px; z-index: 2000;">
+            <div class="p-3 shadow-sm border-bottom d-flex align-items-center">
+                <button onclick="nav.back()" class="btn btn-link text-dark p-0 me-3"><i
+                        class="bi bi-arrow-left fs-4"></i></button>
+                <h5 class="m-0 fw-bold">Pedido #4582</h5>
+            </div>
+            <div class="p-4">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="bg-light rounded-circle d-flex align-items-center justify-content-center me-3"
+                        style="width: 50px; height: 50px;">
+                        <i class="bi bi-person fs-4"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold m-0">Maria João</h6>
+                        <small class="text-muted">Cliente novo</small>
+                    </div>
+                    <a href="tel:840000000" class="btn btn-light rounded-circle ms-auto"><i
+                            class="bi bi-telephone"></i></a>
+                </div>
+
+                <h6 class="fw-bold border-bottom pb-2 mb-3">Itens do Pedido</h6>
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>1x Whopper Combo</span>
+                        <span class="fw-bold">350 MT</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>1x Batata Frita Grande</span>
+                        <span class="fw-bold">200 MT</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>2x Molho Extra</span>
+                        <span class="fw-bold">100 MT</span>
+                    </div>
+                </div>
+
+                <div class="bg-light p-3 rounded mb-4">
+                    <div class="d-flex justify-content-between fw-bold fs-5">
+                        <span>Total</span>
+                        <span>750 MT</span>
+                    </div>
+                    <small class="text-secondary">Pago via M-Pesa</small>
+                </div>
+
+                <button class="btn btn-primary-xicoma btn-lg w-100 mb-2">Aceitar Pedido</button>
+                <button class="btn btn-outline-danger w-100" style="border-radius: 8px;">Rejeitar</button>
+            </div>
+        </section>
+
+        <!-- BOTTOM NAV -->
+        <nav id="main-nav" class="bottom-nav d-none">
+            <a href="#" class="nav-item active" onclick="nav.to('home')">
+                <i class="bi bi-clipboard-check"></i> Pedidos
+            </a>
+            <a href="#" class="nav-item">
+                <i class="bi bi-list-task"></i> Cardápio
+            </a>
+            <a href="#" class="nav-item">
+                <i class="bi bi-wallet2"></i> Ganhos
+            </a>
+            <a href="#" class="nav-item">
+                <i class="bi bi-shop"></i> Perfil
+            </a>
+        </nav>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/scripts.js"></script>
+    <script>
+        document.getElementById('login-form').onsubmit = (e) => {
+            e.preventDefault();
+            nav.to('home');
+        };
+        // Initial
+        nav.to('login');
+    </script>
+</body>
+
+</html>
