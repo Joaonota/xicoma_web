@@ -83,7 +83,100 @@ function updateCartUI() {
             </div>
         </button>`;
         restScreen.appendChild(btn);
-    } else if (document.getElementById('float-cart-btn')) {
-        // update content
     }
 }
+
+// Toast Notification System
+function showToast(message, type = 'success') {
+    // Create toast container if not exists
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 10px;';
+        document.body.appendChild(container);
+    }
+
+    // Create toast
+    const toast = document.createElement('div');
+    const bgClass = type === 'success' ? 'bg-success' : (type === 'error' ? 'bg-danger' : 'bg-dark');
+    toast.className = `toast show align-items-center text-white ${bgClass} border-0 shadow`;
+    toast.style.minWidth = '250px';
+    toast.innerHTML = `
+        <div class="d-flex">
+            <div class="toast-body">
+                <i class="bi bi-${type === 'success' ? 'check-circle' : 'info-circle'} me-2"></i> ${message}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" onclick="this.parentElement.parentElement.remove()"></button>
+        </div>
+    `;
+
+    container.appendChild(toast);
+
+    // Auto remove
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// Generic Mock Actions
+const actions = {
+    login: (role) => {
+        const btn = event.target;
+        const originalText = btn.innerText;
+        btn.innerText = 'Autenticando...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.disabled = false;
+            showToast(`Bem-vindo ao XICOMA ${role}!`);
+
+            if (role === 'Admin') {
+                document.getElementById('admin-login').classList.add('d-none');
+                document.getElementById('admin-content').classList.remove('d-none');
+                if (window.initCharts) window.initCharts();
+            } else {
+                nav.to('home'); // Default SPA nav
+            }
+        }, 1500);
+    },
+
+    save: (item) => {
+        showToast(`${item} salvo com sucesso!`);
+    },
+
+    delete: (item) => {
+        if (confirm(`Tem certeza que deseja remover este ${item}?`)) {
+            showToast(`${item} removido.`);
+            // Try to remove closest row/card
+            const target = event.target.closest('tr') || event.target.closest('.card');
+            if (target) target.style.display = 'none';
+        }
+    },
+
+    export: (type) => {
+        showToast(`Relatório de ${type} baixado.`);
+    },
+
+    toggleStatus: (status) => {
+        showToast(`Status alterado para: ${status}`);
+    },
+
+    acceptOrder: (id) => {
+        showToast(`Pedido #${id} aceito!`);
+        // Move visual card if in Kanban/List
+        const card = event.target.closest('.order-card, .card');
+        if (card) {
+            card.classList.add('opacity-50');
+            card.querySelector('button').innerText = 'Aceito';
+            card.querySelector('button').disabled = true;
+        }
+    }
+};
+
+// Global Button Initializer (Optional - for static buttons)
+document.addEventListener('DOMContentLoaded', () => {
+    // Attach to specific static buttons if needed, but onClick attributes are used for simplicity in mockups
+});

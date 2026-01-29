@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -13,12 +14,15 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" href="../assets/style.css">
 </head>
+
 <body>
 
     <div class="app-container">
-        
+
         <!-- SPLASH SCREEN -->
-        <section id="splash-screen" class="d-flex align-items-center justify-content-center bg-danger text-white vh-100 position-absolute w-100" style="z-index: 2000; top: 0;">
+        <section id="splash-screen"
+            class="d-flex align-items-center justify-content-center bg-danger text-white vh-100 position-absolute w-100"
+            style="z-index: 2000; top: 0;">
             <div class="text-center fade-in">
                 <i class="bi bi-box-seam display-1 mb-3"></i>
                 <h1 class="fw-bold display-4">XICOMA</h1>
@@ -33,22 +37,26 @@
                 <h1 class="text-danger fw-bold">XICOMA</h1>
                 <p class="text-muted">Entre para pedir sua comida favorita</p>
             </div>
-            
+
             <form id="login-form">
                 <div class="mb-3">
                     <label class="form-label text-muted small">Email ou Telefone</label>
-                    <input type="text" class="form-control form-control-lg bg-light border-0" placeholder="ex: 841234567">
+                    <input type="text" class="form-control form-control-lg bg-light border-0"
+                        placeholder="ex: 841234567">
                 </div>
                 <div class="mb-4">
                     <label class="form-label text-muted small">Senha</label>
                     <input type="password" class="form-control form-control-lg bg-light border-0" placeholder="******">
                 </div>
-                <button type="submit" class="btn btn-primary-xicoma btn-lg shadow-sm mb-3">Entrar</button>
-                <button type="button" class="btn btn-outline-xicoma btn-lg w-100">Criar conta</button>
+                <button type="button" onclick="actions.login('Cliente')"
+                    class="btn btn-primary-xicoma btn-lg shadow-sm mb-3">Entrar</button>
+                <button type="button" onclick="showToast('Funcionalidade de cadastro em breve', 'info')"
+                    class="btn btn-outline-xicoma btn-lg w-100">Criar conta</button>
             </form>
 
             <div class="text-center mt-4">
-                <a href="#" class="text-muted small text-decoration-none">Esqueci minha senha</a>
+                <a href="#" onclick="showToast('Link de recuperação enviado ao email', 'info')"
+                    class="text-muted small text-decoration-none">Esqueci minha senha</a>
             </div>
         </section>
 
@@ -58,11 +66,13 @@
             <div class="header-xicoma d-flex align-items-center justify-content-between shadow-sm">
                 <div>
                     <span class="text-muted small">Entregar em:</span>
-                    <div class="fw-bold text-danger dropdown-toggle" role="button">Maputo, Polana <i class="bi bi-chevron-down small"></i></div>
+                    <div class="fw-bold text-danger dropdown-toggle" role="button">Maputo, Polana <i
+                            class="bi bi-chevron-down small"></i></div>
                 </div>
                 <div class="position-relative">
                     <i class="bi bi-bell fs-4"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+                    <span
+                        class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
                 </div>
             </div>
 
@@ -77,19 +87,23 @@
             <!-- Categories -->
             <div class="px-3 mb-4 overflow-auto text-nowrap hide-scrollbar">
                 <div class="d-inline-block text-center me-3">
-                    <div class="bg-danger bg-opacity-10 text-danger rounded-circle p-3 mb-1"><i class="bi bi-burger"></i></div>
+                    <div class="bg-danger bg-opacity-10 text-danger rounded-circle p-3 mb-1"><i
+                            class="bi bi-burger"></i></div>
                     <small>Lanches</small>
                 </div>
                 <div class="d-inline-block text-center me-3">
-                    <div class="bg-warning bg-opacity-10 text-warning rounded-circle p-3 mb-1"><i class="bi bi-pizza"></i></div>
+                    <div class="bg-warning bg-opacity-10 text-warning rounded-circle p-3 mb-1"><i
+                            class="bi bi-pizza"></i></div>
                     <small>Pizza</small>
                 </div>
                 <div class="d-inline-block text-center me-3">
-                    <div class="bg-success bg-opacity-10 text-success rounded-circle p-3 mb-1"><i class="bi bi-egg-fried"></i></div>
+                    <div class="bg-success bg-opacity-10 text-success rounded-circle p-3 mb-1"><i
+                            class="bi bi-egg-fried"></i></div>
                     <small>Saudável</small>
                 </div>
                 <div class="d-inline-block text-center me-3">
-                    <div class="bg-info bg-opacity-10 text-info rounded-circle p-3 mb-1"><i class="bi bi-cup-straw"></i></div>
+                    <div class="bg-info bg-opacity-10 text-info rounded-circle p-3 mb-1"><i class="bi bi-cup-straw"></i>
+                    </div>
                     <small>Bebidas</small>
                 </div>
             </div>
@@ -101,22 +115,27 @@
                     <!-- JS will populate this -->
                 </div>
             </div>
-            
+
             <div style="height: 80px;"></div> <!-- Spacer for bottom nav -->
         </section>
 
         <!-- RESTAURANT DETAIL SCREEN -->
-        <section id="restaurant-screen" class="d-none pb-5 bg-white h-100 position-fixed top-0 w-100" style="max-width: 480px; z-index: 1050; overflow-y: auto;">
+        <section id="restaurant-screen" class="d-none pb-5 bg-white h-100 position-fixed top-0 w-100"
+            style="max-width: 480px; z-index: 1050; overflow-y: auto;">
             <div class="position-relative">
-                <button onclick="nav.back()" class="btn btn-light rounded-circle position-absolute top-0 start-0 m-3 shadow-sm"><i class="bi bi-arrow-left"></i></button>
+                <button onclick="nav.back()"
+                    class="btn btn-light rounded-circle position-absolute top-0 start-0 m-3 shadow-sm"><i
+                        class="bi bi-arrow-left"></i></button>
                 <img id="rest-cover" src="" class="w-100 object-fit-cover" style="height: 200px;">
             </div>
             <div class="p-3 mt-n4 bg-white position-relative rounded-top-4">
                 <div class="d-flex justify-content-between align-items-start mb-2">
                     <h2 class="fw-bold mb-0" id="rest-name">Restaurante</h2>
-                    <span class="badge bg-warning text-dark"><i class="bi bi-star-fill"></i> <span id="rest-rating">0.0</span></span>
+                    <span class="badge bg-warning text-dark"><i class="bi bi-star-fill"></i> <span
+                            id="rest-rating">0.0</span></span>
                 </div>
-                <p class="text-muted small mb-4"><span id="rest-cat">Categoria</span> • <span id="rest-time">00 min</span> • <span id="rest-fee">Entrega</span></p>
+                <p class="text-muted small mb-4"><span id="rest-cat">Categoria</span> • <span id="rest-time">00
+                        min</span> • <span id="rest-fee">Entrega</span></p>
 
                 <h5 class="fw-bold mb-3">Menu</h5>
                 <div id="menu-list">
@@ -126,16 +145,18 @@
         </section>
 
         <!-- CART SCREEN -->
-        <section id="cart-screen" class="d-none bg-white h-100 position-fixed top-0 w-100" style="max-width: 480px; z-index: 1060; overflow-y: auto;">
+        <section id="cart-screen" class="d-none bg-white h-100 position-fixed top-0 w-100"
+            style="max-width: 480px; z-index: 1060; overflow-y: auto;">
             <div class="header-xicoma d-flex align-items-center shadow-sm">
-                <button onclick="nav.back()" class="btn btn-link text-dark p-0 me-3"><i class="bi bi-arrow-left fs-4"></i></button>
+                <button onclick="nav.back()" class="btn btn-link text-dark p-0 me-3"><i
+                        class="bi bi-arrow-left fs-4"></i></button>
                 <h5 class="m-0 fw-bold">Carrinho</h5>
             </div>
             <div class="p-3">
                 <div id="cart-items" class="mb-4">
                     <!-- Cart items -->
                 </div>
-                
+
                 <div class="card bg-light border-0 p-3 mb-4">
                     <div class="d-flex justify-content-between mb-2">
                         <span>Subtotal</span>
@@ -158,7 +179,8 @@
                         <input class="form-check-input" type="radio" name="payment" id="pay-mpesa" checked>
                         <label class="form-check-label d-flex justify-content-between w-100" for="pay-mpesa">
                             <span>M-Pesa</span>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/M-PESA_LOGO-01.svg/1200px-M-PESA_LOGO-01.svg.png" height="20">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/M-PESA_LOGO-01.svg/1200px-M-PESA_LOGO-01.svg.png"
+                                height="20">
                         </label>
                     </div>
                     <div class="form-check p-3 border rounded mb-2">
@@ -175,24 +197,31 @@
         </section>
 
         <!-- CONFIRMATION SCREEN -->
-        <section id="confirmation-screen" class="d-none vh-100 bg-white align-items-center justify-content-center text-center p-4" style="z-index: 1070;">
+        <section id="confirmation-screen"
+            class="d-none vh-100 bg-white align-items-center justify-content-center text-center p-4"
+            style="z-index: 1070;">
             <div class="spinner-grow text-warning mb-4" role="status" style="width: 3rem; height: 3rem;"></div>
             <h2 class="fw-bold mb-3">Quase lá!</h2>
             <p class="lead text-muted mb-4">Confirme o pagamento no seu telefone (USSD Push enviado).</p>
             <div class="alert alert-info small">
                 <i class="bi bi-phone"></i> Verifique a notificação no seu celular.
             </div>
-            <button onclick="nav.to('success')" class="btn btn-outline-xicoma mt-3">Simular Pagamento Confirmado</button>
+            <button onclick="nav.to('success')" class="btn btn-outline-xicoma mt-3">Simular Pagamento
+                Confirmado</button>
         </section>
-        
+
         <!-- SUCCESS SCREEN -->
-        <section id="success-screen" class="d-none vh-100 bg-success text-white align-items-center justify-content-center text-center p-4 position-fixed top-0 start-0 w-100" style="z-index: 1080;">
-             <div class="bg-white text-success rounded-circle d-flex align-items-center justify-content-center mx-auto mb-4" style="width: 80px; height: 80px;">
+        <section id="success-screen"
+            class="d-none vh-100 bg-success text-white align-items-center justify-content-center text-center p-4 position-fixed top-0 start-0 w-100"
+            style="z-index: 1080;">
+            <div class="bg-white text-success rounded-circle d-flex align-items-center justify-content-center mx-auto mb-4"
+                style="width: 80px; height: 80px;">
                 <i class="bi bi-check-lg display-4"></i>
             </div>
             <h2 class="fw-bold mb-2">Pedido Realizado!</h2>
             <p class="mb-4 text-white-50">O restaurante já começou a preparar.</p>
-            <button onclick="nav.to('home')" class="btn btn-light text-success fw-bold w-100 rounded-pill">Voltar ao Início</button>
+            <button onclick="nav.to('home')" class="btn btn-light text-success fw-bold w-100 rounded-pill">Voltar ao
+                Início</button>
         </section>
 
         <!-- BOTTOM NAV -->
@@ -223,12 +252,12 @@
             setTimeout(() => {
                 nav.to('login');
             }, 2000);
-            
+
             document.getElementById('login-form').onsubmit = (e) => {
                 e.preventDefault();
                 nav.to('home');
             };
-            
+
             loadRestaurants();
         });
 
@@ -260,8 +289,8 @@
         // Open Restaurant
         function openRestaurant(id) {
             const r = db.restaurants.find(x => x.id === id);
-            if(!r) return;
-            
+            if (!r) return;
+
             document.getElementById('rest-name').innerText = r.name;
             document.getElementById('rest-cat').innerText = r.category;
             document.getElementById('rest-rating').innerText = r.rating;
@@ -283,7 +312,7 @@
                     </div>
                 </div>
             `).join('');
-            
+
             nav.to('restaurant');
         }
 
@@ -299,4 +328,5 @@
         }
     </script>
 </body>
+
 </html>
