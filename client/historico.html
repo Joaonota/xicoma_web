@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>XICOMA - Meus Pedidos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body class="bg-light">
+
+    <div class="app-container">
+        <div class="bg-white p-3 shadow-sm sticky-top mb-3">
+            <h5 class="fw-bold m-0">Meus Pedidos</h5>
+        </div>
+
+        <div class="p-3" id="order-list">
+            <!-- JS Populated -->
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="home.html" class="nav-item">
+                <i class="bi bi-house-door"></i> Início
+            </a>
+            <a href="restaurantes.html" class="nav-item">
+                <i class="bi bi-search"></i> Busca
+            </a>
+            <a href="historico.html" class="nav-item active">
+                <i class="bi bi-receipt-cutoff"></i> Pedidos
+            </a>
+            <a href="perfil.html" class="nav-item">
+                <i class="bi bi-person"></i> Perfil
+            </a>
+        </nav>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../mock-data/db.js"></script>
+    <script src="../assets/js/core.js"></script>
+    <script>
+        xicoma.auth.checkAccess('client');
+
+        const uid = xicoma.auth.currentUser.id;
+        const orders = xicoma.db.get('orders').filter(o => o.clientId === uid).reverse();
+        const list = document.getElementById('order-list');
+
+        if (orders.length === 0) {
+            list.innerHTML = '<p class="text-center text-muted mt-5">Você ainda não fez nenhum pedido.</p>';
+        } else {
+            list.innerHTML = orders.map(o => `
+                <a href="status-pedido.html?id=${o.id}" class="text-decoration-none text-dark">
+                    <div class="card border-0 shadow-sm rounded-card mb-3 fade-in">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <h6 class="fw-bold m-0">${o.restaurantName}</h6>
+                                <span class="badge ${o.status === 'delivered' ? 'bg-secondary' : 'bg-primary-xicoma'}">
+                                    ${getStatusLabel(o.status)}
+                                </span>
+                            </div>
+                            <p class="small text-muted mb-2">Pedido #${o.id} • ${new Date(o.createdAt).toLocaleDateString()}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="small text-muted">${o.items.length} itens</span>
+                                <span class="fw-bold">${xicoma.formatCurrency(o.total)}</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        function getStatusLabel(s) {
+            const map = {
+                'pending': 'Pendente',
+                'preparing': 'Preparando',
+                'ready': 'Pronto',
+                'delivering': 'A Caminho',
+                'delivered': 'Concluído'
+            };
+            return map[s] || s;
+        }
+    </script>
+</body>
+
+</html>

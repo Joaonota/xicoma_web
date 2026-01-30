@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>XICOMA - Pagamento</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body class="bg-light">
+
+    <div class="app-container" style="padding-bottom: 100px;">
+        <div class="p-3 bg-white shadow-sm d-flex align-items-center mb-3">
+            <a href="javascript:history.back()" class="btn btn-light rounded-circle me-3"><i
+                    class="bi bi-arrow-left"></i></a>
+            <h5 class="fw-bold m-0">Pagamento</h5>
+        </div>
+
+        <div class="p-3">
+            <h6 class="fw-bold mb-3">Endereço de Entrega</h6>
+            <div class="bg-white p-3 rounded-card shadow-sm mb-4">
+                <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-geo-alt-fill text-primary-xicoma me-2"></i>
+                    <span class="fw-bold">Casa</span>
+                </div>
+                <p class="text-muted small m-0">Av. Julius Nyerere, 1234, Polana Cimento, Maputo</p>
+                <button class="btn btn-link text-decoration-none p-0 mt-2 small">Alterar</button>
+            </div>
+
+            <h6 class="fw-bold mb-3">Método de Pagamento</h6>
+            <div class="d-flex flex-column gap-2 mb-4">
+                <label class="bg-white p-3 rounded-card shadow-sm d-flex align-items-center cursor-pointer">
+                    <input type="radio" name="payment" value="mpesa" class="form-check-input me-3" checked>
+                    <div class="flex-grow-1">
+                        <span class="fw-bold d-block">M-Pesa</span>
+                        <small class="text-muted">Pagar pelo celular</small>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/M-PESA_LOGO-01.svg/1200px-M-PESA_LOGO-01.svg.png"
+                        style="height: 20px;">
+                </label>
+
+                <label class="bg-white p-3 rounded-card shadow-sm d-flex align-items-center cursor-pointer">
+                    <input type="radio" name="payment" value="emola" class="form-check-input me-3">
+                    <div class="flex-grow-1">
+                        <span class="fw-bold d-block">e-Mola</span>
+                        <small class="text-muted">Movitel</small>
+                    </div>
+                </label>
+
+                <label class="bg-white p-3 rounded-card shadow-sm d-flex align-items-center cursor-pointer">
+                    <input type="radio" name="payment" value="cash" class="form-check-input me-3">
+                    <div class="flex-grow-1">
+                        <span class="fw-bold d-block">Dinheiro na Entrega</span>
+                        <small class="text-muted">Pagamento ao courier</small>
+                    </div>
+                    <i class="bi bi-cash-stack fs-4 text-success"></i>
+                </label>
+            </div>
+
+            <div class="alert alert-info small">
+                <i class="bi bi-info-circle"></i> Ao usar M-Pesa, você receberá um prompt no seu celular para confirmar
+                a transação.
+            </div>
+        </div>
+
+        <div class="fixed-bottom p-3 bg-white border-top" style="max-width: 480px; margin: 0 auto;">
+            <div class="d-flex justify-content-between mb-3">
+                <span class="fw-bold">Total a Pagar</span>
+                <span class="fw-bold text-primary-xicoma fs-5" id="final-total">...</span>
+            </div>
+            <button onclick="processOrder()" class="btn btn-primary-xicoma w-100 py-3 rounded-pill fw-bold shadow-lg">
+                Confirmar Pedido
+            </button>
+        </div>
+    </div>
+
+    <!-- Payment Overlay -->
+    <div id="pay-overlay"
+        class="position-fixed top-0 start-0 w-100 h-100 bg-white d-flex flex-column justify-content-center align-items-center d-none"
+        style="z-index: 2000;">
+        <div class="spinner-grow text-danger mb-4" style="width: 3rem; height: 3rem;" role="status"></div>
+        <h4 class="fw-bold">Processando Pagamento...</h4>
+        <p class="text-muted text-center px-4">Por favor, verifique seu celular para confirmar a transação.</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../mock-data/db.js"></script>
+    <script src="../assets/js/core.js"></script>
+    <script>
+        xicoma.auth.checkAccess('client');
+
+        // Calc total
+        const restId = xicoma.cart.restaurantId;
+        const rest = xicoma.db.get('restaurants').find(r => r.id === restId);
+        const subtotal = xicoma.cart.total();
+        const fee = rest ? rest.deliveryFee : 0;
+        const total = subtotal + fee;
+
+        document.getElementById('final-total').innerText = xicoma.formatCurrency(total);
+
+        function processOrder() {
+            const method = document.querySelector('input[name="payment"]:checked').value;
+            const overlay = document.getElementById('pay-overlay');
+
+            overlay.classList.remove('d-none');
+
+            // Simulate Delay
+            setTimeout(() => {
+                // Creates Order Object
+                const order = {
+                    id: Date.now(), // ID
+                    clientId: xicoma.auth.currentUser.id,
+                    clientName: xicoma.auth.currentUser.name,
+                    restaurantId: rest.id,
+                    restaurantName: rest.name,
+                    items: xicoma.cart.items,
+                    total: total,
+                    paymentMethod: method,
+                    status: 'pending', // pending -> preparing -> ready -> delivering -> delivered
+                    createdAt: new Date().toISOString(),
+                    address: "Av. Julius Nyerere, 1234, Maputo"
+                };
+
+                // Save to DB
+                xicoma.db.add('orders', order);
+
+                // Clear Cart
+                xicoma.cart.clear();
+
+                // Redirect
+                window.location.href = `status-pedido.html?id=${order.id}`;
+
+            }, 2500); // 2.5s delay
+        }
+    </script>
+</body>
+
+</html>

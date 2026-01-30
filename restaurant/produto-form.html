@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XICOMA - Produto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #FFEFBA 0%, #FFFFFF 100%);
+            /* Warm food-like gradient */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 550px;
+            padding: 40px;
+        }
+
+        .btn-close-custom {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #f8f9fa;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-close-custom:hover {
+            background: #e9ecef;
+            transform: rotate(90deg);
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #adb5bd;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .img-preview {
+            width: 100%;
+            height: 150px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .img-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-card fade-in">
+        <div class="d-flex justify-content-between align-items-center mb-0">
+            <div>
+                <h3 class="fw-bold m-0" id="page-title">Novo Prato</h3>
+                <small class="text-muted">Detalhes do item do cardápio</small>
+            </div>
+            <a href="produtos.html" class="btn-close-custom"><i class="bi bi-x-lg"></i></a>
+        </div>
+
+        <hr class="border-secondary opacity-10 my-4">
+
+        <form id="prodForm">
+            <div id="preview-container" class="img-preview mb-3">
+                <i class="bi bi-image fs-1 opacity-50"></i>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" id="image" class="form-control rounded-3"
+                    value="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500" onchange="updatePreview()">
+                <label for="image">URL da Imagem</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" id="name" class="form-control rounded-3" placeholder="Nome" required>
+                <label for="name">Nome do Item</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <textarea id="description" class="form-control rounded-3" placeholder="Desc"
+                    style="height: 100px"></textarea>
+                <label for="description">Descrição / Ingredientes</label>
+            </div>
+
+            <div class="form-floating mb-4">
+                <input type="number" id="price" class="form-control rounded-3 fw-bold text-success" required
+                    placeholder="0.00">
+                <label for="price">Preço (MT)</label>
+            </div>
+
+            <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary-xicoma py-3 rounded-pill fw-bold shadow-sm">
+                    <i class="bi bi-save me-2"></i> Salvar no Cardápio
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="../mock-data/db.js"></script>
+    <script src="../assets/js/core.js"></script>
+    <script>
+        xicoma.auth.checkAccess('restaurant');
+        const rid = xicoma.auth.currentUser.id;
+
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id') ? parseInt(params.get('id')) : null;
+
+        function updatePreview() {
+            const url = document.getElementById('image').value;
+            if (url) {
+                document.getElementById('preview-container').innerHTML = `<img src="${url}">`;
+            } else {
+                document.getElementById('preview-container').innerHTML = `<i class="bi bi-image fs-1 opacity-50"></i>`;
+            }
+        }
+
+        if (id) {
+            document.getElementById('page-title').innerText = 'Editar Prato';
+            const p = xicoma.db.get('products').find(i => i.id === id);
+            if (p) {
+                document.getElementById('name').value = p.name;
+                document.getElementById('description').value = p.description;
+                document.getElementById('price').value = p.price;
+                document.getElementById('image').value = p.image;
+                updatePreview();
+            }
+        } else {
+            updatePreview(); // Show default
+        }
+
+        document.getElementById('prodForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const item = {
+                restaurantId: rid,
+                name: document.getElementById('name').value,
+                description: document.getElementById('description').value,
+                price: parseFloat(document.getElementById('price').value),
+                image: document.getElementById('image').value
+            };
+
+            if (id) {
+                xicoma.db.update('products', id, item);
+            } else {
+                xicoma.db.add('products', item);
+            }
+            window.location.href = 'produtos.html';
+        });
+    </script>
+</body>
+
+</html>

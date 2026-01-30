@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XICOMA Admin - Restaurantes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .sidebar {
+            width: 250px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            background-color: #212529;
+            color: white;
+            z-index: 100;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 2rem;
+        }
+
+        .nav-link {
+            color: #aaa;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 2px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .nav-link i {
+            width: 20px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <div class="sidebar d-flex flex-column p-3">
+        <h4 class="fw-bold mb-5 ps-2 text-white">XICOMA <small class="fs-6 text-muted">Admin</small></h4>
+        <nav class="nav flex-column flex-grow-1">
+            <a href="dashboard.html" class="nav-link"><i class="bi bi-grid-fill"></i> Dashboard</a>
+            <a href="usuarios.html" class="nav-link"><i class="bi bi-people"></i> Usuários</a>
+            <a href="restaurantes.html" class="nav-link active"><i class="bi bi-shop"></i> Restaurantes</a>
+            <a href="entregadores.html" class="nav-link"><i class="bi bi-bicycle"></i> Entregadores</a>
+            <a href="comissoes.html" class="nav-link"><i class="bi bi-cash-stack"></i> Financeiro</a>
+            <a href="configuracoes.html" class="nav-link"><i class="bi bi-gear"></i> Configurações</a>
+        </nav>
+        <button onclick="xicoma.auth.logout()" class="btn btn-outline-secondary w-100 mt-auto btn-sm text-start ps-3"><i
+                class="bi bi-box-arrow-left me-2"></i> Sair</button>
+    </div>
+
+    <div class="main-content">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="fw-bold m-0">Gerir Restaurantes</h4>
+            <a href="form-restaurant.html" class="btn btn-primary-xicoma rounded-pill px-4"><i
+                    class="bi bi-plus-lg"></i> Novo Parceiro</a>
+        </div>
+
+        <div class="card border-0 shadow-sm rounded-card">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0 table-hover">
+                        <thead class="bg-light">
+                            <tr>
+                                <th class="ps-4 py-3 border-0">Restaurante</th>
+                                <th class="py-3 border-0">Categoria</th>
+                                <th class="py-3 border-0">Avaliação</th>
+                                <th class="pe-4 py-3 border-0 text-end">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="list-rest">
+                            <!-- JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../mock-data/db.js"></script>
+    <script src="../assets/js/core.js"></script>
+    <script>
+        xicoma.auth.checkAccess('admin');
+        const items = xicoma.db.get('restaurants');
+        const list = document.getElementById('list-rest');
+
+        list.innerHTML = items.map(r => `
+            <tr>
+                <td class="ps-4 fw-bold">
+                    <div class="d-flex align-items-center">
+                        <img src="${r.image}" class="rounded-circle object-fit-cover me-2" style="width: 30px; height: 30px;">
+                        ${r.name}
+                    </div>
+                </td>
+                <td>${r.category}</td>
+                <td><i class="bi bi-star-fill text-warning"></i> ${r.rating}</td>
+                <td class="pe-4 text-end">
+                    <a href="form-restaurant.html?id=${r.id}" class="btn btn-sm btn-light me-1"><i class="bi bi-pencil"></i></a>
+                    <button onclick="del(${r.id})" class="btn btn-sm btn-light text-danger"><i class="bi bi-trash"></i></button>
+                </td>
+            </tr>
+        `).join('');
+
+        window.del = (id) => {
+            if (confirm('Remover restaurante?')) {
+                xicoma.db.delete('restaurants', id);
+                location.reload();
+            }
+        };
+    </script>
+</body>
+
+</html>

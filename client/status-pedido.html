@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>XICOMA - Status do Pedido</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            background: #eee;
+            color: #aaa;
+            z-index: 2;
+            position: relative;
+        }
+
+        .step-active .step-icon {
+            background: var(--xicoma-primary);
+            color: white;
+        }
+
+        .step-line {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #eee;
+            z-index: 1;
+        }
+
+        .step-active .step-line {
+            background: var(--xicoma-primary);
+        }
+
+        .step-item:last-child .step-line {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <div class="app-container" style="padding-bottom: 30px;">
+        <div class="d-flex justify-content-between align-items-center p-3 bg-white shadow-sm sticky-top">
+            <a href="home.html" class="btn btn-light rounded-circle"><i class="bi bi-arrow-left"></i></a>
+            <h6 class="fw-bold m-0" id="order-id">Pedido #...</h6>
+            <a href="humaita.html" class="text-decoration-none small fw-bold">Ajuda</a>
+        </div>
+
+        <div class="p-4 text-center bg-white mb-3">
+            <h4 class="fw-bold text-primary-xicoma mb-1" id="time-est">30-40 min</h4>
+            <p class="text-muted small">Previsão de entrega</p>
+            <div class="progress" style="height: 6px;">
+                <div class="progress-bar bg-primary-xicoma" role="progressbar" style="width: 20%" id="progress-bar">
+                </div>
+            </div>
+        </div>
+
+        <div class="p-4 bg-white rounded-card mx-3 shadow-sm mb-4">
+            <!-- Steps -->
+            <div class="step-item position-relative pb-4 ps-5 mb-2" id="step-pending">
+                <div class="step-line"></div>
+                <div class="position-absolute top-0 start-0 step-icon"><i class="bi bi-check-lg"></i></div>
+                <h6 class="fw-bold mb-0">Pedido Enviado</h6>
+                <small class="text-muted">Aguardando confirmação do restaurante</small>
+            </div>
+
+            <div class="step-item position-relative pb-4 ps-5 mb-2" id="step-preparing">
+                <div class="step-line"></div>
+                <div class="position-absolute top-0 start-0 step-icon"><i class="bi bi-fire"></i></div>
+                <h6 class="fw-bold mb-0">Em Preparação</h6>
+                <small class="text-muted">O restaurante está preparando sua comida</small>
+            </div>
+
+            <div class="step-item position-relative pb-4 ps-5 mb-2" id="step-ready">
+                <div class="step-line"></div>
+                <div class="position-absolute top-0 start-0 step-icon"><i class="bi bi-box-seam"></i></div>
+                <h6 class="fw-bold mb-0">Pronto para Coleta</h6>
+                <small class="text-muted">Aguardando entregador</small>
+            </div>
+
+            <div class="step-item position-relative pb-4 ps-5 mb-2" id="step-delivering">
+                <div class="step-line"></div>
+                <div class="position-absolute top-0 start-0 step-icon"><i class="bi bi-bicycle"></i></div>
+                <h6 class="fw-bold mb-0">Saiu para Entrega</h6>
+                <small class="text-muted">O entregador está a caminho</small>
+                <!-- Courier Info (Hidden initally) -->
+                <div class="mt-2 p-2 bg-light rounded d-none" id="courier-info">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-white p-2 rounded-circle me-3"><i class="bi bi-person fs-4"></i></div>
+                        <div>
+                            <span class="fw-bold d-block">António (Entregador)</span>
+                            <small class="text-muted">Moto • ABC-123-MC</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-item position-relative ps-5" id="step-delivered">
+                <div class="position-absolute top-0 start-0 step-icon"><i class="bi bi-house-door"></i></div>
+                <h6 class="fw-bold mb-0">Entregue</h6>
+                <small class="text-muted">Bom apetite!</small>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button onclick="location.reload()" class="btn btn-outline-secondary btn-sm rounded-pill"><i
+                    class="bi bi-arrow-clockwise"></i> Atualizar Status</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../mock-data/db.js"></script>
+    <script src="../assets/js/core.js"></script>
+    <script>
+        xicoma.auth.checkAccess('client');
+
+        const params = new URLSearchParams(window.location.search);
+        const id = parseInt(params.get('id'));
+
+        function updateStatus() {
+            // Re-fetch from DB simulated poller
+            xicoma.db.init(); // Refresh LocalStorage data
+            const order = xicoma.db.get('orders').find(o => o.id === id);
+
+            if (!order) {
+                alert('Pedido não encontrado');
+                window.location.href = 'home.html';
+                return;
+            }
+
+            document.getElementById('order-id').innerText = `Pedido #${order.id}`;
+
+            // Map Status to Steps
+            const steps = ['pending', 'preparing', 'ready', 'delivering', 'delivered'];
+            const currentIdx = steps.indexOf(order.status);
+
+            // Progress Bar
+            const prog = Math.min((currentIdx + 1) * 20, 100);
+            document.getElementById('progress-bar').style.width = `${prog}%`;
+
+            // UI Steps
+            steps.forEach((s, idx) => {
+                const el = document.getElementById(`step-${s}`);
+                if (idx <= currentIdx) {
+                    el.classList.add('step-active');
+                    // Mark previous as completed logic visually if needed
+                }
+            });
+
+            // Courier
+            if (currentIdx >= 3) { // delivering
+                document.getElementById('courier-info').classList.remove('d-none');
+            }
+        }
+
+        // Init
+        updateStatus();
+
+        // Auto Poll every 3s
+        setInterval(updateStatus, 3000);
+
+    </script>
+</body>
+
+</html>

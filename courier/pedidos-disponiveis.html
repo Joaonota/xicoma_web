@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>XICOMA - Novas Entregas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body class="bg-light">
+
+    <div class="app-container">
+        <div class="p-3 bg-white shadow-sm d-flex align-items-center mb-3 sticky-top">
+            <a href="dashboard.html" class="btn btn-light rounded-circle me-3"><i class="bi bi-arrow-left"></i></a>
+            <h5 class="fw-bold m-0">Disponíveis (<span id="count">0</span>)</h5>
+        </div>
+
+        <!-- Fake Map -->
+        <div class="bg-secondary bg-opacity-10 w-100 mb-3 d-flex align-items-center justify-content-center text-muted position-relative"
+            style="height: 200px;">
+            <i class="bi bi-map display-1 opacity-25"></i>
+            <span class="position-absolute">Mapa Simulado</span>
+            <div
+                class="position-absolute bg-primary-xicoma rounded-circle p-2 border border-white top-50 start-50 shadow">
+            </div>
+            <div class="position-absolute bg-danger rounded-circle p-2 border border-white top-25 start-25 shadow">
+            </div>
+            <div class="position-absolute bg-danger rounded-circle p-2 border border-white bottom-25 end-25 shadow">
+            </div>
+        </div>
+
+        <div class="p-3" id="orders-list" style="padding-bottom: 80px;">
+            <!-- JS -->
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="dashboard.html" class="nav-item">
+                <i class="bi bi-speedometer2"></i> Painel
+            </a>
+            <a href="pedidos-disponiveis.html" class="nav-item active">
+                <i class="bi bi-box-seam"></i> Entregas
+            </a>
+            <a href="ganhos.html" class="nav-item">
+                <i class="bi bi-wallet2"></i> Ganhos
+            </a>
+            <a href="perfil.html" class="nav-item">
+                <i class="bi bi-person"></i> Perfil
+            </a>
+        </nav>
+    </div>
+
+    <!-- Accept Modal -->
+    <div class="modal fade" id="acceptModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-bottom m-0"
+            style="position: fixed; bottom: 0; width: 100%; max-width: 480px; left: 50%; transform: translateX(-50%);">
+            <div class="modal-content rounded-top-4 border-0">
+                <div class="modal-body p-4">
+                    <div class="text-center mb-3">
+                        <div class="bg-light rounded-pill px-3 py-1 d-inline-block fw-bold text-success mb-2">
+                            <i class="bi bi-cash-stack"></i> Ganho estimado: 50 MT
+                        </div>
+                        <h4 class="fw-bold" id="m-store">Restaurant Name</h4>
+                        <p class="text-muted" id="m-dist">2.5 km • Polana Cimento</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-4">
+                        <div class="text-center">
+                            <small class="text-muted d-block">Coleta</small>
+                            <span class="fw-bold">10:45</span>
+                        </div>
+                        <div class="text-center">
+                            <small class="text-muted d-block">Entrega</small>
+                            <span class="fw-bold">11:00</span>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button onclick="confirmAccept()"
+                            class="btn btn-primary-xicoma btn-lg py-3 rounded-pill fw-bold">Aceitar Corrida</button>
+                        <button class="btn btn-light btn-lg py-3 rounded-pill fw-bold"
+                            data-bs-dismiss="modal">Recusar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../mock-data/db.js"></script>
+    <script src="../assets/js/core.js"></script>
+    <script>
+        xicoma.auth.checkAccess('courier');
+        const cid = xicoma.auth.currentUser.id;
+
+        let selectedId = null;
+
+        function refreshOrders() {
+            xicoma.db.init();
+            // Available = Ready status + No Courier Assigned (or mocked logic)
+            // For simplicity: any 'ready' order is available
+            const ready = xicoma.db.get('orders').filter(o => o.status === 'ready');
+
+            document.getElementById('count').innerText = ready.length;
+            const list = document.getElementById('orders-list');
+
+            if (ready.length === 0) {
+                list.innerHTML = `
+                    <div class="text-center py-5">
+                        <div class="spinner-grow text-primary-xicoma mb-3" role="status"></div>
+                        <p class="text-muted">Procurando pedidos na região...</p>
+                    </div>
+               `;
+                return;
+            }
+
+            list.innerHTML = ready.map(o => `
+                <div class="card border-0 shadow-sm rounded-card mb-3 fade-in">
+                    <div class="card-body p-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border">2.5 km</span>
+                            <span class="fw-bold text-success">+50 MT</span>
+                        </div>
+                        <h6 class="fw-bold mb-1">${o.restaurantName}</h6>
+                        <p class="text-muted small mb-3">Av. Julius Nyerere, Polana</p>
+                        
+                        <div class="d-flex gap-2">
+                            <button onclick="previewOrder(${o.id}, '${o.restaurantName}')" class="btn btn-primary-xicoma w-100 fw-bold rounded-pill">Ver Corrida</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.previewOrder = (oid, rname) => {
+            selectedId = oid;
+            document.getElementById('m-store').innerText = rname;
+            new bootstrap.Modal(document.getElementById('acceptModal')).show();
+        };
+
+        window.confirmAccept = () => {
+            // Update Order
+            xicoma.db.update('orders', selectedId, {
+                status: 'delivering',
+                courierId: cid,
+                courierName: xicoma.auth.currentUser.name
+            });
+
+            // Redirect to Active Delivery
+            window.location.href = `entrega-detalhe.html?id=${selectedId}`;
+        };
+
+        refreshOrders();
+        setInterval(refreshOrders, 5000);
+
+    </script>
+</body>
+
+</html>

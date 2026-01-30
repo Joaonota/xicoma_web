@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XICOMA - Financeiro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body class="bg-light">
+
+    <div class="container-fluid p-3">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <a href="dashboard.html" class="btn btn-light rounded-circle me-2"><i class="bi bi-arrow-left"></i></a>
+                <span class="h4 fw-bold align-middle">Minha Carteira</span>
+            </div>
+            <button class="btn btn-outline-dark btn-sm"><i class="bi bi-download"></i> Exportar</button>
+        </div>
+
+        <div class="row g-4 mb-4">
+            <div class="col-md-6">
+                <!-- Wallet Card -->
+                <div
+                    class="card bg-dark text-white border-0 shadow rounded-card overflow-hidden position-relative p-4 h-100">
+                    <div class="position-absolute top-0 end-0 p-3 opacity-25">
+                        <i class="bi bi-wallet2 display-1"></i>
+                    </div>
+                    <p class="text-white-50 mb-1">Saldo Disponível (Pós-taxas)</p>
+                    <h2 class="fw-bold display-5 mb-3" id="wallet-bal">0 MT</h2>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-light text-dark fw-bold px-4">Solicitar Saque</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm rounded-card h-100 p-4">
+                    <p class="text-muted small">Vendas Totais vs Comissão (15%)</p>
+                    <div class="d-flex align-items-end gap-3 mt-auto mb-2" style="height: 100px;">
+                        <div class="bg-primary-xicoma rounded w-100 d-flex align-items-end justify-content-center text-white small fw-bold pb-2"
+                            style="height: 100%" id="bar-sales">Vendas</div>
+                        <div class="bg-secondary rounded w-100 d-flex align-items-end justify-content-center text-white small fw-bold pb-2 opacity-25"
+                            style="height: 15%" id="bar-fee">Taxa</div>
+                    </div>
+                    <small class="text-center d-block text-muted">Visão acumulada</small>
+                </div>
+            </div>
+        </div>
+
+        <h6 class="fw-bold mb-3">Histórico de Transações</h6>
+        <div class="bg-white rounded-card shadow-sm">
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="ps-3 border-0">Data</th>
+                            <th class="border-0">Descrição</th>
+                            <th class="border-0">Pedido</th>
+                            <th class="pe-3 border-0 text-end">Valor Líquido</th>
+                        </tr>
+                    </thead>
+                    <tbody id="trans-list">
+                        <!-- JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="../mock-data/db.js"></script>
+    <script src="../assets/js/core.js"></script>
+    <script>
+        xicoma.auth.checkAccess('restaurant');
+        const rid = xicoma.auth.currentUser.id;
+
+        // Calc
+        const orders = xicoma.db.get('orders').filter(o => o.restaurantId === rid && (o.status === 'delivered' || o.status === 'ready'));
+
+        const totalSales = orders.reduce((sum, o) => sum + o.total, 0);
+        const commission = totalSales * 0.15;
+        const liquid = totalSales - commission;
+
+        document.getElementById('wallet-bal').innerText = xicoma.formatCurrency(liquid);
+
+        const list = document.getElementById('trans-list');
+        list.innerHTML = orders.reverse().map(o => `
+            <tr>
+                <td class="ps-3 text-muted small">${new Date(o.createdAt).toLocaleDateString()}</td>
+                <td>Venda Finalizada</td>
+                <td>#${o.id}</td>
+                <td class="pe-3 text-end fw-bold text-success">+${xicoma.formatCurrency(o.total * 0.85)}</td>
+            </tr>
+        `).join('');
+
+        if (orders.length === 0) {
+            list.innerHTML = '<tr><td colspan="4" class="text-center p-4 text-muted">Sem movimentações.</td></tr>';
+        }
+    </script>
+</body>
+
+</html>

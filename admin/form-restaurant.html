@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XICOMA Admin - Restaurante</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+        }
+
+        .btn-close-custom {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #f8f9fa;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-close-custom:hover {
+            background: #e9ecef;
+            transform: rotate(90deg);
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #adb5bd;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-card fade-in">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h3 class="fw-bold m-0" id="page-title">Parceiro</h3>
+                <small class="text-muted">Gerir informações do restaurante</small>
+            </div>
+            <a href="restaurantes.html" class="btn-close-custom"><i class="bi bi-x-lg"></i></a>
+        </div>
+
+        <form id="restForm">
+            <span class="section-label">Dados do Estabelecimento</span>
+
+            <div class="form-floating mb-3">
+                <input type="text" id="name" class="form-control rounded-3" placeholder="Nome" required>
+                <label for="name">Nome Fantasia</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <select id="category" class="form-select rounded-3">
+                    <option>Lanches</option>
+                    <option>Pizza</option>
+                    <option>Japonês</option>
+                    <option>Moçambicana</option>
+                    <option>Doces</option>
+                    <option>Bebidas</option>
+                </select>
+                <label for="category">Categoria Principal</label>
+            </div>
+
+            <div class="row g-2 mb-3">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" id="deliveryTime" class="form-control rounded-3" placeholder="Tempo">
+                        <label for="deliveryTime">Tempo Médio (min)</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="number" id="deliveryFee" class="form-control rounded-3" value="0">
+                        <label for="deliveryFee">Taxa Entrega (MT)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-floating mb-4">
+                <input type="text" id="image" class="form-control rounded-3"
+                    value="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500">
+                <label for="image">URL da Logo / Capa</label>
+            </div>
+
+            <hr class="border-secondary opacity-10 my-4">
+            <span class="section-label">Acesso ao Portal</span>
+
+            <div class="form-floating mb-4">
+                <input type="email" id="email" class="form-control rounded-3" placeholder="Email" required>
+                <label for="email">Email Corporativo</label>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary-xicoma py-3 rounded-pill fw-bold shadow-sm">
+                    <i class="bi bi-check2-circle me-2"></i> Salvar Parceiro
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="../mock-data/db.js"></script>
+    <script src="../assets/js/core.js"></script>
+    <script>
+        xicoma.auth.checkAccess('admin');
+
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id') ? parseInt(params.get('id')) : null;
+
+        if (id) {
+            document.getElementById('page-title').innerText = 'Editar Restaurante';
+            const r = xicoma.db.get('restaurants').find(i => i.id === id);
+            if (r) {
+                document.getElementById('name').value = r.name;
+                document.getElementById('category').value = r.category;
+                document.getElementById('deliveryTime').value = r.deliveryTime;
+                document.getElementById('deliveryFee').value = r.deliveryFee;
+                document.getElementById('image').value = r.image;
+                document.getElementById('email').value = r.email;
+                document.getElementById('email').disabled = true;
+            }
+        }
+
+        document.getElementById('restForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('name').value,
+                category: document.getElementById('category').value,
+                deliveryTime: document.getElementById('deliveryTime').value,
+                deliveryFee: parseFloat(document.getElementById('deliveryFee').value),
+                image: document.getElementById('image').value,
+                email: document.getElementById('email').value,
+                rating: 5.0
+            };
+
+            if (id) {
+                xicoma.db.update('restaurants', id, data);
+                // Also update user name if needed
+            } else {
+                const newRest = xicoma.db.add('restaurants', data);
+                xicoma.db.add('users', {
+                    name: data.name,
+                    email: data.email,
+                    password: '123',
+                    role: 'restaurant',
+                    id: newRest.id
+                });
+            }
+            window.location.href = 'restaurantes.html';
+        });
+    </script>
+</body>
+
+</html>

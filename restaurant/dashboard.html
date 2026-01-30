@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XICOMA - Dashboard Restaurante</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .sidebar {
+            width: 250px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            background: white;
+            border-right: 1px solid #eee;
+            z-index: 100;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 2rem;
+        }
+
+        .nav-link {
+            color: #666;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background-color: #fff0f1;
+            color: var(--xicoma-primary);
+        }
+
+        .nav-link i {
+            margin-right: 10px;
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <!-- Sidebar -->
+    <div class="sidebar p-3 d-flex flex-column">
+        <h4 class="text-primary-xicoma fw-bold mb-5 ps-2">XICOMA <small class="text-muted fs-6">Partner</small></h4>
+
+        <nav class="nav flex-column flex-grow-1">
+            <a href="dashboard.html" class="nav-link active"><i class="bi bi-grid-fill"></i> Visão Geral</a>
+            <a href="pedidos.html" class="nav-link"><i class="bi bi-receipt"></i> Pedidos <span
+                    class="badge bg-danger ms-auto" id="badge-orders">0</span></a>
+            <a href="produtos.html" class="nav-link"><i class="bi bi-basket"></i> Cardápio</a>
+            <a href="saldo.html" class="nav-link"><i class="bi bi-wallet2"></i> Financeiro</a>
+            <a href="perfil.html" class="nav-link"><i class="bi bi-shop"></i> Perfil da Loja</a>
+        </nav>
+
+        <button onclick="xicoma.auth.logout()" class="btn btn-light text-danger w-100 mt-auto"><i
+                class="bi bi-box-arrow-right"></i> Sair</button>
+    </div>
+
+    <!-- Mobile Header -->
+    <div class="d-lg-none bg-white p-3 shadow-sm d-flex justify-content-between align-items-center sticky-top">
+        <h5 class="fw-bold m-0">Dashboard</h5>
+        <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu"><i
+                class="bi bi-list"></i></button>
+    </div>
+
+    <!-- Content -->
+    <div class="main-content">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h4 class="fw-bold m-0">Olá, <span id="rest-name">...</span> 👋</h4>
+                <p class="text-muted small">Aqui está o resumo de hoje.</p>
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-success rounded-pill px-4"><i class="bi bi-shop"></i> Loja Aberta</button>
+            </div>
+        </div>
+
+        <!-- Cards -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm rounded-card p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary-xicoma text-white p-3 rounded-circle me-3"><i
+                                class="bi bi-currency-dollar fs-4"></i></div>
+                        <div>
+                            <p class="text-muted small mb-0">Vendas Hoje</p>
+                            <h4 class="fw-bold m-0" id="sales-today">0 MT</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm rounded-card p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-warning text-white p-3 rounded-circle me-3"><i class="bi bi-receipt fs-4"></i>
+                        </div>
+                        <div>
+                            <p class="text-muted small mb-0">Pedidos Pendentes</p>
+                            <h4 class="fw-bold m-0" id="pending-count">0</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm rounded-card p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-success text-white p-3 rounded-circle me-3"><i class="bi bi-check-lg fs-4"></i>
+                        </div>
+                        <div>
+                            <p class="text-muted small mb-0">Entregues</p>
+                            <h4 class="fw-bold m-0" id="delivered-count">0</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Orders -->
+        <div class="card border-0 shadow-sm rounded-card">
+            <div class="card-header bg-white border-0 py-3">
+                <h6 class="fw-bold m-0">Últimos Pedidos</h6>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-middle mb-0 table-hover">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="ps-3 border-0">#ID</th>
+                            <th class="border-0">Cliente</th>
+                            <th class="border-0">Total</th>
+                            <th class="border-0">Status</th>
+                            <th class="pe-3 border-0 text-end">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-orders">
+                        <!-- JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Offcanvas -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold text-primary-xicoma">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="list-group list-group-flush">
+                <a href="dashboard.html" class="list-group-item list-group-item-action active">Visão Geral</a>
+                <a href="pedidos.html" class="list-group-item list-group-item-action">Pedidos</a>
+                <a href="produtos.html" class="list-group-item list-group-item-action">Cardápio</a>
+                <a href="saldo.html" class="list-group-item list-group-item-action">Financeiro</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../mock-data/db.js"></script>
+    <script src="../assets/js/core.js"></script>
+    <script>
+        xicoma.auth.checkAccess('restaurant');
+
+        const rid = xicoma.auth.currentUser.id;
+        document.getElementById('rest-name').innerText = xicoma.auth.currentUser.name;
+
+        // Stats
+        const orders = xicoma.db.get('orders').filter(o => o.restaurantId === rid);
+        const today = new Date().toISOString().split('T')[0];
+
+        const todayOrders = orders.filter(o => o.createdAt.startsWith(today));
+        const sales = todayOrders.reduce((sum, o) => sum + o.total, 0);
+        const pending = orders.filter(o => o.status === 'pending').length;
+        const delivered = orders.filter(o => o.status === 'delivered').length;
+
+        document.getElementById('sales-today').innerText = xicoma.formatCurrency(sales);
+        document.getElementById('pending-count').innerText = pending;
+        document.getElementById('delivered-count').innerText = delivered;
+        document.getElementById('badge-orders').innerText = pending;
+
+        // Recent Table
+        const list = document.getElementById('recent-orders');
+        list.innerHTML = orders.slice(0, 5).map(o => `
+            <tr>
+                <td class="ps-3 fw-bold">#${o.id.toString().slice(-4)}</td>
+                <td>${o.clientName}</td>
+                <td>${xicoma.formatCurrency(o.total)}</td>
+                <td><span class="badge bg-light text-dark border">${o.status}</span></td>
+                <td class="pe-3 text-end"><a href="pedidos.html" class="btn btn-sm btn-outline-primary">Ver</a></td>
+            </tr>
+        `).join('');
+    </script>
+</body>
+
+</html>
