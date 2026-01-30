@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
@@ -134,17 +135,40 @@
 
         /* Header styling */
         .page-header {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            border-radius: 24px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-greeting h2 {
+            font-size: 1.75rem;
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .admin-profile-pill {
+            background: white;
+            padding: 0.5rem 0.5rem 0.5rem 1.25rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .admin-avatar {
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(135deg, #EA1D2C 0%, #8B0000 100%);
             border-radius: 50%;
             display: flex;
@@ -152,7 +176,8 @@
             justify-content: center;
             color: white;
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(234, 29, 44, 0.3);
         }
 
         /* Activity Timeline */
@@ -229,62 +254,7 @@
             border-color: rgba(234, 29, 44, 0.1);
         }
 
-        /* Sales Chart Widget (CSS Only) */
-        .chart-container {
-            height: 200px;
-            display: flex;
-            align-items: flex-end;
-            gap: 12px;
-            padding-top: 20px;
-        }
 
-        .chart-bar-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100%;
-            justify-content: flex-end;
-        }
-
-        .chart-bar {
-            width: 100%;
-            max-width: 30px;
-            background: linear-gradient(to top, #EA1D2C, #ff414d);
-            border-radius: 8px 8px 4px 4px;
-            transition: all 0.5s ease;
-            position: relative;
-        }
-
-        .chart-bar:hover {
-            filter: brightness(1.1);
-            cursor: pointer;
-        }
-
-        .chart-bar::after {
-            content: attr(data-value);
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 10px;
-            font-weight: 700;
-            color: #EA1D2C;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .chart-bar:hover::after {
-            opacity: 1;
-        }
-
-        .chart-label {
-            font-size: 10px;
-            color: #adb5bd;
-            margin-top: 8px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
 
         /* Top Restaurant Item */
         .restaurant-mini-card {
@@ -364,15 +334,15 @@
     </div>
 
     <div class="main-content">
-        <div class="page-header d-flex justify-content-between align-items-center">
-            <div>
+        <div class="page-header">
+            <div class="header-greeting">
                 <h2 class="fw-bold m-0">Visão Geral</h2>
                 <p class="text-muted mb-0 mt-1">Bem-vindo ao painel administrativo</p>
             </div>
-            <div class="d-flex align-items-center gap-3">
-                <div class="text-end">
-                    <div class="fw-semibold">Admin</div>
-                    <small class="text-muted">Administrador</small>
+            <div class="admin-profile-pill">
+                <div class="text-end d-none d-md-block">
+                    <div class="fw-bold" style="font-size: 0.9rem;">Admin Xicoma</div>
+                    <small class="text-muted" style="font-size: 0.75rem;">Administrador Master</small>
                 </div>
                 <div class="admin-avatar">A</div>
             </div>
@@ -388,7 +358,7 @@
                             </div>
                             <span class="trend-up fw-bold"><i class="bi bi-arrow-up-short"></i>12%</span>
                         </div>
-                        <h3 class="fw-bold mb-1">1,284</h3>
+                        <h3 class="fw-bold mb-1" id="total-users">0</h3>
                         <p class="text-muted mb-0 small">Usuários Ativos</p>
                     </div>
                 </div>
@@ -402,7 +372,7 @@
                             </div>
                             <span class="trend-up fw-bold"><i class="bi bi-arrow-up-short"></i>5%</span>
                         </div>
-                        <h3 class="fw-bold mb-1">156</h3>
+                        <h3 class="fw-bold mb-1" id="total-rest">0</h3>
                         <p class="text-muted mb-0 small">Parceiros</p>
                     </div>
                 </div>
@@ -431,17 +401,17 @@
                             <span class="badge bg-danger rounded-pill pulse shadow-sm" style="font-size: 0.65rem;">12
                                 URGENTE</span>
                         </div>
-                        <h3 class="fw-bold mb-1">42</h3>
+                        <h3 class="fw-bold mb-1" id="total-orders">0</h3>
                         <p class="text-muted mb-0 small">Pedidos Pendentes</p>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Section 2: Sales & Activity beside each other -->
         <div class="row g-4 mb-4">
-            <!-- Left Column: Sales and Top Restaurants -->
             <div class="col-lg-8">
-                <div class="card border-0 shadow-sm mb-4 slide-up" style="border-radius: 20px;">
+                <div class="card border-0 shadow-sm slide-up" style="border-radius: 20px; height: 100%;">
                     <div class="card-header bg-white border-0 py-4 px-4">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
@@ -455,121 +425,18 @@
                         </div>
                     </div>
                     <div class="card-body px-4 pb-4">
-                        <div class="chart-container">
-                            <div class="chart-bar-wrapper">
-                                <div class="chart-bar" style="height: 60%;" data-value="42"></div>
-                                <span class="chart-label">Seg</span>
-                            </div>
-                            <div class="chart-bar-wrapper">
-                                <div class="chart-bar" style="height: 85%;" data-value="65"></div>
-                                <span class="chart-label">Ter</span>
-                            </div>
-                            <div class="chart-bar-wrapper">
-                                <div class="chart-bar" style="height: 45%;" data-value="32"></div>
-                                <span class="chart-label">Qua</span>
-                            </div>
-                            <div class="chart-bar-wrapper">
-                                <div class="chart-bar" style="height: 95%;" data-value="78"></div>
-                                <span class="chart-label">Qui</span>
-                            </div>
-                            <div class="chart-bar-wrapper">
-                                <div class="chart-bar" style="height: 75%;" data-value="59"></div>
-                                <span class="chart-label">Sex</span>
-                            </div>
-                            <div class="chart-bar-wrapper">
-                                <div class="chart-bar" style="height: 100%; background: #EA1D2C;" data-value="92"></div>
-                                <span class="chart-label">Sáb</span>
-                            </div>
-                            <div class="chart-bar-wrapper">
-                                <div class="chart-bar" style="height: 80%;" data-value="61"></div>
-                                <span class="chart-label">Dom</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card border-0 shadow-sm slide-up" style="border-radius: 20px;">
-                    <div class="card-header bg-white border-0 py-4 px-4 d-flex justify-content-between">
-                        <h5 class="fw-bold mb-0">Restaurantes em Destaque</h5>
-                        <a href="restaurantes.html" class="btn btn-sm btn-light text-primary fw-bold">Ver Todos</a>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle mb-0">
-                                <thead class="bg-light">
-                                    <tr>
-                                        <th class="border-0 ps-4">Restaurante</th>
-                                        <th class="border-0">Vendas</th>
-                                        <th class="border-0">Avaliação</th>
-                                        <th class="border-0">Status</th>
-                                        <th class="border-0 pe-4">Ação</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="ps-4">
-                                            <div class="d-flex align-items-center">
-                                                <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=50"
-                                                    class="rounded me-3"
-                                                    style="width: 40px; height: 40px; object-fit: cover;">
-                                                <span class="fw-bold">Burger King</span>
-                                            </div>
-                                        </td>
-                                        <td>1,245 MT</td>
-                                        <td><i class="bi bi-star-fill text-warning me-1"></i>4.8</td>
-                                        <td><span
-                                                class="badge bg-success bg-opacity-10 text-success border-0">Ativo</span>
-                                        </td>
-                                        <td class="pe-4"><a href="#" class="btn btn-sm btn-light"><i
-                                                    class="bi bi-eye"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="ps-4">
-                                            <div class="d-flex align-items-center">
-                                                <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=50"
-                                                    class="rounded me-3"
-                                                    style="width: 40px; height: 40px; object-fit: cover;">
-                                                <span class="fw-bold">Pizza Hut</span>
-                                            </div>
-                                        </td>
-                                        <td>980 MT</td>
-                                        <td><i class="bi bi-star-fill text-warning me-1"></i>4.5</td>
-                                        <td><span
-                                                class="badge bg-success bg-opacity-10 text-success border-0">Ativo</span>
-                                        </td>
-                                        <td class="pe-4"><a href="#" class="btn btn-sm btn-light"><i
-                                                    class="bi bi-eye"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="ps-4">
-                                            <div class="d-flex align-items-center">
-                                                <img src="https://images.unsplash.com/photo-1551632326-f7f6ec41c098?w=50"
-                                                    class="rounded me-3"
-                                                    style="width: 40px; height: 40px; object-fit: cover;">
-                                                <span class="fw-bold">Ocean Grill</span>
-                                            </div>
-                                        </td>
-                                        <td>650 MT</td>
-                                        <td><i class="bi bi-star-fill text-warning me-1"></i>4.7</td>
-                                        <td><span
-                                                class="badge bg-success bg-opacity-10 text-success border-0">Ativo</span>
-                                        </td>
-                                        <td class="pe-4"><a href="#" class="btn btn-sm btn-light"><i
-                                                    class="bi bi-eye"></i></a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div style="height: 350px;">
+                            <canvas id="salesChart"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Column: Recent Activity -->
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm slide-up h-100" style="border-radius: 20px;">
                     <div class="card-header bg-white border-0 py-4 px-4">
                         <h5 class="fw-bold mb-0">Atividade Recente</h5>
-                        <small class="text-muted">Fluxo de eventos em tempo real</small>
+                        <small class="text-muted">Eventos em tempo real</small>
                     </div>
                     <div class="card-body px-4">
                         <div class="activity-timeline">
@@ -592,7 +459,7 @@
                                 </span>
                                 <div class="activity-content">
                                     <div class="d-flex justify-content-between mb-1">
-                                        <h6 class="mb-0 fw-bold small">Restaurante Verificado</h6>
+                                        <h6 class="mb-0 fw-bold small">Parceiro Verificado</h6>
                                         <small class="text-muted">12m</small>
                                     </div>
                                     <p class="mb-0 text-muted extra-small">"Ocean Grill" está agora disponível.</p>
@@ -611,24 +478,146 @@
                                     <p class="mb-0 text-muted extra-small">Entrega concluída com nota máxima.</p>
                                 </div>
                             </div>
-
-                            <div class="activity-item">
-                                <span class="activity-icon bg-activity-courier">
-                                    <i class="bi bi-bicycle"></i>
-                                </span>
-                                <div class="activity-content">
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <h6 class="mb-0 fw-bold small">Novo Courier</h6>
-                                        <small class="text-muted">1h</small>
-                                    </div>
-                                    <p class="mb-0 text-muted extra-small">Marcos Silva aguardando aprovação.</p>
-                                </div>
-                            </div>
                         </div>
-
                         <div class="mt-4 pt-4 border-top">
-                            <button class="btn btn-light w-100 rounded-pill text-primary fw-bold">Ver Todas
-                                Atividades</button>
+                            <button class="btn btn-light w-100 rounded-pill text-primary fw-bold">Ver Todas</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Growth & Categories -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm slide-up" style="border-radius: 20px;">
+                    <div class="card-header bg-white border-0 py-4 px-4">
+                        <h6 class="fw-bold mb-0">Crescimento de Usuários</h6>
+                    </div>
+                    <div class="card-body px-4 pb-4">
+                        <div style="height: 180px;">
+                            <canvas id="usersChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm slide-up" style="border-radius: 20px;">
+                    <div class="card-header bg-white border-0 py-4 px-4">
+                        <h6 class="fw-bold mb-0">Categorias Populares</h6>
+                    </div>
+                    <div class="card-body px-4 pb-4">
+                        <div style="height: 180px;">
+                            <canvas id="categoriesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm slide-up"
+                    style="border-radius: 20px; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: white;">
+                    <div class="card-body p-4">
+                        <h6 class="fw-bold mb-3">Acesso Rápido</h6>
+                        <div class="d-grid gap-2">
+                            <a href="restaurantes.html" class="btn btn-light text-start py-2 border-0 shadow-sm">
+                                <i class="bi bi-plus-circle me-2 text-primary"></i> Novo Restaurante
+                            </a>
+                            <a href="entregadores.html" class="btn btn-light text-start py-2 border-0 shadow-sm">
+                                <i class="bi bi-bicycle me-2 text-success"></i> Aprovar Courier
+                            </a>
+                            <a href="comissoes.html" class="btn btn-light text-start py-2 border-0 shadow-sm">
+                                <i class="bi bi-file-earmark-bar-graph me-2 text-warning"></i> Relatório Financeiro
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Featured Restaurants Leaderboard -->
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm slide-up" style="border-radius: 20px;">
+                    <div
+                        class="card-header bg-white border-0 py-4 px-4 d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="fw-bold mb-0">Restaurantes em Destaque</h5>
+                            <small class="text-muted">Parceiros com melhor performance este mês</small>
+                        </div>
+                        <a href="restaurantes.html" class="btn btn-sm btn-light text-primary fw-bold px-3">Ver Ranking
+                            Completo</a>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th class="border-0 ps-4">Rank</th>
+                                        <th class="border-0">Restaurante</th>
+                                        <th class="border-0">Pedidos</th>
+                                        <th class="border-0">Receita Total</th>
+                                        <th class="border-0">Avaliação</th>
+                                        <th class="border-0">Crescimento</th>
+                                        <th class="border-0 pe-4 text-center">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="ps-4 fw-bold text-muted">#1</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=50"
+                                                    class="rounded me-3 shadow-sm"
+                                                    style="width: 40px; height: 40px; object-fit: cover;">
+                                                <span class="fw-bold">Burger King</span>
+                                            </div>
+                                        </td>
+                                        <td>854</td>
+                                        <td class="fw-bold text-primary">42.500 MT</td>
+                                        <td><i class="bi bi-star-fill text-warning me-1"></i>4.9</td>
+                                        <td class="text-success fw-bold">+18%</td>
+                                        <td class="pe-4 text-center"><span
+                                                class="badge bg-success bg-opacity-10 text-success border-0 px-3">Elite</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-4 fw-bold text-muted">#2</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=50"
+                                                    class="rounded me-3 shadow-sm"
+                                                    style="width: 40px; height: 40px; object-fit: cover;">
+                                                <span class="fw-bold">Pizza Hut</span>
+                                            </div>
+                                        </td>
+                                        <td>642</td>
+                                        <td class="fw-bold text-primary">31.200 MT</td>
+                                        <td><i class="bi bi-star-fill text-warning me-1"></i>4.7</td>
+                                        <td class="text-success fw-bold">+12%</td>
+                                        <td class="pe-4 text-center"><span
+                                                class="badge bg-success bg-opacity-10 text-success border-0 px-3">Elite</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-4 fw-bold text-muted">#3</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://images.unsplash.com/photo-1551632326-f7f6ec41c098?w=50"
+                                                    class="rounded me-3 shadow-sm"
+                                                    style="width: 40px; height: 40px; object-fit: cover;">
+                                                <span class="fw-bold">Ocean Grill</span>
+                                            </div>
+                                        </td>
+                                        <td>421</td>
+                                        <td class="fw-bold text-primary">28.950 MT</td>
+                                        <td><i class="bi bi-star-fill text-warning me-1"></i>4.8</td>
+                                        <td class="text-success fw-bold">+5%</td>
+                                        <td class="pe-4 text-center"><span
+                                                class="badge bg-info bg-opacity-10 text-info border-0 px-3">Top</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -644,20 +633,92 @@
 
         xicoma.db.init();
 
+        // Atualizar estatísticas dinâmicas
         document.getElementById('total-users').innerText = xicoma.db.get('users').length;
         document.getElementById('total-rest').innerText = xicoma.db.get('restaurants').length;
-        document.getElementById('total-cour').innerText = xicoma.db.get('couriers').length;
         document.getElementById('total-orders').innerText = xicoma.db.get('orders').length;
 
-        const orders = xicoma.db.get('orders').reverse().slice(0, 5);
-        document.getElementById('recent-orders').innerHTML = orders.map(o => `
-            <tr>
-                <td class="ps-3 fw-bold">#${o.id.toString().slice(-4)}</td>
-                <td>${o.restaurantName}</td>
-                 <td><span class="badge bg-light text-dark border">${o.status}</span></td>
-                <td class="pe-3 text-end">${xicoma.formatCurrency(o.total)}</td>
-            </tr>
-        `).join('');
+        // Configuração Global do Chart.js
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#adb5bd';
+
+        // 1. Gráfico de Vendas (Bar Chart)
+        const salesCtx = document.getElementById('salesChart').getContext('2d');
+        new Chart(salesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                datasets: [{
+                    label: 'Vendas (MT)',
+                    data: [12500, 18200, 14100, 25900, 21200, 32100, 28500],
+                    backgroundColor: '#EA1D2C',
+                    borderRadius: 8,
+                    barThickness: 30
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true, border: { display: false } },
+                    x: { grid: { display: false }, border: { display: false } }
+                }
+            }
+        });
+
+        // 2. Gráfico de Usuários (Line Chart)
+        const usersCtx = document.getElementById('usersChart').getContext('2d');
+        new Chart(usersCtx, {
+            type: 'line',
+            data: {
+                labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4'],
+                datasets: [{
+                    label: 'Novos Usuários',
+                    data: [120, 210, 180, 450],
+                    borderColor: '#2d2d2d',
+                    backgroundColor: 'rgba(45, 45, 45, 0.05)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#2d2d2d'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { display: false },
+                    x: { grid: { display: false }, border: { display: false } }
+                }
+            }
+        });
+
+        // 3. Categorias (Doughnut Chart)
+        const categoriesCtx = document.getElementById('categoriesChart').getContext('2d');
+        new Chart(categoriesCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pizza', 'Burger', 'Sushi', 'Bebidas'],
+                datasets: [{
+                    data: [45, 25, 20, 10],
+                    backgroundColor: ['#EA1D2C', '#2d2d2d', '#adb5bd', '#e9ecef'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: { position: 'right', labels: { boxWidth: 10, usePointStyle: true } }
+                }
+            }
+        });
 
     </script>
 </body>
