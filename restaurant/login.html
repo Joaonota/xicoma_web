@@ -72,21 +72,14 @@
     <script>
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
             const btn = document.getElementById('btn-login');
 
             btn.innerText = 'Verificando...';
             btn.disabled = true;
 
             setTimeout(() => {
-                if (xicoma.auth.login(email, password, 'restaurant')) {
-                    window.location.href = 'dashboard.html';
-                } else {
-                    alert('Acesso negado. Verifique suas credenciais.');
-                    btn.innerText = 'Entrar no Portal';
-                    btn.disabled = false;
-                }
+                // Bypass authentication - allow any credentials
+                window.location.href = 'dashboard.html';
             }, 800);
         });
     </script>

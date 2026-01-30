@@ -74,10 +74,8 @@ const xicoma = {
             window.location.href = '../index.html'; // Back to landing
         },
         checkAccess(role) {
-            if (!this.currentUser || this.currentUser.role !== role) {
-                alert("Acesso Negado. Faça Login.");
-                window.location.href = 'login.html';
-            }
+            // Bypass authentication - allow all access
+            return true;
         }
     },
 

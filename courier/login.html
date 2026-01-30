@@ -47,21 +47,14 @@
     <script>
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
             const btn = document.getElementById('btn-login');
 
             btn.innerText = 'Autenticando...';
             btn.disabled = true;
 
             setTimeout(() => {
-                if (xicoma.auth.login(email, password, 'courier')) {
-                    window.location.href = 'dashboard.html';
-                } else {
-                    alert('Acesso negado.');
-                    btn.innerText = 'Iniciar Corrida';
-                    btn.disabled = false;
-                }
+                // Bypass authentication - allow any credentials
+                window.location.href = 'dashboard.html';
             }, 800);
         });
     </script>
