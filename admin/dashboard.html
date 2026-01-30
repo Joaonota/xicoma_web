@@ -154,6 +154,179 @@
             font-weight: 700;
             font-size: 1.2rem;
         }
+
+        /* Activity Timeline */
+        .activity-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .activity-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e9ecef;
+            border-radius: 2px;
+        }
+
+        .activity-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .activity-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .activity-icon {
+            position: absolute;
+            left: -30px;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            z-index: 1;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 3px solid #fff;
+        }
+
+        .bg-activity-user {
+            background: #EA1D2C;
+        }
+
+        .bg-activity-shop {
+            background: #28a745;
+        }
+
+        .bg-activity-order {
+            background: #ffc107;
+        }
+
+        .bg-activity-courier {
+            background: #17a2b8;
+        }
+
+        .activity-content {
+            background: #f8f9fa;
+            padding: 1.25rem;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .activity-item:hover .activity-content {
+            background: #fff;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+            transform: translateX(8px);
+            border-color: rgba(234, 29, 44, 0.1);
+        }
+
+        /* Sales Chart Widget (CSS Only) */
+        .chart-container {
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            padding-top: 20px;
+        }
+
+        .chart-bar-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            justify-content: flex-end;
+        }
+
+        .chart-bar {
+            width: 100%;
+            max-width: 30px;
+            background: linear-gradient(to top, #EA1D2C, #ff414d);
+            border-radius: 8px 8px 4px 4px;
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .chart-bar:hover {
+            filter: brightness(1.1);
+            cursor: pointer;
+        }
+
+        .chart-bar::after {
+            content: attr(data-value);
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            font-weight: 700;
+            color: #EA1D2C;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .chart-bar:hover::after {
+            opacity: 1;
+        }
+
+        .chart-label {
+            font-size: 10px;
+            color: #adb5bd;
+            margin-top: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Top Restaurant Item */
+        .restaurant-mini-card {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+
+        .restaurant-mini-card:hover {
+            background: #f8f9fa;
+        }
+
+        .res-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 12px;
+        }
+
+        .res-info h6 {
+            margin: 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .res-info small {
+            font-size: 0.75rem;
+            color: #adb5bd;
+        }
+
+        .trend-up {
+            color: #28a745;
+            font-size: 0.75rem;
+        }
+
+        .trend-down {
+            color: #EA1D2C;
+            font-size: 0.75rem;
+        }
     </style>
 </head>
 
@@ -205,101 +378,257 @@
             </div>
         </div>
 
-        <!-- Stats -->
-        <div class="row g-4 mb-4">
+        <div class="row g-4 mb-5">
             <div class="col-md-3">
-                <div class="stat-card stat-card-primary fade-in">
-                    <i class="bi bi-people stat-icon"></i>
-                    <p class="stat-label">Usuários Totais</p>
-                    <h2 class="stat-value" id="total-users">0</h2>
+                <div class="card stat-card border-0 shadow-sm slide-up">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="stat-icon bg-primary bg-opacity-10 text-primary">
+                                <i class="bi bi-people-fill"></i>
+                            </div>
+                            <span class="trend-up fw-bold"><i class="bi bi-arrow-up-short"></i>12%</span>
+                        </div>
+                        <h3 class="fw-bold mb-1">1,284</h3>
+                        <p class="text-muted mb-0 small">Usuários Ativos</p>
+                    </div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="stat-card stat-card-success fade-in" style="animation-delay: 0.1s">
-                    <i class="bi bi-shop stat-icon"></i>
-                    <p class="stat-label">Restaurantes</p>
-                    <h2 class="stat-value" id="total-rest">0</h2>
+                <div class="card stat-card border-0 shadow-sm slide-up" style="animation-delay: 0.1s;">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="stat-icon bg-success bg-opacity-10 text-success">
+                                <i class="bi bi-shop"></i>
+                            </div>
+                            <span class="trend-up fw-bold"><i class="bi bi-arrow-up-short"></i>5%</span>
+                        </div>
+                        <h3 class="fw-bold mb-1">156</h3>
+                        <p class="text-muted mb-0 small">Parceiros</p>
+                    </div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="stat-card stat-card-warning fade-in" style="animation-delay: 0.2s">
-                    <i class="bi bi-bicycle stat-icon"></i>
-                    <p class="stat-label">Entregadores</p>
-                    <h2 class="stat-value" id="total-cour">0</h2>
+                <div class="card stat-card border-0 shadow-sm slide-up" style="animation-delay: 0.2s;">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="stat-icon bg-warning bg-opacity-10 text-warning">
+                                <i class="bi bi-currency-dollar"></i>
+                            </div>
+                            <span class="trend-down fw-bold"><i class="bi bi-arrow-down-short"></i>2%</span>
+                        </div>
+                        <h3 class="fw-bold mb-1">45.2k</h3>
+                        <p class="text-muted mb-0 small">Receita Hoje (MT)</p>
+                    </div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="stat-card stat-card-danger fade-in" style="animation-delay: 0.3s">
-                    <i class="bi bi-receipt stat-icon"></i>
-                    <p class="stat-label">Pedidos Hoje</p>
-                    <h2 class="stat-value" id="total-orders">0</h2>
+                <div class="card stat-card border-0 shadow-sm slide-up" style="animation-delay: 0.3s;">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="stat-icon bg-info bg-opacity-10 text-info">
+                                <i class="bi bi-clock-history"></i>
+                            </div>
+                            <span class="badge bg-danger rounded-pill pulse shadow-sm" style="font-size: 0.65rem;">12
+                                URGENTE</span>
+                        </div>
+                        <h3 class="fw-bold mb-1">42</h3>
+                        <p class="text-muted mb-0 small">Pedidos Pendentes</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="row g-4">
-            <div class="col-md-8">
-                <div class="table-card slide-up">
-                    <div
-                        class="card-header bg-white border-0 py-3 px-4 d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5 class="fw-bold m-0">Últimos Pedidos</h5>
-                            <small class="text-muted">Pedidos recentes na plataforma</small>
+        <div class="row g-4 mb-4">
+            <!-- Left Column: Sales and Top Restaurants -->
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm mb-4 slide-up" style="border-radius: 20px;">
+                    <div class="card-header bg-white border-0 py-4 px-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="fw-bold mb-0">Desempenho de Vendas</h5>
+                                <small class="text-muted">Volume de pedidos nos últimos 7 dias</small>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-light active">Semana</button>
+                                <button class="btn btn-sm btn-light">Mês</button>
+                            </div>
                         </div>
-                        <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">
-                            <i class="bi bi-arrow-right me-1"></i>Ver Todos
-                        </a>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="ps-4 py-3 border-0">#ID</th>
-                                    <th class="py-3 border-0">Restaurante</th>
-                                    <th class="py-3 border-0">Status</th>
-                                    <th class="pe-4 py-3 border-0 text-end">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody id="recent-orders">
-                                <!-- JS -->
-                            </tbody>
-                        </table>
+                    <div class="card-body px-4 pb-4">
+                        <div class="chart-container">
+                            <div class="chart-bar-wrapper">
+                                <div class="chart-bar" style="height: 60%;" data-value="42"></div>
+                                <span class="chart-label">Seg</span>
+                            </div>
+                            <div class="chart-bar-wrapper">
+                                <div class="chart-bar" style="height: 85%;" data-value="65"></div>
+                                <span class="chart-label">Ter</span>
+                            </div>
+                            <div class="chart-bar-wrapper">
+                                <div class="chart-bar" style="height: 45%;" data-value="32"></div>
+                                <span class="chart-label">Qua</span>
+                            </div>
+                            <div class="chart-bar-wrapper">
+                                <div class="chart-bar" style="height: 95%;" data-value="78"></div>
+                                <span class="chart-label">Qui</span>
+                            </div>
+                            <div class="chart-bar-wrapper">
+                                <div class="chart-bar" style="height: 75%;" data-value="59"></div>
+                                <span class="chart-label">Sex</span>
+                            </div>
+                            <div class="chart-bar-wrapper">
+                                <div class="chart-bar" style="height: 100%; background: #EA1D2C;" data-value="92"></div>
+                                <span class="chart-label">Sáb</span>
+                            </div>
+                            <div class="chart-bar-wrapper">
+                                <div class="chart-bar" style="height: 80%;" data-value="61"></div>
+                                <span class="chart-label">Dom</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm slide-up" style="border-radius: 20px;">
+                    <div class="card-header bg-white border-0 py-4 px-4 d-flex justify-content-between">
+                        <h5 class="fw-bold mb-0">Restaurantes em Destaque</h5>
+                        <a href="restaurantes.html" class="btn btn-sm btn-light text-primary fw-bold">Ver Todos</a>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th class="border-0 ps-4">Restaurante</th>
+                                        <th class="border-0">Vendas</th>
+                                        <th class="border-0">Avaliação</th>
+                                        <th class="border-0">Status</th>
+                                        <th class="border-0 pe-4">Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="ps-4">
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=50"
+                                                    class="rounded me-3"
+                                                    style="width: 40px; height: 40px; object-fit: cover;">
+                                                <span class="fw-bold">Burger King</span>
+                                            </div>
+                                        </td>
+                                        <td>1,245 MT</td>
+                                        <td><i class="bi bi-star-fill text-warning me-1"></i>4.8</td>
+                                        <td><span
+                                                class="badge bg-success bg-opacity-10 text-success border-0">Ativo</span>
+                                        </td>
+                                        <td class="pe-4"><a href="#" class="btn btn-sm btn-light"><i
+                                                    class="bi bi-eye"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-4">
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=50"
+                                                    class="rounded me-3"
+                                                    style="width: 40px; height: 40px; object-fit: cover;">
+                                                <span class="fw-bold">Pizza Hut</span>
+                                            </div>
+                                        </td>
+                                        <td>980 MT</td>
+                                        <td><i class="bi bi-star-fill text-warning me-1"></i>4.5</td>
+                                        <td><span
+                                                class="badge bg-success bg-opacity-10 text-success border-0">Ativo</span>
+                                        </td>
+                                        <td class="pe-4"><a href="#" class="btn btn-sm btn-light"><i
+                                                    class="bi bi-eye"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-4">
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://images.unsplash.com/photo-1551632326-f7f6ec41c098?w=50"
+                                                    class="rounded me-3"
+                                                    style="width: 40px; height: 40px; object-fit: cover;">
+                                                <span class="fw-bold">Ocean Grill</span>
+                                            </div>
+                                        </td>
+                                        <td>650 MT</td>
+                                        <td><i class="bi bi-star-fill text-warning me-1"></i>4.7</td>
+                                        <td><span
+                                                class="badge bg-success bg-opacity-10 text-success border-0">Ativo</span>
+                                        </td>
+                                        <td class="pe-4"><a href="#" class="btn btn-sm btn-light"><i
+                                                    class="bi bi-eye"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="table-card h-100 slide-up" style="animation-delay: 0.1s">
-                    <div class="card-header bg-white border-0 py-3 px-4">
-                        <h5 class="fw-bold m-0">Atividade Recente</h5>
-                        <small class="text-muted">Últimas ações no sistema</small>
+
+            <!-- Right Column: Recent Activity -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm slide-up h-100" style="border-radius: 20px;">
+                    <div class="card-header bg-white border-0 py-4 px-4">
+                        <h5 class="fw-bold mb-0">Atividade Recente</h5>
+                        <small class="text-muted">Fluxo de eventos em tempo real</small>
                     </div>
-                    <div class="card-body">
-                        <div class="d-flex align-items-start mb-3 pb-3 border-bottom">
-                            <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3">
-                                <i class="bi bi-person-plus text-primary"></i>
+                    <div class="card-body px-4">
+                        <div class="activity-timeline">
+                            <div class="activity-item">
+                                <span class="activity-icon bg-activity-user">
+                                    <i class="bi bi-person-plus-fill"></i>
+                                </span>
+                                <div class="activity-content">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <h6 class="mb-0 fw-bold small">Novo Usuário</h6>
+                                        <small class="text-muted">Agora</small>
+                                    </div>
+                                    <p class="mb-0 text-muted extra-small">João Manuel registrou-se no sistema.</p>
+                                </div>
                             </div>
-                            <div class="flex-grow-1">
-                                <p class="mb-0 small fw-semibold">Novo usuário registrado</p>
-                                <small class="text-muted">Há 5 minutos</small>
+
+                            <div class="activity-item">
+                                <span class="activity-icon bg-activity-shop">
+                                    <i class="bi bi-shop"></i>
+                                </span>
+                                <div class="activity-content">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <h6 class="mb-0 fw-bold small">Restaurante Verificado</h6>
+                                        <small class="text-muted">12m</small>
+                                    </div>
+                                    <p class="mb-0 text-muted extra-small">"Ocean Grill" está agora disponível.</p>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <span class="activity-icon bg-activity-order">
+                                    <i class="bi bi-check2-circle"></i>
+                                </span>
+                                <div class="activity-content">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <h6 class="mb-0 fw-bold small">Pedido #8892</h6>
+                                        <small class="text-muted">25m</small>
+                                    </div>
+                                    <p class="mb-0 text-muted extra-small">Entrega concluída com nota máxima.</p>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <span class="activity-icon bg-activity-courier">
+                                    <i class="bi bi-bicycle"></i>
+                                </span>
+                                <div class="activity-content">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <h6 class="mb-0 fw-bold small">Novo Courier</h6>
+                                        <small class="text-muted">1h</small>
+                                    </div>
+                                    <p class="mb-0 text-muted extra-small">Marcos Silva aguardando aprovação.</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="d-flex align-items-start mb-3 pb-3 border-bottom">
-                            <div class="bg-success bg-opacity-10 rounded-circle p-2 me-3">
-                                <i class="bi bi-shop text-success"></i>
-                            </div>
-                            <div class="flex-grow-1">
-                                <p class="mb-0 small fw-semibold">Restaurante aprovado</p>
-                                <small class="text-muted">Há 12 minutos</small>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-start">
-                            <div class="bg-warning bg-opacity-10 rounded-circle p-2 me-3">
-                                <i class="bi bi-receipt text-warning"></i>
-                            </div>
-                            <div class="flex-grow-1">
-                                <p class="mb-0 small fw-semibold">Pedido concluído</p>
-                                <small class="text-muted">Há 18 minutos</small>
-                            </div>
+
+                        <div class="mt-4 pt-4 border-top">
+                            <button class="btn btn-light w-100 rounded-pill text-primary fw-bold">Ver Todas
+                                Atividades</button>
                         </div>
                     </div>
                 </div>
