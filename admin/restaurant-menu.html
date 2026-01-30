@@ -196,8 +196,13 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center flex-grow-1">
                             <img src="${item.image}" alt="${item.name}" class="menu-item-image me-3">
-                            <div>
+                            <div class="me-3">
                                 <h6 class="fw-bold mb-1">${item.name}</h6>
+                                <div class="mb-1">
+                                    <span class="text-warning small">
+                                        <i class="bi bi-star-fill"></i> ${item.rating || '5.0'}
+                                    </span>
+                                </div>
                                 <p class="text-muted small mb-0">${item.description || 'Sem descrição'}</p>
                             </div>
                         </div>
@@ -217,14 +222,49 @@
             `).join('');
         }
 
-        // Placeholder functions for menu item management
+        let editingItemId = null;
+        const menuItemModal = new bootstrap.Modal(document.getElementById('menuItemModal'));
+
         window.addMenuItem = () => {
-            alert('Funcionalidade de adicionar item será implementada em breve!');
+            editingItemId = null;
+            document.getElementById('menuItemModalLabel').innerText = 'Novo Item';
+            document.getElementById('menuItemForm').reset();
+            document.getElementById('itemImage').value = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200";
+            menuItemModal.show();
         };
 
         window.editMenuItem = (id) => {
-            alert('Funcionalidade de editar item será implementada em breve!');
+            editingItemId = id;
+            const item = menuItems.find(i => i.id === id);
+            if (item) {
+                document.getElementById('menuItemModalLabel').innerText = 'Editar Item';
+                document.getElementById('itemName').value = item.name;
+                document.getElementById('itemDescription').value = item.description || '';
+                document.getElementById('itemPrice').value = item.price;
+                document.getElementById('itemImage').value = item.image;
+                menuItemModal.show();
+            }
         };
+
+        document.getElementById('menuItemForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const data = {
+                restaurantId: restaurantId,
+                name: document.getElementById('itemName').value,
+                description: document.getElementById('itemDescription').value,
+                price: parseFloat(document.getElementById('itemPrice').value),
+                image: document.getElementById('itemImage').value
+            };
+
+            if (editingItemId) {
+                xicoma.db.update('menuItems', editingItemId, data);
+            } else {
+                xicoma.db.add('menuItems', data);
+            }
+
+            menuItemModal.hide();
+            location.reload();
+        });
 
         window.deleteMenuItem = (id) => {
             if (confirm('Remover este item do cardápio?')) {

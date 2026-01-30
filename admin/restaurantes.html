@@ -37,6 +37,15 @@
             margin-bottom: 2rem;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
+
+        .clickable-row {
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .clickable-row:hover {
+            background-color: rgba(234, 29, 44, 0.03) !important;
+        }
     </style>
 </head>
 
@@ -179,7 +188,7 @@
         const list = document.getElementById('list-rest');
 
         list.innerHTML = items.map(r => `
-            <tr>
+            <tr class="clickable-row" onclick="window.location.href='restaurant-menu.html?id=${r.id}'">
                 <td class="ps-4">
                     <div class="d-flex align-items-center">
                         <img src="${r.image}" alt="${r.name}" class="rounded me-3"
@@ -198,13 +207,13 @@
                     <small class="text-muted ms-1">${r.rating}</small>
                 </td>
                 <td class="pe-4 text-end">
-                    <a href="restaurant-menu.html?id=${r.id}" class="btn btn-sm btn-light me-1" title="Ver Cardápio">
+                    <a href="restaurant-menu.html?id=${r.id}" class="btn btn-sm btn-light me-1" title="Ver Cardápio" onclick="event.stopPropagation()">
                         <i class="bi bi-list-ul"></i>
                     </a>
-                    <button onclick="editRestaurant(${r.id})" class="btn btn-sm btn-light me-1" title="Editar">
+                    <button onclick="event.stopPropagation(); editRestaurant(${r.id})" class="btn btn-sm btn-light me-1" title="Editar">
                         <i class="bi bi-pencil"></i>
                     </button>
-                    <button onclick="del(${r.id})" class="btn btn-sm btn-light text-danger" title="Remover">
+                    <button onclick="event.stopPropagation(); del(${r.id})" class="btn btn-sm btn-light text-danger" title="Remover">
                         <i class="bi bi-trash"></i>
                     </button>
                 </td>
