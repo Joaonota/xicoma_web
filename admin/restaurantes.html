@@ -101,17 +101,33 @@
 
         list.innerHTML = items.map(r => `
             <tr>
-                <td class="ps-4 fw-bold">
+                <td class="ps-4">
                     <div class="d-flex align-items-center">
-                        <img src="${r.image}" class="rounded-circle object-fit-cover me-2" style="width: 30px; height: 30px;">
-                        ${r.name}
+                        <img src="${r.image}" alt="${r.name}" class="rounded me-3"
+                            style="width: 50px; height: 50px; object-fit: cover;">
+                        <div>
+                            <span class="fw-bold d-block">${r.name}</span>
+                            <small class="text-muted">${r.email}</small>
+                        </div>
                     </div>
                 </td>
                 <td>${r.category}</td>
-                <td><i class="bi bi-star-fill text-warning"></i> ${r.rating}</td>
+                <td>
+                    <span class="text-warning">
+                        ${'★'.repeat(Math.floor(r.rating))}${'☆'.repeat(5 - Math.floor(r.rating))}
+                    </span>
+                    <small class="text-muted ms-1">${r.rating}</small>
+                </td>
                 <td class="pe-4 text-end">
-                    <a href="form-restaurant.html?id=${r.id}" class="btn btn-sm btn-light me-1"><i class="bi bi-pencil"></i></a>
-                    <button onclick="del(${r.id})" class="btn btn-sm btn-light text-danger"><i class="bi bi-trash"></i></button>
+                    <a href="restaurant-menu.html?id=${r.id}" class="btn btn-sm btn-light me-1" title="Ver Cardápio">
+                        <i class="bi bi-list-ul"></i>
+                    </a>
+                    <a href="form-restaurant.html?id=${r.id}" class="btn btn-sm btn-light me-1" title="Editar">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                    <button onclick="del(${r.id})" class="btn btn-sm btn-light text-danger" title="Remover">
+                        <i class="bi bi-trash"></i>
+                    </button>
                 </td>
             </tr>
         `).join('');
