@@ -65,9 +65,9 @@
                 <h2 class="fw-bold m-0">Frota de Entregadores</h2>
                 <p class="text-muted mb-0 mt-1">Gerenciar entregadores e veículos</p>
             </div>
-            <a href="form-courier.html" class="btn btn-primary-xicoma rounded-pill px-4">
+            <button onclick="openCourierModal()" class="btn btn-primary-xicoma rounded-pill px-4">
                 <i class="bi bi-plus-lg me-2"></i>Novo Entregador
-            </a>
+            </button>
         </div>
 
         <div class="card border-0 shadow-sm rounded-card slide-up">
@@ -91,6 +91,72 @@
         </div>
     </div>
 
+    <!-- Modal para Formulário de Entregador -->
+    <div class="modal fade" id="courierModal" tabindex="-1" aria-labelledby="courierModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header border-0 pb-0">
+                    <div>
+                        <h5 class="modal-title fw-bold" id="courierModalLabel">Novo Entregador</h5>
+                        <small class="text-muted">Cadastro de frota</small>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body pt-3">
+                    <form id="courierForm">
+                        <span class="d-block text-uppercase text-muted fw-bold mb-3"
+                            style="font-size: 0.75rem; letter-spacing: 1px;">Dados Pessoais & Veículo</span>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" id="courierName" class="form-control rounded-3" placeholder="Nome"
+                                required>
+                            <label for="courierName">Nome Completo</label>
+                        </div>
+
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select id="vehicle" class="form-select rounded-3">
+                                        <option>Moto</option>
+                                        <option>Bicicleta</option>
+                                        <option>Carro</option>
+                                    </select>
+                                    <label for="vehicle">Veículo</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" id="plate" class="form-control rounded-3" placeholder="Placa"
+                                        required>
+                                    <label for="plate">Placa / ID</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+                        <span class="d-block text-uppercase text-muted fw-bold mb-3"
+                            style="font-size: 0.75rem; letter-spacing: 1px;">Conta</span>
+
+                        <div class="form-floating mb-4">
+                            <input type="email" id="courierEmail" class="form-control rounded-3" placeholder="Email"
+                                required>
+                            <label for="courierEmail">Email</label>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary-xicoma py-3 rounded-pill fw-bold shadow-sm">
+                                <i class="bi bi-check2-circle me-2"></i> Salvar Entregador
+                            </button>
+                            <button type="button" class="btn btn-light py-2 rounded-pill" data-bs-dismiss="modal">
+                                Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../mock-data/db.js"></script>
     <script src="../assets/js/core.js"></script>
@@ -108,11 +174,62 @@
                 <td>${c.plate}</td>
                 <td><span class="badge bg-success-subtle text-success border border-success-subtle text-uppercase">${c.status || 'livre'}</span></td>
                 <td class="pe-4 text-end">
-                    <a href="form-courier.html?id=${c.id}" class="btn btn-sm btn-light me-1"><i class="bi bi-pencil"></i></a>
+                    <button onclick="editCourier(${c.id})" class="btn btn-sm btn-light me-1"><i class="bi bi-pencil"></i></button>
                     <button onclick="del(${c.id})" class="btn btn-sm btn-light text-danger"><i class="bi bi-trash"></i></button>
                 </td>
             </tr>
         `).join('');
+
+        let editingCourierId = null;
+        const courierModal = new bootstrap.Modal(document.getElementById('courierModal'));
+
+        window.openCourierModal = () => {
+            editingCourierId = null;
+            document.getElementById('courierModalLabel').innerText = 'Novo Entregador';
+            document.getElementById('courierForm').reset();
+            document.getElementById('courierEmail').disabled = false;
+            courierModal.show();
+        };
+
+        window.editCourier = (id) => {
+            editingCourierId = id;
+            const c = items.find(i => i.id === id);
+            if (c) {
+                document.getElementById('courierModalLabel').innerText = 'Editar Entregador';
+                document.getElementById('courierName').value = c.name;
+                document.getElementById('vehicle').value = c.vehicle;
+                document.getElementById('plate').value = c.plate;
+                document.getElementById('courierEmail').value = c.email;
+                document.getElementById('courierEmail').disabled = true;
+                courierModal.show();
+            }
+        };
+
+        document.getElementById('courierForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('courierName').value,
+                vehicle: document.getElementById('vehicle').value,
+                plate: document.getElementById('plate').value,
+                email: document.getElementById('courierEmail').value,
+                status: 'livre'
+            };
+
+            if (editingCourierId) {
+                xicoma.db.update('couriers', editingCourierId, data);
+            } else {
+                xicoma.db.add('couriers', data);
+                xicoma.db.add('users', {
+                    name: data.name,
+                    email: data.email,
+                    password: '123',
+                    role: 'courier'
+                });
+            }
+
+            courierModal.hide();
+            location.reload();
+        });
 
         window.del = (id) => {
             if (confirm('Remover entregador?')) {

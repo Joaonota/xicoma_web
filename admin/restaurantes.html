@@ -65,9 +65,9 @@
                 <h2 class="fw-bold m-0">Gerir Restaurantes</h2>
                 <p class="text-muted mb-0 mt-1">Gerenciar parceiros e restaurantes</p>
             </div>
-            <a href="form-restaurant.html" class="btn btn-primary-xicoma rounded-pill px-4">
+            <button onclick="openRestaurantModal()" class="btn btn-primary-xicoma rounded-pill px-4">
                 <i class="bi bi-plus-lg me-2"></i>Novo Parceiro
-            </a>
+            </button>
         </div>
 
         <div class="card border-0 shadow-sm rounded-card slide-up">
@@ -86,6 +86,85 @@
                             <!-- JS -->
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Formulário de Restaurante -->
+    <div class="modal fade" id="restaurantModal" tabindex="-1" aria-labelledby="restaurantModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header border-0 pb-0">
+                    <div>
+                        <h5 class="modal-title fw-bold" id="restaurantModalLabel">Novo Parceiro</h5>
+                        <small class="text-muted">Gerir informações do restaurante</small>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body pt-3">
+                    <form id="restForm">
+                        <span class="d-block text-uppercase text-muted fw-bold mb-3"
+                            style="font-size: 0.75rem; letter-spacing: 1px;">Dados do Estabelecimento</span>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" id="name" class="form-control rounded-3" placeholder="Nome" required>
+                            <label for="name">Nome Fantasia</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select id="category" class="form-select rounded-3">
+                                <option>Lanches</option>
+                                <option>Pizza</option>
+                                <option>Japonês</option>
+                                <option>Moçambicana</option>
+                                <option>Doces</option>
+                                <option>Bebidas</option>
+                            </select>
+                            <label for="category">Categoria Principal</label>
+                        </div>
+
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" id="deliveryTime" class="form-control rounded-3"
+                                        placeholder="Tempo">
+                                    <label for="deliveryTime">Tempo Médio (min)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="number" id="deliveryFee" class="form-control rounded-3" value="0">
+                                    <label for="deliveryFee">Taxa Entrega (MT)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-4">
+                            <input type="text" id="image" class="form-control rounded-3"
+                                value="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500">
+                            <label for="image">URL da Logo / Capa</label>
+                        </div>
+
+                        <hr class="my-4">
+                        <span class="d-block text-uppercase text-muted fw-bold mb-3"
+                            style="font-size: 0.75rem; letter-spacing: 1px;">Acesso ao Portal</span>
+
+                        <div class="form-floating mb-4">
+                            <input type="email" id="email" class="form-control rounded-3" placeholder="Email" required>
+                            <label for="email">Email Corporativo</label>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary-xicoma py-3 rounded-pill fw-bold shadow-sm">
+                                <i class="bi bi-check2-circle me-2"></i> Salvar Parceiro
+                            </button>
+                            <button type="button" class="btn btn-light py-2 rounded-pill" data-bs-dismiss="modal">
+                                Cancelar
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -122,15 +201,71 @@
                     <a href="restaurant-menu.html?id=${r.id}" class="btn btn-sm btn-light me-1" title="Ver Cardápio">
                         <i class="bi bi-list-ul"></i>
                     </a>
-                    <a href="form-restaurant.html?id=${r.id}" class="btn btn-sm btn-light me-1" title="Editar">
+                    <button onclick="editRestaurant(${r.id})" class="btn btn-sm btn-light me-1" title="Editar">
                         <i class="bi bi-pencil"></i>
-                    </a>
+                    </button>
                     <button onclick="del(${r.id})" class="btn btn-sm btn-light text-danger" title="Remover">
                         <i class="bi bi-trash"></i>
                     </button>
                 </td>
             </tr>
         `).join('');
+
+        let editingRestId = null;
+        const restaurantModal = new bootstrap.Modal(document.getElementById('restaurantModal'));
+
+        window.openRestaurantModal = () => {
+            editingRestId = null;
+            document.getElementById('restaurantModalLabel').innerText = 'Novo Parceiro';
+            document.getElementById('restForm').reset();
+            document.getElementById('email').disabled = false;
+            restaurantModal.show();
+        };
+
+        window.editRestaurant = (id) => {
+            editingRestId = id;
+            const r = items.find(i => i.id === id);
+            if (r) {
+                document.getElementById('restaurantModalLabel').innerText = 'Editar Restaurante';
+                document.getElementById('name').value = r.name;
+                document.getElementById('category').value = r.category;
+                document.getElementById('deliveryTime').value = r.deliveryTime;
+                document.getElementById('deliveryFee').value = r.deliveryFee;
+                document.getElementById('image').value = r.image;
+                document.getElementById('email').value = r.email;
+                document.getElementById('email').disabled = true;
+                restaurantModal.show();
+            }
+        };
+
+        document.getElementById('restForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('name').value,
+                category: document.getElementById('category').value,
+                deliveryTime: document.getElementById('deliveryTime').value,
+                deliveryFee: parseFloat(document.getElementById('deliveryFee').value),
+                image: document.getElementById('image').value,
+                email: document.getElementById('email').value,
+                rating: 5.0
+            };
+
+            if (editingRestId) {
+                xicoma.db.update('restaurants', editingRestId, data);
+            } else {
+                const newRest = xicoma.db.add('restaurants', data);
+                xicoma.db.add('users', {
+                    name: data.name,
+                    email: data.email,
+                    password: '123',
+                    role: 'restaurant',
+                    id: newRest.id
+                });
+            }
+
+            restaurantModal.hide();
+            location.reload();
+        });
 
         window.del = (id) => {
             if (confirm('Remover restaurante?')) {
