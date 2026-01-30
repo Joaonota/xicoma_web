@@ -5,9 +5,16 @@ const xicoma = {
         init() {
             const stored = localStorage.getItem('xicoma_db');
             if (stored) {
-                this.data = JSON.parse(stored);
+                const parsed = JSON.parse(stored);
+                // Sync data if version in code is newer than stored version
+                if (!parsed.version || (mockDB.version && mockDB.version > parsed.version)) {
+                    this.data = mockDB;
+                    this.save();
+                } else {
+                    this.data = parsed;
+                }
             } else {
-                this.data = mockDB; // From mock-data/db.js
+                this.data = mockDB;
                 this.save();
             }
         },

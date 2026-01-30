@@ -1,4 +1,5 @@
 const mockDB = {
+    version: 1.1,
     users: [
         { id: 1, name: "Usuário Teste", email: "cliente@xicoma.com", role: "client", password: "123", phone: "841234567" },
         { id: 2, name: "Admin Geral", email: "admin@xicoma.com", role: "admin", password: "123", phone: "820000000" }
